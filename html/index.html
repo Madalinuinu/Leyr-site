@@ -7,14 +7,190 @@
 <link rel="icon" href="../imgages/logo3.ico">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/index.css">
+<script>
+// Language toggle function - MUST be defined in head before body loads
+// This will be redefined in body script, but we need it here for onclick
+window.toggleLanguage = function() {
+  const currentLang = localStorage.getItem('language') || 'ro';
+  const newLang = currentLang === 'ro' ? 'en' : 'ro';
+  // Save language immediately
+  localStorage.setItem('language', newLang);
+  // Always reload to ensure language is applied correctly
+  location.reload();
+};
+
+// Theme toggle function - MUST be defined in head before body loads
+// This will be redefined in body script, but we need it here for onclick
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (head) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  // Save theme immediately
+  localStorage.setItem('theme', newTheme);
+  // Apply theme immediately without reload
+  document.documentElement.setAttribute('data-theme', newTheme);
+  
+  // Update button icons if available
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    if (sunIcon && moonIcon) {
+      if (newTheme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+      }
+    }
+  }
+};
+</script>
 </head>
 <body>
+<script>
+// Language translations - MUST be defined FIRST
+const translations = {
+  ro: {
+    // Navigation
+    navHome: 'Acasă',
+    navProducts: 'Produsele Noastre',
+    navServices: 'Serviciile Noastre',
+    navContact: 'Contactează-ne',
+    navCart: 'Coș',
+    // Hero section
+    heroTitle: 'Bun venit la Leyr.',
+    heroSubtitle: 'Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.',
+    heroBtnProducts: 'Produsele Noastre',
+    heroBtnServices: 'Serviciile Noastre',
+    // Stats
+    statClients: 'Clienți Mulțumiți',
+    statProjects: 'Proiecte Realizate',
+    statMaterials: 'Materiale Disponibile',
+    statSatisfaction: '% Satisfacție',
+    // Features
+    featuresTitle: 'De Ce Să Alegi Leyr?',
+    feature1Title: 'Design Personalizat',
+    feature1Desc: 'Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.',
+    feature2Title: 'Precizie Maximă',
+    feature2Desc: 'Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.',
+    feature3Title: 'Materiale Premium',
+    feature3Desc: 'O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.',
+    feature4Title: 'Livrare Rapidă',
+    feature4Desc: 'Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.',
+    feature5Title: 'Proiecte Personalizate',
+    feature5Desc: 'Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.',
+    feature6Title: 'Calitate Premium',
+    feature6Desc: 'Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.',
+    // About
+    aboutTitle: 'Despre Noi',
+    aboutText: 'Leyr. este o firmă specializată în printare 3D profesională, oferind servicii complete de modelare și printare pentru figurine, cercei, bijuterii și multe alte produse personalizate. Misiunea noastră este să transformăm ideile tale în realitate prin tehnologie avansată și creativitate. De la concept la produs final, ne concentrăm pe calitate, precizie și satisfacerea clienților.',
+    // Contact
+    contactTitle: 'Contactează-ne'
+  },
+  en: {
+    // Navigation
+    navHome: 'Home',
+    navProducts: 'Our Products',
+    navServices: 'Our Services',
+    navContact: 'Contact Us',
+    navCart: 'Cart',
+    // Hero section
+    heroTitle: 'Welcome to Leyr.',
+    heroSubtitle: 'Professional 3D printing for figurines, earrings, jewelry and much more — quality, precision and creativity combined.',
+    heroBtnProducts: 'Our Products',
+    heroBtnServices: 'Our Services',
+    // Stats
+    statClients: 'Satisfied Clients',
+    statProjects: 'Completed Projects',
+    statMaterials: 'Available Materials',
+    statSatisfaction: '% Satisfaction',
+    // Features
+    featuresTitle: 'Why Choose Leyr?',
+    feature1Title: 'Custom Design',
+    feature1Desc: 'Create your own 3D models or choose from our collection of unique designs for figurines, earrings and jewelry.',
+    feature2Title: 'Maximum Precision',
+    feature2Desc: 'Advanced 3D printing technology for fine details and high resolution in every project.',
+    feature3Title: 'Premium Materials',
+    feature3Desc: 'A wide range of quality materials: PLA, ABS, PETG, resin and many more for every need.',
+    feature4Title: 'Fast Delivery',
+    feature4Desc: 'Fast processing and efficient delivery to bring you 3D products as quickly as possible.',
+    feature5Title: 'Custom Projects',
+    feature5Desc: 'Complete 3D modeling and printing services for unique and custom projects.',
+    feature6Title: 'Premium Quality',
+    feature6Desc: 'Rigorous quality control standards to ensure perfect results in every print.',
+    // About
+    aboutTitle: 'About Us',
+    aboutText: 'Leyr. is a company specialized in professional 3D printing, offering complete modeling and printing services for figurines, earrings, jewelry and many other custom products. Our mission is to transform your ideas into reality through advanced technology and creativity. From concept to final product, we focus on quality, precision and customer satisfaction.',
+    // Contact
+    contactTitle: 'Contact Us'
+  }
+};
+
+// Make translations global immediately
+window.translations = translations;
+
+// Initialize language IMMEDIATELY - before any HTML loads
+(function() {
+  try {
+    const savedLang = localStorage.getItem('language') || 'ro';
+    
+    // Define setLanguage function here if not already defined
+    if (typeof window.setLanguage !== 'function') {
+      window.setLanguage = function(lang) {
+        localStorage.setItem('language', lang);
+        document.documentElement.setAttribute('lang', lang);
+        
+        const languageToggleText = document.getElementById('languageToggleText');
+        if (languageToggleText) {
+          languageToggleText.textContent = lang.toUpperCase();
+        }
+        
+        // Update page content if translations are available
+        if (typeof window.translations !== 'undefined' && window.translations[lang]) {
+          const t = window.translations[lang];
+          document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) {
+              el.textContent = t[key];
+            }
+          });
+          
+          if (lang === 'en') {
+            document.title = 'Leyr. — Professional 3D Printing | Figurines, Earrings, Jewelry';
+          } else {
+            document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
+          }
+        }
+      };
+    }
+    
+    // Wait for DOM to be ready
+    function applyLanguage() {
+      if (typeof window.setLanguage === 'function') {
+        window.setLanguage(savedLang);
+      }
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyLanguage);
+    } else {
+      applyLanguage();
+    }
+  } catch (error) {
+    // Silent error handling
+  }
+})();
+</script>
 
 <header>
   <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
   <div class="header-controls">
-    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Toggle language">
-      <span class="toggle-icon">RO</span>
+    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Language">
+      <span class="toggle-icon" id="languageToggleText">RO</span>
     </button>
     <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-icon">
@@ -41,25 +217,25 @@
     <span></span>
   </button>
   <nav id="navMenu">
-    <a href="index.html" data-i18n="nav.home">Acasă</a>
-    <a href="catalogue.html" data-i18n="nav.products">Produsele Noastre</a>
-    <a href="services.html" data-i18n="nav.services">Serviciile Noastre</a>
-    <a href="contact.html" data-i18n="nav.contact">Contactează-ne</a>
-    <a href="cart.html" data-i18n="nav.cart">Coș</a>
+    <a href="index.html" data-i18n="navHome">Acasă</a>
+    <a href="catalogue.html" data-i18n="navProducts">Produsele Noastre</a>
+    <a href="services.html" data-i18n="navServices">Serviciile Noastre</a>
+    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
+    <a href="cart.html" data-i18n="navCart">Coș</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1 data-i18n="hero.title">Bun venit la Leyr.</h1>
-  <p data-i18n="hero.subtitle">Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.</p>
+  <h1 data-i18n="heroTitle">Bun venit la Leyr.</h1>
+  <p data-i18n="heroSubtitle">Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.</p>
   <div class="hero-buttons">
-    <button onclick="window.location.href='catalogue.html'" data-i18n="hero.products">Our Products</button>
-    <button onclick="window.location.href='services.html'" data-i18n="hero.services">Our Services</button>
+    <button onclick="window.location.href='catalogue.html'" data-i18n="heroBtnProducts">Produsele Noastre</button>
+    <button onclick="window.location.href='services.html'" data-i18n="heroBtnServices">Serviciile Noastre</button>
   </div>
 </section>
 
 <section class="hero-image" id="heroImage">
-  <img src="../imgages/3dworldproduct.jpg" alt="Leyr. Product" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+  <img src="../imgages/3dworldproduct.jpg" alt="Leyr. Product" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';">
   <div style="display:none; text-align:center; padding:40px; background:#fff; border-radius:14px; color:#666;">Image coming soon</div>
 </section>
 
@@ -67,62 +243,62 @@
   <div class="stats-grid">
     <div class="stat-item">
       <span class="stat-number" data-target="500">0</span>
-      <div class="stat-label" data-i18n="stats.customers">Clienți Mulțumiți</div>
+      <div class="stat-label" data-i18n="statClients">Clienți Mulțumiți</div>
     </div>
     <div class="stat-item">
       <span class="stat-number" data-target="500">0</span>
-      <div class="stat-label" data-i18n="stats.products">Proiecte Realizate</div>
+      <div class="stat-label" data-i18n="statProjects">Proiecte Realizate</div>
     </div>
     <div class="stat-item">
       <span class="stat-number" data-target="25">0</span>
-      <div class="stat-label" data-i18n="stats.materials">Materiale Disponibile</div>
+      <div class="stat-label" data-i18n="statMaterials">Materiale Disponibile</div>
     </div>
     <div class="stat-item">
       <span class="stat-number" data-target="98">0</span>
-      <div class="stat-label" data-i18n="stats.satisfaction">% Satisfacție</div>
+      <div class="stat-label" data-i18n="statSatisfaction">% Satisfacție</div>
     </div>
   </div>
 </section>
 
 <section class="features-section" id="featuresSection">
-  <h2 data-i18n="features.title">De Ce Să Alegi Leyr?</h2>
+  <h2 data-i18n="featuresTitle">De Ce Să Alegi Leyr?</h2>
   <div class="features-grid">
     <div class="feature-card">
       <span class="feature-icon">🎨</span>
-      <h3 data-i18n="features.design.title">Design Personalizat</h3>
-      <p data-i18n="features.design.desc">Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.</p>
+      <h3 data-i18n="feature1Title">Design Personalizat</h3>
+      <p data-i18n="feature1Desc">Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">🔧</span>
-      <h3 data-i18n="features.precision.title">Precizie Maximă</h3>
-      <p data-i18n="features.precision.desc">Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.</p>
+      <h3 data-i18n="feature2Title">Precizie Maximă</h3>
+      <p data-i18n="feature2Desc">Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">💎</span>
-      <h3 data-i18n="features.materials.title">Materiale Premium</h3>
-      <p data-i18n="features.materials.desc">O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.</p>
+      <h3 data-i18n="feature3Title">Materiale Premium</h3>
+      <p data-i18n="feature3Desc">O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">⚡</span>
-      <h3 data-i18n="features.speed.title">Livrare Rapidă</h3>
-      <p data-i18n="features.speed.desc">Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.</p>
+      <h3 data-i18n="feature4Title">Livrare Rapidă</h3>
+      <p data-i18n="feature4Desc">Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">🎯</span>
-      <h3 data-i18n="features.custom.title">Proiecte Personalizate</h3>
-      <p data-i18n="features.custom.desc">Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.</p>
+      <h3 data-i18n="feature5Title">Proiecte Personalizate</h3>
+      <p data-i18n="feature5Desc">Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.</p>
     </div>
     <div class="feature-card">
       <span class="feature-icon">✨</span>
-      <h3 data-i18n="features.quality.title">Calitate Premium</h3>
-      <p data-i18n="features.quality.desc">Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.</p>
+      <h3 data-i18n="feature6Title">Calitate Premium</h3>
+      <p data-i18n="feature6Desc">Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.</p>
     </div>
   </div>
 </section>
 
 <section class="about-us" id="aboutUs">
-  <h1 data-i18n="about.title">Despre Noi</h1>
-  <p data-i18n="about.text">
+  <h1 data-i18n="aboutTitle">Despre Noi</h1>
+  <p data-i18n="aboutText">
     Leyr. este o firmă specializată în printare 3D profesională, oferind servicii complete de modelare și printare pentru figurine, cercei, bijuterii și multe alte produse personalizate.
     Misiunea noastră este să transformăm ideile tale în realitate prin tehnologie avansată și creativitate. De la concept la produs final, ne concentrăm pe calitate, precizie și satisfacerea clienților.
   </p>
@@ -130,14 +306,14 @@
 
 <section class="contact-section">
   <div class="contact-container">
-    <h2 data-i18n="contact.title">Contactează-ne</h2>
+    <h2 data-i18n="contactTitle">Contactează-ne</h2>
     <div class="contact-info">
       <a href="https://instagram.com/leyr" target="_blank" class="contact-link">
         <span class="contact-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2" fill="none"/>
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
-            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
           </svg>
         </span>
         <span>Instagram</span>
@@ -175,136 +351,116 @@
 </footer>
 
 <script>
-// Translations
-const translations = {
-  en: {
-    'nav.home': 'Home',
-    'nav.products': 'Our Products',
-    'nav.services': 'Our Services',
-    'nav.contact': 'Contact Us',
-    'nav.cart': 'Cart',
-    'hero.title': 'Welcome to Leyr.',
-    'hero.subtitle': 'Professional 3D printing for figurines, earrings, jewelry and more — quality, precision and creativity combined.',
-    'hero.products': 'Our Products',
-    'hero.services': 'Our Services',
-    'stats.customers': 'Happy Customers',
-    'stats.products': 'Projects Completed',
-    'stats.materials': 'Available Materials',
-    'stats.satisfaction': '% Satisfaction',
-    'features.title': 'Why Choose Leyr?',
-    'features.design.title': 'Custom Design',
-    'features.design.desc': 'Create your own 3D models or choose from our collection of unique designs for figurines, earrings and jewelry.',
-    'features.precision.title': 'Maximum Precision',
-    'features.precision.desc': 'Advanced 3D printing technology for fine details and high resolution in every project.',
-    'features.materials.title': 'Premium Materials',
-    'features.materials.desc': 'A wide range of quality materials: PLA, ABS, PETG, resin and many more for every need.',
-    'features.speed.title': 'Fast Delivery',
-    'features.speed.desc': 'Fast processing and efficient delivery to bring you 3D products as quickly as possible.',
-    'features.custom.title': 'Custom Projects',
-    'features.custom.desc': 'Complete 3D modeling and printing services for unique and personalized projects.',
-    'features.quality.title': 'Premium Quality',
-    'features.quality.desc': 'Rigorous quality control standards to ensure perfect results in every print.',
-    'about.title': 'About Us',
-    'about.text': 'Leyr. is a company specialized in professional 3D printing, offering complete modeling and printing services for figurines, earrings, jewelry and many other personalized products. Our mission is to transform your ideas into reality through advanced technology and creativity. From concept to final product, we focus on quality, precision and customer satisfaction.',
-    'contact.title': 'Contact Us'
-  },
-  ro: {
-    'nav.home': 'Acasă',
-    'nav.products': 'Produsele Noastre',
-    'nav.services': 'Serviciile Noastre',
-    'nav.contact': 'Contactează-ne',
-    'nav.cart': 'Coș',
-    'hero.title': 'Bun venit la Leyr.',
-    'hero.subtitle': 'Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.',
-    'hero.products': 'Produsele Noastre',
-    'hero.services': 'Serviciile Noastre',
-    'stats.customers': 'Clienți Mulțumiți',
-    'stats.products': 'Proiecte Realizate',
-    'stats.materials': 'Materiale Disponibile',
-    'stats.satisfaction': '% Satisfacție',
-    'features.title': 'De Ce Să Alegi Leyr?',
-    'features.design.title': 'Design Personalizat',
-    'features.design.desc': 'Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.',
-    'features.precision.title': 'Precizie Maximă',
-    'features.precision.desc': 'Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.',
-    'features.materials.title': 'Materiale Premium',
-    'features.materials.desc': 'O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.',
-    'features.speed.title': 'Livrare Rapidă',
-    'features.speed.desc': 'Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.',
-    'features.custom.title': 'Proiecte Personalizate',
-    'features.custom.desc': 'Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.',
-    'features.quality.title': 'Calitate Premium',
-    'features.quality.desc': 'Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.',
-    'about.title': 'Despre Noi',
-    'about.text': 'Leyr. este o firmă specializată în printare 3D profesională, oferind servicii complete de modelare și printare pentru figurine, cercei, bijuterii și multe alte produse personalizate. Misiunea noastră este să transformăm ideile tale în realitate prin tehnologie avansată și creativitate. De la concept la produs final, ne concentrăm pe calitate, precizie și satisfacerea clienților.',
-    'contact.title': 'Contactează-ne'
-  }
-};
-
-// Language toggle function - must be global
+// Language toggle function - redefine to use setLanguage directly
 window.toggleLanguage = function() {
   const currentLang = localStorage.getItem('language') || 'ro';
   const newLang = currentLang === 'ro' ? 'en' : 'ro';
   setLanguage(newLang);
 };
 
-// Language function
-function setLanguage(lang) {
-  localStorage.setItem('language', lang);
-  document.documentElement.lang = lang;
-  
-  // Update toggle button - show EN or RO
-  const langToggle = document.getElementById('languageToggle');
-  if (langToggle) {
-    const langIcon = langToggle.querySelector('.toggle-icon');
-    if (langIcon) {
-      if (lang === 'ro') {
-        langIcon.textContent = 'RO';
-      } else {
-        langIcon.textContent = 'EN';
-      }
+// Translations are already defined at the top of the body script
+// This is just a reference to avoid duplication
+
+// If language was already set, update content now that translations are loaded
+if (typeof window.setLanguage === 'function') {
+  const currentLang = localStorage.getItem('language') || 'ro';
+  window.setLanguage(currentLang);
+}
+
+// Make setLanguage global so it can be called from head
+// Only define if not already defined (to avoid overwriting the one from body top)
+if (typeof window.setLanguage !== 'function') {
+  window.setLanguage = function(lang) {
+    localStorage.setItem('language', lang);
+    document.documentElement.setAttribute('lang', lang);
+    
+    const languageToggleText = document.getElementById('languageToggleText');
+    if (languageToggleText) {
+      languageToggleText.textContent = lang.toUpperCase();
     }
+    
+    if (typeof updatePageContent === 'function') {
+      updatePageContent(lang);
+    }
+  };
+}
+
+// Also define it locally for backwards compatibility
+function setLanguage(lang) {
+  window.setLanguage(lang);
+}
+
+function updatePageContent(lang) {
+  const t = translations[lang];
+  if (!t) {
+    return;
   }
   
-  // Update all translatable elements
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
-    if (translations[lang] && translations[lang][key]) {
-      element.textContent = translations[lang][key];
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
     }
   });
+  
+  // Update page title
+  if (lang === 'en') {
+    document.title = 'Leyr. — Professional 3D Printing | Figurines, Earrings, Jewelry';
+  } else {
+    document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
+  }
 }
 
 // Theme toggle function - must be global
 window.toggleTheme = function() {
+  console.log('=== toggleTheme called ===');
   const currentTheme = localStorage.getItem('theme') || 'light';
+  console.log('Current theme:', currentTheme);
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  console.log('Switching to theme:', newTheme);
   setTheme(newTheme);
 };
 
 // Theme function
 function setTheme(theme) {
+  console.log('=== setTheme called with:', theme, '===');
   localStorage.setItem('theme', theme);
+  console.log('Theme saved to localStorage:', theme);
+  
   document.documentElement.setAttribute('data-theme', theme);
+  console.log('data-theme attribute set on html element:', document.documentElement.getAttribute('data-theme'));
   
   // Update toggle button - only icon, no label
   const themeToggle = document.getElementById('themeToggle');
+  console.log('Looking for themeToggle element...');
   if (themeToggle) {
+    console.log('Found themeToggle element:', themeToggle);
     const sunIcon = themeToggle.querySelector('.sun-icon');
     const moonIcon = themeToggle.querySelector('.moon-icon');
+    console.log('Sun icon found:', !!sunIcon);
+    console.log('Moon icon found:', !!moonIcon);
     
     if (sunIcon && moonIcon) {
       if (theme === 'dark') {
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'block';
         themeToggle.classList.add('dark-active');
+        console.log('Theme set to dark - sun hidden, moon shown');
       } else {
         sunIcon.style.display = 'block';
         moonIcon.style.display = 'none';
         themeToggle.classList.remove('dark-active');
+        console.log('Theme set to light - sun shown, moon hidden');
       }
+    } else {
+      console.error('Sun or moon icon NOT found!');
+      console.log('Available children:', Array.from(themeToggle.children).map(c => c.tagName + (c.className ? '.' + c.className : '')));
     }
+  } else {
+    console.error('themeToggle element NOT found!');
   }
+  console.log('=== setTheme finished ===');
 }
 
 // Mobile menu toggle
@@ -483,12 +639,15 @@ function initParallax() {
 
 // Initialize everything when DOM is ready
 function initAll() {
-  // Initialize language and theme
-  const savedLanguage = localStorage.getItem('language') || 'ro';
+  // Initialize theme
   const savedTheme = localStorage.getItem('theme') || 'light';
-  
-  setLanguage(savedLanguage);
   setTheme(savedTheme);
+  
+  // Initialize language - MUST be after DOM is ready
+  const savedLang = localStorage.getItem('language') || 'ro';
+  if (typeof setLanguage === 'function') {
+    setLanguage(savedLang);
+  }
   
   // Initialize mobile menu
   initMobileMenu();
@@ -510,6 +669,17 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initAll);
 } else {
   initAll();
+}
+
+// Initialize language on page load - AFTER all functions are defined
+// This is a backup in case the head script didn't work
+try {
+  const savedLang = localStorage.getItem('language') || 'ro';
+  if (typeof setLanguage === 'function') {
+    setLanguage(savedLang);
+  }
+} catch (error) {
+  // Silent error handling
 }
 
 </script>

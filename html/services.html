@@ -7,57 +7,107 @@
 <link rel="icon" href="../imgages/logo3.ico">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/services.css">
+<script>
+// Theme toggle function - MUST be defined in head before body loads
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (head - services) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  localStorage.setItem('theme', newTheme);
+  document.documentElement.setAttribute('data-theme', newTheme);
+  
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    if (sunIcon && moonIcon) {
+      if (newTheme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+      }
+    }
+  }
+};
+</script>
 </head>
 <body>
 
 <header>
   <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+  <div class="header-controls">
+    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Language">
+      <span class="toggle-icon" id="languageToggleText">RO</span>
+    </button>
+    <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-icon">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
   <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
   <nav id="navMenu">
-    <a href="index.html">Acasă</a>
-    <a href="catalogue.html">Produsele Noastre</a>
-    <a href="services.html">Serviciile Noastre</a>
-    <a href="contact.html">Contactează-ne</a>
-    <a href="cart.html">Coș</a>
+    <a href="index.html" data-i18n="navHome">Acasă</a>
+    <a href="catalogue.html" data-i18n="navProducts">Produsele Noastre</a>
+    <a href="services.html" data-i18n="navServices">Serviciile Noastre</a>
+    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
+    <a href="cart.html" data-i18n="navCart">Coș</a>
   </nav>
 </header>
 
-<section class="page-title">Serviciile Noastre</section>
+<section class="page-title" data-i18n="pageTitle">Serviciile Noastre</section>
 
 <section class="services-container">
   <div class="service-card">
-    <h3>🎨 Modelare 3D</h3>
-    <p>Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.</p>
+    <h3><span>🎨</span> <span data-i18n="service1Title">Modelare 3D</span></h3>
+    <p data-i18n="service1Desc">Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.</p>
   </div>
   <div class="service-card">
-    <h3>🖨️ Printare 3D</h3>
-    <p>Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.</p>
+    <h3><span>🖨️</span> <span data-i18n="service2Title">Printare 3D</span></h3>
+    <p data-i18n="service2Desc">Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.</p>
   </div>
   <div class="service-card">
-    <h3>🎯 Figurine Personalizate</h3>
-    <p>Creăm figurine unice și personalizate pentru colecții, jocuri, decor sau cadouri speciale cu atenție la detalii.</p>
+    <h3><span>🎯</span> <span data-i18n="service3Title">Figurine Personalizate</span></h3>
+    <p data-i18n="service3Desc">Creăm figurine unice și personalizate pentru colecții, jocuri, decor sau cadouri speciale cu atenție la detalii.</p>
   </div>
   <div class="service-card">
-    <h3>💎 Bijuterii & Cercei</h3>
-    <p>Design și printare 3D pentru bijuterii moderne, cercei unici și accesorii personalizate din materiale de calitate.</p>
+    <h3><span>💎</span> <span data-i18n="service4Title">Bijuterii & Cercei</span></h3>
+    <p data-i18n="service4Desc">Design și printare 3D pentru bijuterii moderne, cercei unici și accesorii personalizate din materiale de calitate.</p>
   </div>
   <div class="service-card">
-    <h3>🔧 Prototipare Rapidă</h3>
-    <p>Servicii de prototipare rapidă pentru teste de concept, validare de design și dezvoltare de produse.</p>
+    <h3><span>🔧</span> <span data-i18n="service5Title">Prototipare Rapidă</span></h3>
+    <p data-i18n="service5Desc">Servicii de prototipare rapidă pentru teste de concept, validare de design și dezvoltare de produse.</p>
   </div>
   <div class="service-card">
-    <h3>✨ Finisare & Post-Processing</h3>
-    <p>Servicii complete de finisare: șlefuire, vopsire, tratare de suprafață și asamblare pentru rezultate perfecte.</p>
+    <h3><span>✨</span> <span data-i18n="service6Title">Finisare & Post-Processing</span></h3>
+    <p data-i18n="service6Desc">Servicii complete de finisare: șlefuire, vopsire, tratare de suprafață și asamblare pentru rezultate perfecte.</p>
   </div>
 </section>
 
 <section class="contact-section">
   <div class="contact-container">
-    <h2>Contactează-ne</h2>
+    <h2 data-i18n="contactTitle">Contactează-ne</h2>
     <div class="contact-info">
       <a href="https://instagram.com/leyr" target="_blank" class="contact-link">
         <span class="contact-icon">
@@ -102,6 +152,91 @@
 </footer>
 
 <script>
+// Language translations for services page
+const translations = {
+  ro: {
+    navHome: 'Acasă',
+    navProducts: 'Produsele Noastre',
+    navServices: 'Serviciile Noastre',
+    navContact: 'Contactează-ne',
+    navCart: 'Coș',
+    pageTitle: 'Serviciile Noastre',
+    service1Title: 'Modelare 3D',
+    service1Desc: 'Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.',
+    service2Title: 'Printare 3D',
+    service2Desc: 'Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.',
+    service3Title: 'Figurine Personalizate',
+    service3Desc: 'Creăm figurine unice și personalizate pentru colecții, jocuri, decor sau cadouri speciale cu atenție la detalii.',
+    service4Title: 'Bijuterii & Cercei',
+    service4Desc: 'Design și printare 3D pentru bijuterii moderne, cercei unici și accesorii personalizate din materiale de calitate.',
+    service5Title: 'Prototipare Rapidă',
+    service5Desc: 'Servicii de prototipare rapidă pentru teste de concept, validare de design și dezvoltare de produse.',
+    service6Title: 'Finisare & Post-Processing',
+    service6Desc: 'Servicii complete de finisare: șlefuire, vopsire, tratare de suprafață și asamblare pentru rezultate perfecte.',
+    contactTitle: 'Contactează-ne'
+  },
+  en: {
+    navHome: 'Home',
+    navProducts: 'Our Products',
+    navServices: 'Our Services',
+    navContact: 'Contact Us',
+    navCart: 'Cart',
+    pageTitle: 'Our Services',
+    service1Title: '3D Modeling',
+    service1Desc: 'Complete 3D modeling services for custom designs, objects or projects with precise details and professional quality.',
+    service2Title: '3D Printing',
+    service2Desc: 'High quality printing using premium materials to transform your digital designs into reality with durability.',
+    service3Title: 'Custom Figurines',
+    service3Desc: 'We create unique and custom figurines for collections, games, decoration or special gifts with attention to detail.',
+    service4Title: 'Jewelry & Earrings',
+    service4Desc: '3D design and printing for modern jewelry, unique earrings and custom accessories from quality materials.',
+    service5Title: 'Rapid Prototyping',
+    service5Desc: 'Rapid prototyping services for concept testing, design validation and product development.',
+    service6Title: 'Finishing & Post-Processing',
+    service6Desc: 'Complete finishing services: sanding, painting, surface treatment and assembly for perfect results.',
+    contactTitle: 'Contact Us'
+  }
+};
+
+// Language toggle function
+window.toggleLanguage = function() {
+  const currentLang = localStorage.getItem('language') || 'ro';
+  const newLang = currentLang === 'ro' ? 'en' : 'ro';
+  setLanguage(newLang);
+};
+
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.documentElement.setAttribute('lang', lang);
+  
+  const languageToggleText = document.getElementById('languageToggleText');
+  if (languageToggleText) {
+    languageToggleText.textContent = lang.toUpperCase();
+  }
+  
+  updatePageContent(lang);
+}
+
+function updatePageContent(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+  
+  // Update page title
+  if (lang === 'en') {
+    document.title = 'Leyr. — Our Services | 3D Printing, Modeling, Prototyping';
+  } else {
+    document.title = 'Leyr. — Serviciile Noastre | Printare 3D, Modelare, Prototipare';
+  }
+}
+
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -110,7 +245,6 @@ if (mobileMenuToggle) {
     navMenu.classList.toggle('active');
   });
   
-  // Close menu when clicking on a link (mobile)
   const navLinks = navMenu.querySelectorAll('a');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -120,6 +254,64 @@ if (mobileMenuToggle) {
     });
   });
 }
+
+// Theme toggle function
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (services) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  console.log('Current theme:', currentTheme);
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  console.log('Switching to theme:', newTheme);
+  setTheme(newTheme);
+};
+
+// Theme function
+function setTheme(theme) {
+  console.log('=== setTheme called with:', theme, '(services) ===');
+  localStorage.setItem('theme', theme);
+  console.log('Theme saved to localStorage:', theme);
+  
+  document.documentElement.setAttribute('data-theme', theme);
+  console.log('data-theme attribute set on html element:', document.documentElement.getAttribute('data-theme'));
+  
+  const themeToggle = document.getElementById('themeToggle');
+  console.log('Looking for themeToggle element...');
+  if (themeToggle) {
+    console.log('Found themeToggle element:', themeToggle);
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    console.log('Sun icon found:', !!sunIcon);
+    console.log('Moon icon found:', !!moonIcon);
+    
+    if (sunIcon && moonIcon) {
+      if (theme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+        console.log('Theme set to dark - sun hidden, moon shown');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+        console.log('Theme set to light - sun shown, moon hidden');
+      }
+    } else {
+      console.error('Sun or moon icon NOT found!');
+      console.log('Available children:', Array.from(themeToggle.children).map(c => c.tagName + (c.className ? '.' + c.className : '')));
+    }
+  } else {
+    console.error('themeToggle element NOT found!');
+  }
+  console.log('=== setTheme finished (services) ===');
+}
+
+// Initialize language on page load
+const savedLang = localStorage.getItem('language') || 'ro';
+setLanguage(savedLang);
+
+// Initialize theme on page load
+const savedTheme = localStorage.getItem('theme') || 'light';
+setTheme(savedTheme);
 </script>
 
 </body>

@@ -8,46 +8,176 @@
 <link rel="icon" href="../imgages/logo3.ico">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/cart.css">
+<script>
+// Theme toggle function - MUST be defined in head before body loads
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (head - cart) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  localStorage.setItem('theme', newTheme);
+  document.documentElement.setAttribute('data-theme', newTheme);
+  
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    if (sunIcon && moonIcon) {
+      if (newTheme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+      }
+    }
+  }
+};
+</script>
 </head>
 <body>
 
 <header>
   <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+  <div class="header-controls">
+    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Language">
+      <span class="toggle-icon" id="languageToggleText">RO</span>
+    </button>
+    <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-icon">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
   <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
   <nav id="navMenu">
-    <a href="index.html">Acasă</a>
-    <a href="catalogue.html">Produsele Noastre</a>
-    <a href="services.html">Serviciile Noastre</a>
-    <a href="contact.html">Contactează-ne</a>
-    <a href="cart.html">Coș</a>
+    <a href="index.html" data-i18n="navHome">Acasă</a>
+    <a href="catalogue.html" data-i18n="navProducts">Produsele Noastre</a>
+    <a href="services.html" data-i18n="navServices">Serviciile Noastre</a>
+    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
+    <a href="cart.html" data-i18n="navCart">Coș</a>
   </nav>
 </header>
 
 <section class="cart-container">
-  <h2 class="cart-title">Your Cart</h2>
+  <h2 class="cart-title" data-i18n="cartTitle">Coșul Tău</h2>
   <div id="cartItems"></div>
   <div id="emptyMsg" class="empty-cart" style="display: none;">
-    Your cart is empty.
-    <button onclick="window.location.href='catalogue.html'">Shop Now!</button>
+    <span data-i18n="emptyCart">Coșul tău este gol.</span>
+    <button onclick="window.location.href='catalogue.html'" data-i18n="shopNow">Cumpără Acum!</button>
   </div>
   <div id="cartSummary" class="cart-summary" style="display: none;">
     <div class="summary-row">
-      <span>Subtotal:</span>
+      <span data-i18n="subtotal">Subtotal:</span>
       <span id="subtotal">$0.00</span>
     </div>
     <div class="summary-row total">
-      <span>Total:</span>
+      <span data-i18n="total">Total:</span>
       <span id="total">$0.00</span>
     </div>
-    <button id="checkoutBtn" class="checkout-btn">Checkout via WhatsApp</button>
+    <button id="checkoutBtn" class="checkout-btn" data-i18n="checkoutBtn">Finalizează prin WhatsApp</button>
   </div>
 </section>
 
 <script>
+// Language translations for cart page
+const translations = {
+  ro: {
+    navHome: 'Acasă',
+    navProducts: 'Produsele Noastre',
+    navServices: 'Serviciile Noastre',
+    navContact: 'Contactează-ne',
+    navCart: 'Coș',
+    cartTitle: 'Coșul Tău',
+    emptyCart: 'Coșul tău este gol.',
+    shopNow: 'Cumpără Acum!',
+    subtotal: 'Subtotal:',
+    total: 'Total:',
+    checkoutBtn: 'Finalizează prin WhatsApp',
+    each: 'fiecare',
+    remove: 'Elimină',
+    contactTitle: 'Contactează-ne',
+    order: 'Comandă'
+  },
+  en: {
+    navHome: 'Home',
+    navProducts: 'Our Products',
+    navServices: 'Our Services',
+    navContact: 'Contact Us',
+    navCart: 'Cart',
+    cartTitle: 'Your Cart',
+    emptyCart: 'Your cart is empty.',
+    shopNow: 'Shop Now!',
+    subtotal: 'Subtotal:',
+    total: 'Total:',
+    checkoutBtn: 'Checkout via WhatsApp',
+    each: 'each',
+    remove: 'Remove',
+    contactTitle: 'Contact Us',
+    order: 'Order'
+  }
+};
+
+// Language toggle function
+window.toggleLanguage = function() {
+  const currentLang = localStorage.getItem('language') || 'ro';
+  const newLang = currentLang === 'ro' ? 'en' : 'ro';
+  setLanguage(newLang);
+};
+
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.documentElement.setAttribute('lang', lang);
+  
+  const languageToggleText = document.getElementById('languageToggleText');
+  if (languageToggleText) {
+    languageToggleText.textContent = lang.toUpperCase();
+  }
+  
+  updatePageContent(lang);
+}
+
+function updatePageContent(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+  
+  // Re-render cart to update dynamic content
+  renderCart();
+  
+  // Update page title
+  if (lang === 'en') {
+    document.title = 'Leyr. — Cart';
+  } else {
+    document.title = 'Leyr. — Coș';
+  }
+}
+
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -56,7 +186,6 @@ if (mobileMenuToggle) {
     navMenu.classList.toggle('active');
   });
   
-  // Close menu when clicking on a link (mobile)
   const navLinks = navMenu.querySelectorAll('a');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -103,6 +232,9 @@ function saveCart() {
 function renderCart() {
   cartItemsDiv.innerHTML = '';
   
+  const lang = localStorage.getItem('language') || 'ro';
+  const t = translations[lang];
+  
   if (cart.length === 0) {
     emptyMsg.style.display = 'block';
     cartSummary.style.display = 'none';
@@ -124,14 +256,14 @@ function renderCart() {
       <img src="${item.img || 'placeholder.jpg'}" alt="${item.name}" onerror="this.src='placeholder.jpg'">
       <div class="cart-item-details">
         <h3>${item.name}</h3>
-        <div class="cart-item-price">$${(item.price || 0).toFixed(2)} each</div>
+        <div class="cart-item-price">$${(item.price || 0).toFixed(2)} ${t.each}</div>
         <div class="qty-controls">
           <button class="dec" aria-label="Decrease quantity">-</button>
           <span>${item.qty || 1}</span>
           <button class="inc" aria-label="Increase quantity">+</button>
         </div>
       </div>
-      <button class="remove-item-btn" aria-label="Remove item">Remove</button>
+      <button class="remove-item-btn" aria-label="Remove item">${t.remove}</button>
     `;
     
     cartItemsDiv.appendChild(div);
@@ -172,7 +304,10 @@ function renderCart() {
 checkoutBtn.addEventListener('click', () => {
   if (cart.length === 0) return;
   
-  let msg = 'Leyr. Order:%0A%0A';
+  const lang = localStorage.getItem('language') || 'ro';
+  const t = translations[lang];
+  
+  let msg = `Leyr. ${t.order}:%0A%0A`;
   let total = 0;
   
   cart.forEach(item => {
@@ -181,10 +316,68 @@ checkoutBtn.addEventListener('click', () => {
     msg += `${item.name} x${item.qty || 1} - $${itemTotal.toFixed(2)}%0A`;
   });
   
-  msg += `%0ATotal: $${total.toFixed(2)}`;
+  msg += `%0A${t.total} $${total.toFixed(2)}`;
   
-  window.open(`https://wa.me/?text=${msg}`, '_blank');
+  window.open(`https://wa.me/40712345678?text=${msg}`, '_blank');
 });
+
+// Theme toggle function
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (cart) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  console.log('Current theme:', currentTheme);
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  console.log('Switching to theme:', newTheme);
+  setTheme(newTheme);
+};
+
+// Theme function
+function setTheme(theme) {
+  console.log('=== setTheme called with:', theme, '(cart) ===');
+  localStorage.setItem('theme', theme);
+  console.log('Theme saved to localStorage:', theme);
+  
+  document.documentElement.setAttribute('data-theme', theme);
+  console.log('data-theme attribute set on html element:', document.documentElement.getAttribute('data-theme'));
+  
+  const themeToggle = document.getElementById('themeToggle');
+  console.log('Looking for themeToggle element...');
+  if (themeToggle) {
+    console.log('Found themeToggle element:', themeToggle);
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    console.log('Sun icon found:', !!sunIcon);
+    console.log('Moon icon found:', !!moonIcon);
+    
+    if (sunIcon && moonIcon) {
+      if (theme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+        console.log('Theme set to dark - sun hidden, moon shown');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+        console.log('Theme set to light - sun shown, moon hidden');
+      }
+    } else {
+      console.error('Sun or moon icon NOT found!');
+      console.log('Available children:', Array.from(themeToggle.children).map(c => c.tagName + (c.className ? '.' + c.className : '')));
+    }
+  } else {
+    console.error('themeToggle element NOT found!');
+  }
+  console.log('=== setTheme finished (cart) ===');
+}
+
+// Initialize language on page load
+const savedLang = localStorage.getItem('language') || 'ro';
+setLanguage(savedLang);
+
+// Initialize theme on page load
+const savedTheme = localStorage.getItem('theme') || 'light';
+setTheme(savedTheme);
 
 // Initial render
 renderCart();
@@ -192,7 +385,7 @@ renderCart();
 
 <section class="contact-section">
   <div class="contact-container">
-    <h2>Contactează-ne</h2>
+    <h2 data-i18n="contactTitle">Contactează-ne</h2>
     <div class="contact-info">
       <a href="https://instagram.com/leyr" target="_blank" class="contact-link">
         <span class="contact-icon">

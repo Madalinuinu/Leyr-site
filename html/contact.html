@@ -7,55 +7,105 @@
 <link rel="icon" href="../imgages/logo3.ico">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/contact.css">
+<script>
+// Theme toggle function - MUST be defined in head before body loads
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (head - contact) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  localStorage.setItem('theme', newTheme);
+  document.documentElement.setAttribute('data-theme', newTheme);
+  
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    if (sunIcon && moonIcon) {
+      if (newTheme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+      }
+    }
+  }
+};
+</script>
 </head>
 <body>
 
 <header>
   <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+  <div class="header-controls">
+    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Language">
+      <span class="toggle-icon" id="languageToggleText">RO</span>
+    </button>
+    <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-icon">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
   <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
   <nav id="navMenu">
-    <a href="index.html">Acasă</a>
-    <a href="catalogue.html">Produsele Noastre</a>
-    <a href="services.html">Serviciile Noastre</a>
-    <a href="contact.html">Contactează-ne</a>
-    <a href="cart.html">Coș</a>
+    <a href="index.html" data-i18n="navHome">Acasă</a>
+    <a href="catalogue.html" data-i18n="navProducts">Produsele Noastre</a>
+    <a href="services.html" data-i18n="navServices">Serviciile Noastre</a>
+    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
+    <a href="cart.html" data-i18n="navCart">Coș</a>
   </nav>
 </header>
 
 <section class="contact-page">
   <div class="contact-page-container">
-    <h1 class="contact-page-title">Contactează-ne</h1>
-    <p class="contact-page-subtitle">Ai o întrebare? Ne-ar plăcea să te ajutăm!</p>
+    <h1 class="contact-page-title" data-i18n="pageTitle">Contactează-ne</h1>
+    <p class="contact-page-subtitle" data-i18n="pageSubtitle">Ai o întrebare? Ne-ar plăcea să te ajutăm!</p>
     
     <div class="contact-content">
       <div class="contact-form-section">
-        <h2>Pune o întrebare</h2>
+        <h2 data-i18n="formTitle">Pune o întrebare</h2>
         <form class="contact-form" id="contactForm">
           <div class="form-group">
-            <label for="name">Numele tău *</label>
+            <label for="name" data-i18n="formName">Numele tău *</label>
             <input type="text" id="name" name="name" required>
           </div>
           
           <div class="form-group">
-            <label for="email">Email *</label>
+            <label for="email" data-i18n="formEmail">Email *</label>
             <input type="email" id="email" name="email" required>
           </div>
           
           <div class="form-group">
-            <label for="message">Mesajul tău *</label>
+            <label for="message" data-i18n="formMessage">Mesajul tău *</label>
             <textarea id="message" name="message" rows="6" required></textarea>
           </div>
           
-          <button type="submit" class="submit-btn">Trimite Mesajul</button>
+          <button type="submit" class="submit-btn" data-i18n="formSubmit">Trimite Mesajul</button>
         </form>
       </div>
       
       <div class="contact-info-section">
-        <h2>Informații de Contact</h2>
+        <h2 data-i18n="contactInfoTitle">Informații de Contact</h2>
         <div class="contact-details">
           <div class="contact-item">
             <span class="contact-icon">
@@ -127,7 +177,7 @@
 
 <section class="contact-section">
   <div class="contact-container">
-    <h2>Contactează-ne</h2>
+    <h2 data-i18n="contactTitle">Contactează-ne</h2>
     <div class="contact-info">
       <a href="https://instagram.com/leyr" target="_blank" class="contact-link">
         <span class="contact-icon">
@@ -172,6 +222,81 @@
 </footer>
 
 <script>
+// Language translations for contact page
+const translations = {
+  ro: {
+    navHome: 'Acasă',
+    navProducts: 'Produsele Noastre',
+    navServices: 'Serviciile Noastre',
+    navContact: 'Contactează-ne',
+    navCart: 'Coș',
+    pageTitle: 'Contactează-ne',
+    pageSubtitle: 'Ai o întrebare? Ne-ar plăcea să te ajutăm!',
+    formTitle: 'Pune o întrebare',
+    formName: 'Numele tău *',
+    formEmail: 'Email *',
+    formMessage: 'Mesajul tău *',
+    formSubmit: 'Trimite Mesajul',
+    contactInfoTitle: 'Informații de Contact',
+    contactTitle: 'Contactează-ne'
+  },
+  en: {
+    navHome: 'Home',
+    navProducts: 'Our Products',
+    navServices: 'Our Services',
+    navContact: 'Contact Us',
+    navCart: 'Cart',
+    pageTitle: 'Contact Us',
+    pageSubtitle: 'Have a question? We would love to help you!',
+    formTitle: 'Ask a Question',
+    formName: 'Your Name *',
+    formEmail: 'Email *',
+    formMessage: 'Your Message *',
+    formSubmit: 'Send Message',
+    contactInfoTitle: 'Contact Information',
+    contactTitle: 'Contact Us'
+  }
+};
+
+// Language toggle function
+window.toggleLanguage = function() {
+  const currentLang = localStorage.getItem('language') || 'ro';
+  const newLang = currentLang === 'ro' ? 'en' : 'ro';
+  setLanguage(newLang);
+};
+
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.documentElement.setAttribute('lang', lang);
+  
+  const languageToggleText = document.getElementById('languageToggleText');
+  if (languageToggleText) {
+    languageToggleText.textContent = lang.toUpperCase();
+  }
+  
+  updatePageContent(lang);
+}
+
+function updatePageContent(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+  
+  // Update page title
+  if (lang === 'en') {
+    document.title = 'Leyr. — Contact Us';
+  } else {
+    document.title = 'Leyr. — Contactează-ne';
+  }
+}
+
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -200,9 +325,22 @@ if (contactForm) {
     const data = Object.fromEntries(formData);
     
     // Create WhatsApp message
-    let message = `Mesaj nou de la ${data.name}%0A%0A`;
-    message += `Email: ${data.email}%0A%0A`;
-    message += `Mesaj:%0A${data.message}`;
+    const lang = localStorage.getItem('language') || 'ro';
+    const t = lang === 'en' ? {
+      newMessage: 'New message from',
+      email: 'Email',
+      message: 'Message',
+      sent: 'Your message has been sent! We will contact you soon.'
+    } : {
+      newMessage: 'Mesaj nou de la',
+      email: 'Email',
+      message: 'Mesaj',
+      sent: 'Mesajul tău a fost trimis! Te vom contacta în curând.'
+    };
+    
+    let message = `${t.newMessage} ${data.name}%0A%0A`;
+    message += `${t.email}: ${data.email}%0A%0A`;
+    message += `${t.message}:%0A${data.message}`;
     
     // Open WhatsApp
     window.open(`https://wa.me/40712345678?text=${message}`, '_blank');
@@ -211,9 +349,67 @@ if (contactForm) {
     contactForm.reset();
     
     // Show success message
-    alert('Mesajul tău a fost trimis! Te vom contacta în curând.');
+    alert(t.sent);
   });
 }
+
+// Theme toggle function
+window.toggleTheme = function() {
+  console.log('=== toggleTheme called (contact) ===');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  console.log('Current theme:', currentTheme);
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  console.log('Switching to theme:', newTheme);
+  setTheme(newTheme);
+};
+
+// Theme function
+function setTheme(theme) {
+  console.log('=== setTheme called with:', theme, '(contact) ===');
+  localStorage.setItem('theme', theme);
+  console.log('Theme saved to localStorage:', theme);
+  
+  document.documentElement.setAttribute('data-theme', theme);
+  console.log('data-theme attribute set on html element:', document.documentElement.getAttribute('data-theme'));
+  
+  const themeToggle = document.getElementById('themeToggle');
+  console.log('Looking for themeToggle element...');
+  if (themeToggle) {
+    console.log('Found themeToggle element:', themeToggle);
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    console.log('Sun icon found:', !!sunIcon);
+    console.log('Moon icon found:', !!moonIcon);
+    
+    if (sunIcon && moonIcon) {
+      if (theme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+        console.log('Theme set to dark - sun hidden, moon shown');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+        console.log('Theme set to light - sun shown, moon hidden');
+      }
+    } else {
+      console.error('Sun or moon icon NOT found!');
+      console.log('Available children:', Array.from(themeToggle.children).map(c => c.tagName + (c.className ? '.' + c.className : '')));
+    }
+  } else {
+    console.error('themeToggle element NOT found!');
+  }
+  console.log('=== setTheme finished (contact) ===');
+}
+
+// Initialize language on page load
+const savedLang = localStorage.getItem('language') || 'ro';
+setLanguage(savedLang);
+
+// Initialize theme on page load
+const savedTheme = localStorage.getItem('theme') || 'light';
+setTheme(savedTheme);
 </script>
 
 </body>

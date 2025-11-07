@@ -431,6 +431,7 @@ nav a:hover::after {
 
 /* Hero Image */
 .hero-image { 
+  display: none;
   text-align:center; 
   margin:60px 0;
   padding: 0 20px;
