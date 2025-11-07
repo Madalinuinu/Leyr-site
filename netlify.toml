@@ -1,0 +1,54 @@
+[build]
+  # Publish directory - Netlify va servi fișierele din root
+  publish = "."
+  
+  # Base directory - directorul de bază pentru build
+  base = "."
+
+# Redirects pentru a asigura că toate rutele funcționează
+# Redirecționează rutele către folderul html
+[[redirects]]
+  from = "/"
+  to = "/html/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/catalogue"
+  to = "/html/catalogue.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/html/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/html/services.html"
+  status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/html/cart.html"
+  status = 200
+
+[[redirects]]
+  from = "/ourproducts"
+  to = "/html/ourproducts.html"
+  status = 200
+
+# Redirect pentru toate celelalte rute către index.html
+[[redirects]]
+  from = "/*"
+  to = "/html/index.html"
+  status = 200
+
+# Headers pentru securitate și performanță
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
