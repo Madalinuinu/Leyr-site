@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leyr.</title>
+<link rel="icon" href="imgages/logo3.ico">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --header-bg: #2F4F4F;
+  --accent: #c9cac8;
+  --accent-hover: #c3c4c2;
+  --bg: #e9e8e4;
+  --text: #1A1A1A;
+  --radius: 14px;
+  --max-width: 1200px;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+
+/* Hamburger menu */
+.hamburger {
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:220;
+  width:45px;
+  height:35px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+  cursor:pointer;
+  padding:5px;
+  background: var(--header-bg);
+  border-radius:8px;
+  transition:0.3s background;
+}
+.hamburger.active { background: transparent; }
+.hamburger span {
+  display:block;
+  height:4px;
+  width:100%;
+  background: var(--accent);
+  border-radius:2px;
+  transition:0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed;
+  top:0;
+  left:-250px;
+  width:250px;
+  height:100%;
+  background: var(--bg);
+  box-shadow:2px 0 10px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+  padding-top:80px;
+  transition:0.3s;
+  z-index:210;
+}
+.sidebar a {
+  padding:15px 20px;
+  font-weight:600;
+  color: var(--text);
+  transition:0.2s background;
+}
+.sidebar a:hover { background:#d6d6d6; }
+.sidebar.active { left:0; }
+
+/* Overlay */
+.overlay {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.3);
+  z-index:200;
+}
+.overlay.active { display:block; }
+
+/* Header logo centered */
+header {
+  position:sticky;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:80px;
+  z-index:200;
+  background: var(--header-bg);
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+header img {
+  max-height:60px;
+  cursor:pointer;
+  z-index:210;
+}
+
+/* Hero section */
+.hero { text-align:center; padding:60px 20px; }
+.hero h1 {
+  font-family:'Playfair Display', serif;
+  font-size:2.8rem;
+  margin-bottom:15px;
+}
+.hero p { font-size:1.2rem; margin-bottom:20px; }
+.hero-buttons {
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.hero-buttons button {
+  padding:14px 28px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:30px;
+  background: var(--accent);
+  color: var(--header-bg);
+  cursor:pointer;
+  transition:0.2s transform, 0.2s background;
+}
+.hero-buttons button:hover {
+  transform: scale(1.05);
+  background: var(--accent-hover);
+}
+
+/* Hero Image */
+.hero-image { text-align:center; margin:40px 0; }
+.hero-image img { max-width:100%; border-radius: var(--radius); }
+
+/* About Us Section */
+.about-us {
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 20px;
+}
+.about-us h1 { text-align:center; font-family:'Playfair Display', serif; font-size:2.4rem; margin-bottom:20px; color:var(--header-bg); }
+.about-us p { font-size:1.05rem; line-height:1.6; color:var(--text); text-align:center; }
+
+/* Footer */
+footer {
+  background: var(--header-bg);
+  color: var(--accent);
+  text-align:center;
+  padding:20px 10px;
+  margin-top:40px;
+}
+</style>
+</head>
+<body>
+
+<!-- Hamburger -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <a href="index.html">Home</a>
+  <a href="catalogue.html">Our Products</a>
+  <a href="services.html">Our Services</a>
+  <a href="cart.html">Cart</a>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<header>
+  <img src="imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+</header>
+
+<section class="hero">
+  <h1>Welcome to Leyr.</h1>
+  <p>Premium smart pet tags designed for the modern pet owner — quality, style, and convenience combined.</p>
+  <div class="hero-buttons">
+    <button onclick="window.location.href='catalogue.html'">Our Products</button>
+    <button onclick="window.location.href='services.html'">Our Services</button>
+  </div>
+</section>
+
+<section class="hero-image">
+  <img src="imgages/3dworldproduct.jpg" alt="Leyr. Product" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+  <div style="display:none; text-align:center; padding:40px; background:#fff; border-radius:14px; color:#666;">Image coming soon</div>
+</section>
+
+<section class="about-us">
+  <h1>About Us</h1>
+  <p>
+    Leyr. is dedicated to creating premium smart pet tags that combine technology, style, and reliability.
+    Our mission is to ensure that pets and their owners stay connected safely and stylishly. From design to delivery, we focus on quality and customer satisfaction.
+  </p>
+</section>
+
+<footer>
+  <p>&copy; 2025 Leyr. All rights reserved.</p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('active');
+  overlay.classList.remove('active');
+  hamburger.classList.remove('active');
+});
+</script>
+
+</body>
+</html>
+

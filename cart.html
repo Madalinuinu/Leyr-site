@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="View your shopping cart at Leyr. - Premium smart pet tags and 3D services">
+<title>Leyr. — Cart</title>
+<link rel="icon" href="imgages/logo3.ico">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --header-bg: #2F4F4F;
+  --accent: #c9cac8;
+  --accent-hover: #c3c4c2;
+  --bg: #e9e8e4;
+  --text: #1A1A1A;
+  --radius: 14px;
+  --max-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background: var(--header-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 200;
+}
+
+header img {
+  max-height: 60px;
+  cursor: pointer;
+  z-index: 210;
+}
+
+/* Hamburger */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 220;
+  width: 45px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  background: var(--header-bg);
+  border-radius: 8px;
+  transition: 0.3s background;
+}
+
+.hamburger.active {
+  background: transparent;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: var(--bg);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  transition: 0.3s;
+  z-index: 210;
+}
+
+.sidebar a {
+  padding: 15px 20px;
+  font-weight: 600;
+  color: var(--text);
+  transition: 0.2s background;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: #d6d6d6;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 200;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Cart */
+.cart-container {
+  max-width: var(--max-width);
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.cart-title {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+  color: var(--header-bg);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: var(--radius);
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  gap: 15px;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.cart-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-details h3 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: var(--header-bg);
+}
+
+.cart-item-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--header-bg);
+  margin-bottom: 10px;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-controls button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  cursor: pointer;
+  transition: 0.2s background;
+  font-weight: 600;
+  min-width: 32px;
+}
+
+.qty-controls button:hover {
+  background: var(--accent-hover);
+}
+
+.qty-controls span {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.remove-item-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s background;
+  font-weight: 600;
+}
+
+.remove-item-btn:hover {
+  background: #c82333;
+}
+
+.empty-cart {
+  text-align: center;
+  margin: 50px 0;
+  font-size: 1.2rem;
+  padding: 40px 20px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.empty-cart button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  background: var(--accent);
+  color: var(--header-bg);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s transform, 0.2s background;
+}
+
+.empty-cart button:hover {
+  transform: scale(1.05);
+  background: var(--accent-hover);
+}
+
+.cart-summary {
+  background: white;
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 1.1rem;
+}
+
+.summary-row.total {
+  border-top: 2px solid var(--header-bg);
+  margin-top: 15px;
+  padding-top: 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--header-bg);
+}
+
+.checkout-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 30px auto 0;
+  padding: 14px 0;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  background: var(--accent);
+  color: var(--header-bg);
+  cursor: pointer;
+  transition: 0.2s transform, 0.2s background;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+  background: var(--accent-hover);
+}
+
+.checkout-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+footer {
+  background: var(--header-bg);
+  color: var(--accent);
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <a href="index.html">Home</a>
+  <a href="catalogue.html">Our Products</a>
+  <a href="services.html">Our Services</a>
+  <a href="cart.html">Cart</a>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<header>
+  <img src="imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+</header>
+
+<section class="cart-container">
+  <h2 class="cart-title">Your Cart</h2>
+  <div id="cartItems"></div>
+  <div id="emptyMsg" class="empty-cart" style="display: none;">
+    Your cart is empty.
+    <button onclick="window.location.href='catalogue.html'">Shop Now!</button>
+  </div>
+  <div id="cartSummary" class="cart-summary" style="display: none;">
+    <div class="summary-row">
+      <span>Subtotal:</span>
+      <span id="subtotal">$0.00</span>
+    </div>
+    <div class="summary-row total">
+      <span>Total:</span>
+      <span id="total">$0.00</span>
+    </div>
+    <button id="checkoutBtn" class="checkout-btn">Checkout via WhatsApp</button>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Leyr. All rights reserved.</p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('active');
+  overlay.classList.remove('active');
+  hamburger.classList.remove('active');
+});
+
+// CART LOGIC
+let cart = [];
+
+// Load cart from localStorage with error handling
+try {
+  const cartData = localStorage.getItem('cart');
+  cart = cartData ? JSON.parse(cartData) : [];
+  // Ensure cart items have required properties
+  cart = cart.map(item => ({
+    name: item.name || 'Unknown Product',
+    price: item.price || 0,
+    img: item.img || 'placeholder.jpg',
+    qty: item.qty || 1
+  }));
+} catch (error) {
+  console.error('Error loading cart:', error);
+  cart = [];
+}
+
+const cartItemsDiv = document.getElementById('cartItems');
+const emptyMsg = document.getElementById('emptyMsg');
+const cartSummary = document.getElementById('cartSummary');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+function saveCart() {
+  try {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  } catch (error) {
+    console.error('Error saving cart:', error);
+    alert('Unable to save cart. Please try again.');
+  }
+}
+
+function renderCart() {
+  cartItemsDiv.innerHTML = '';
+  
+  if (cart.length === 0) {
+    emptyMsg.style.display = 'block';
+    cartSummary.style.display = 'none';
+    return;
+  }
+  
+  emptyMsg.style.display = 'none';
+  cartSummary.style.display = 'block';
+  
+  let subtotal = 0;
+  
+  cart.forEach((item, index) => {
+    const itemTotal = (item.price || 0) * (item.qty || 1);
+    subtotal += itemTotal;
+    
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="${item.img || 'placeholder.jpg'}" alt="${item.name}" onerror="this.src='placeholder.jpg'">
+      <div class="cart-item-details">
+        <h3>${item.name}</h3>
+        <div class="cart-item-price">$${(item.price || 0).toFixed(2)} each</div>
+        <div class="qty-controls">
+          <button class="dec" aria-label="Decrease quantity">-</button>
+          <span>${item.qty || 1}</span>
+          <button class="inc" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <button class="remove-item-btn" aria-label="Remove item">Remove</button>
+    `;
+    
+    cartItemsDiv.appendChild(div);
+    
+    // Quantity controls
+    const incBtn = div.querySelector('.inc');
+    const decBtn = div.querySelector('.dec');
+    const removeBtn = div.querySelector('.remove-item-btn');
+    
+    incBtn.addEventListener('click', () => {
+      item.qty = (item.qty || 1) + 1;
+      saveCart();
+      renderCart();
+    });
+    
+    decBtn.addEventListener('click', () => {
+      if (item.qty > 1) {
+        item.qty--;
+      } else {
+        cart = cart.filter((_, i) => i !== index);
+      }
+      saveCart();
+      renderCart();
+    });
+    
+    removeBtn.addEventListener('click', () => {
+      cart = cart.filter((_, i) => i !== index);
+      saveCart();
+      renderCart();
+    });
+  });
+  
+  // Update summary
+  document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById('total').textContent = `$${subtotal.toFixed(2)}`;
+}
+
+checkoutBtn.addEventListener('click', () => {
+  if (cart.length === 0) return;
+  
+  let msg = 'Leyr. Order:%0A%0A';
+  let total = 0;
+  
+  cart.forEach(item => {
+    const itemTotal = (item.price || 0) * (item.qty || 1);
+    total += itemTotal;
+    msg += `${item.name} x${item.qty || 1} - $${itemTotal.toFixed(2)}%0A`;
+  });
+  
+  msg += `%0ATotal: $${total.toFixed(2)}`;
+  
+  window.open(`https://wa.me/?text=${msg}`, '_blank');
+});
+
+// Initial render
+renderCart();
+</script>
+
+</body>
+</html>
