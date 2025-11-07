@@ -22,14 +22,17 @@ window.toggleTheme = function() {
     const sunIcon = themeToggle.querySelector('.sun-icon');
     const moonIcon = themeToggle.querySelector('.moon-icon');
     if (sunIcon && moonIcon) {
+      // Show the opposite icon (the one you can switch to)
       if (newTheme === 'dark') {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-        themeToggle.classList.add('dark-active');
-      } else {
+        // Theme is dark, show sun icon (to switch to light)
         sunIcon.style.display = 'block';
         moonIcon.style.display = 'none';
         themeToggle.classList.remove('dark-active');
+      } else {
+        // Theme is light, show moon icon (to switch to dark)
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
       }
     }
   }
@@ -42,11 +45,11 @@ window.toggleTheme = function() {
   <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
   <div class="header-controls">
     <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Language">
-      <span class="toggle-icon" id="languageToggleText">RO</span>
+      <span class="toggle-icon" id="languageToggleText">EN</span>
     </button>
     <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-icon">
-        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
           <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -57,7 +60,7 @@ window.toggleTheme = function() {
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </span>
@@ -138,7 +141,11 @@ const translations = {
 
 // Language toggle function
 window.toggleLanguage = function() {
-  const currentLang = localStorage.getItem('language') || 'ro';
+  let currentLang = localStorage.getItem('language');
+  if (!currentLang) {
+    currentLang = 'ro';
+    localStorage.setItem('language', 'ro');
+  }
   const newLang = currentLang === 'ro' ? 'en' : 'ro';
   setLanguage(newLang);
 };
@@ -149,7 +156,9 @@ function setLanguage(lang) {
   
   const languageToggleText = document.getElementById('languageToggleText');
   if (languageToggleText) {
-    languageToggleText.textContent = lang.toUpperCase();
+    // Show the opposite language (the one you can switch to)
+    const oppositeLang = lang === 'ro' ? 'EN' : 'RO';
+    languageToggleText.textContent = oppositeLang;
   }
   
   updatePageContent(lang);
@@ -350,16 +359,19 @@ function setTheme(theme) {
     console.log('Moon icon found:', !!moonIcon);
     
     if (sunIcon && moonIcon) {
+      // Show the opposite icon (the one you can switch to)
       if (theme === 'dark') {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-        themeToggle.classList.add('dark-active');
-        console.log('Theme set to dark - sun hidden, moon shown');
-      } else {
+        // Theme is dark, show sun icon (to switch to light)
         sunIcon.style.display = 'block';
         moonIcon.style.display = 'none';
         themeToggle.classList.remove('dark-active');
-        console.log('Theme set to light - sun shown, moon hidden');
+        console.log('Theme set to dark - showing sun icon (can switch to light)');
+      } else {
+        // Theme is light, show moon icon (to switch to dark)
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+        console.log('Theme set to light - showing moon icon (can switch to dark)');
       }
     } else {
       console.error('Sun or moon icon NOT found!');
@@ -372,7 +384,11 @@ function setTheme(theme) {
 }
 
 // Initialize language on page load
-const savedLang = localStorage.getItem('language') || 'ro';
+let savedLang = localStorage.getItem('language');
+if (!savedLang) {
+  savedLang = 'ro';
+  localStorage.setItem('language', 'ro');
+}
 setLanguage(savedLang);
 
 // Initialize theme on page load
