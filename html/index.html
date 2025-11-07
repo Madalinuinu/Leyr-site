@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii</title>
+<link rel="icon" href="../imgages/logo3.ico">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+
+<header>
+  <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+  <div class="header-controls">
+    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Toggle language">
+      <span class="toggle-icon">RO</span>
+    </button>
+    <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-icon">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav id="navMenu">
+    <a href="index.html" data-i18n="nav.home">Acasă</a>
+    <a href="catalogue.html" data-i18n="nav.products">Produsele Noastre</a>
+    <a href="services.html" data-i18n="nav.services">Serviciile Noastre</a>
+    <a href="contact.html" data-i18n="nav.contact">Contactează-ne</a>
+    <a href="cart.html" data-i18n="nav.cart">Coș</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1 data-i18n="hero.title">Bun venit la Leyr.</h1>
+  <p data-i18n="hero.subtitle">Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.</p>
+  <div class="hero-buttons">
+    <button onclick="window.location.href='catalogue.html'" data-i18n="hero.products">Our Products</button>
+    <button onclick="window.location.href='services.html'" data-i18n="hero.services">Our Services</button>
+  </div>
+</section>
+
+<section class="hero-image" id="heroImage">
+  <img src="../imgages/3dworldproduct.jpg" alt="Leyr. Product" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+  <div style="display:none; text-align:center; padding:40px; background:#fff; border-radius:14px; color:#666;">Image coming soon</div>
+</section>
+
+<section class="stats-section" id="statsSection">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-number" data-target="500">0</span>
+      <div class="stat-label" data-i18n="stats.customers">Clienți Mulțumiți</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="500">0</span>
+      <div class="stat-label" data-i18n="stats.products">Proiecte Realizate</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="25">0</span>
+      <div class="stat-label" data-i18n="stats.materials">Materiale Disponibile</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="98">0</span>
+      <div class="stat-label" data-i18n="stats.satisfaction">% Satisfacție</div>
+    </div>
+  </div>
+</section>
+
+<section class="features-section" id="featuresSection">
+  <h2 data-i18n="features.title">De Ce Să Alegi Leyr?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🎨</span>
+      <h3 data-i18n="features.design.title">Design Personalizat</h3>
+      <p data-i18n="features.design.desc">Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔧</span>
+      <h3 data-i18n="features.precision.title">Precizie Maximă</h3>
+      <p data-i18n="features.precision.desc">Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💎</span>
+      <h3 data-i18n="features.materials.title">Materiale Premium</h3>
+      <p data-i18n="features.materials.desc">O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3 data-i18n="features.speed.title">Livrare Rapidă</h3>
+      <p data-i18n="features.speed.desc">Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎯</span>
+      <h3 data-i18n="features.custom.title">Proiecte Personalizate</h3>
+      <p data-i18n="features.custom.desc">Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">✨</span>
+      <h3 data-i18n="features.quality.title">Calitate Premium</h3>
+      <p data-i18n="features.quality.desc">Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-us" id="aboutUs">
+  <h1 data-i18n="about.title">Despre Noi</h1>
+  <p data-i18n="about.text">
+    Leyr. este o firmă specializată în printare 3D profesională, oferind servicii complete de modelare și printare pentru figurine, cercei, bijuterii și multe alte produse personalizate.
+    Misiunea noastră este să transformăm ideile tale în realitate prin tehnologie avansată și creativitate. De la concept la produs final, ne concentrăm pe calitate, precizie și satisfacerea clienților.
+  </p>
+</section>
+
+<section class="contact-section">
+  <div class="contact-container">
+    <h2 data-i18n="contact.title">Contactează-ne</h2>
+    <div class="contact-info">
+      <a href="https://instagram.com/leyr" target="_blank" class="contact-link">
+        <span class="contact-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>Instagram</span>
+      </a>
+      <a href="https://wa.me/40712345678" target="_blank" class="contact-link">
+        <span class="contact-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+        </span>
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://facebook.com/leyr" target="_blank" class="contact-link">
+        <span class="contact-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </span>
+        <span>Facebook</span>
+      </a>
+      <a href="https://tiktok.com/@leyr" target="_blank" class="contact-link">
+        <span class="contact-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+          </svg>
+        </span>
+        <span>TikTok</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Leyr. All rights reserved.</p>
+</footer>
+
+<script>
+// Translations
+const translations = {
+  en: {
+    'nav.home': 'Home',
+    'nav.products': 'Our Products',
+    'nav.services': 'Our Services',
+    'nav.contact': 'Contact Us',
+    'nav.cart': 'Cart',
+    'hero.title': 'Welcome to Leyr.',
+    'hero.subtitle': 'Professional 3D printing for figurines, earrings, jewelry and more — quality, precision and creativity combined.',
+    'hero.products': 'Our Products',
+    'hero.services': 'Our Services',
+    'stats.customers': 'Happy Customers',
+    'stats.products': 'Projects Completed',
+    'stats.materials': 'Available Materials',
+    'stats.satisfaction': '% Satisfaction',
+    'features.title': 'Why Choose Leyr?',
+    'features.design.title': 'Custom Design',
+    'features.design.desc': 'Create your own 3D models or choose from our collection of unique designs for figurines, earrings and jewelry.',
+    'features.precision.title': 'Maximum Precision',
+    'features.precision.desc': 'Advanced 3D printing technology for fine details and high resolution in every project.',
+    'features.materials.title': 'Premium Materials',
+    'features.materials.desc': 'A wide range of quality materials: PLA, ABS, PETG, resin and many more for every need.',
+    'features.speed.title': 'Fast Delivery',
+    'features.speed.desc': 'Fast processing and efficient delivery to bring you 3D products as quickly as possible.',
+    'features.custom.title': 'Custom Projects',
+    'features.custom.desc': 'Complete 3D modeling and printing services for unique and personalized projects.',
+    'features.quality.title': 'Premium Quality',
+    'features.quality.desc': 'Rigorous quality control standards to ensure perfect results in every print.',
+    'about.title': 'About Us',
+    'about.text': 'Leyr. is a company specialized in professional 3D printing, offering complete modeling and printing services for figurines, earrings, jewelry and many other personalized products. Our mission is to transform your ideas into reality through advanced technology and creativity. From concept to final product, we focus on quality, precision and customer satisfaction.',
+    'contact.title': 'Contact Us'
+  },
+  ro: {
+    'nav.home': 'Acasă',
+    'nav.products': 'Produsele Noastre',
+    'nav.services': 'Serviciile Noastre',
+    'nav.contact': 'Contactează-ne',
+    'nav.cart': 'Coș',
+    'hero.title': 'Bun venit la Leyr.',
+    'hero.subtitle': 'Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.',
+    'hero.products': 'Produsele Noastre',
+    'hero.services': 'Serviciile Noastre',
+    'stats.customers': 'Clienți Mulțumiți',
+    'stats.products': 'Proiecte Realizate',
+    'stats.materials': 'Materiale Disponibile',
+    'stats.satisfaction': '% Satisfacție',
+    'features.title': 'De Ce Să Alegi Leyr?',
+    'features.design.title': 'Design Personalizat',
+    'features.design.desc': 'Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.',
+    'features.precision.title': 'Precizie Maximă',
+    'features.precision.desc': 'Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.',
+    'features.materials.title': 'Materiale Premium',
+    'features.materials.desc': 'O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.',
+    'features.speed.title': 'Livrare Rapidă',
+    'features.speed.desc': 'Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.',
+    'features.custom.title': 'Proiecte Personalizate',
+    'features.custom.desc': 'Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.',
+    'features.quality.title': 'Calitate Premium',
+    'features.quality.desc': 'Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.',
+    'about.title': 'Despre Noi',
+    'about.text': 'Leyr. este o firmă specializată în printare 3D profesională, oferind servicii complete de modelare și printare pentru figurine, cercei, bijuterii și multe alte produse personalizate. Misiunea noastră este să transformăm ideile tale în realitate prin tehnologie avansată și creativitate. De la concept la produs final, ne concentrăm pe calitate, precizie și satisfacerea clienților.',
+    'contact.title': 'Contactează-ne'
+  }
+};
+
+// Language toggle function - must be global
+window.toggleLanguage = function() {
+  const currentLang = localStorage.getItem('language') || 'ro';
+  const newLang = currentLang === 'ro' ? 'en' : 'ro';
+  setLanguage(newLang);
+};
+
+// Language function
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.documentElement.lang = lang;
+  
+  // Update toggle button - show EN or RO
+  const langToggle = document.getElementById('languageToggle');
+  if (langToggle) {
+    const langIcon = langToggle.querySelector('.toggle-icon');
+    if (langIcon) {
+      if (lang === 'ro') {
+        langIcon.textContent = 'RO';
+      } else {
+        langIcon.textContent = 'EN';
+      }
+    }
+  }
+  
+  // Update all translatable elements
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+  });
+}
+
+// Theme toggle function - must be global
+window.toggleTheme = function() {
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  setTheme(newTheme);
+};
+
+// Theme function
+function setTheme(theme) {
+  localStorage.setItem('theme', theme);
+  document.documentElement.setAttribute('data-theme', theme);
+  
+  // Update toggle button - only icon, no label
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+    
+    if (sunIcon && moonIcon) {
+      if (theme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        themeToggle.classList.add('dark-active');
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('dark-active');
+      }
+    }
+  }
+}
+
+// Mobile menu toggle
+function initMobileMenu() {
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const navMenu = document.getElementById('navMenu');
+
+  if (mobileMenuToggle && navMenu) {
+    mobileMenuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link (mobile)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navMenu.classList.remove('active');
+        }
+      });
+    });
+  }
+}
+
+// Intersection Observer for scroll animations
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements for animation
+  const elementsToAnimate = document.querySelectorAll('.hero-image, .about-us, .stats-section, .features-section');
+  elementsToAnimate.forEach(el => observer.observe(el));
+}
+
+// Counter Animation - Brand New Simple Version
+(function() {
+  let animated = false;
+  
+  function countUp(element, target) {
+    if (!element || !target) return;
+    
+    const duration = 2000;
+    const start = 0;
+    const startTime = Date.now();
+    
+    function update() {
+      const now = Date.now();
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const value = Math.floor(start + (target - start) * ease);
+      
+      element.textContent = value;
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        element.textContent = target;
+      }
+    }
+    
+    requestAnimationFrame(update);
+  }
+  
+  function startCounters() {
+    if (animated) return;
+    animated = true;
+    
+    const section = document.getElementById('statsSection');
+    if (!section) return;
+    
+    const counters = section.querySelectorAll('.stat-number');
+    if (counters.length === 0) return;
+    
+    counters.forEach((counter, index) => {
+      const target = parseInt(counter.getAttribute('data-target'));
+      if (target && !isNaN(target)) {
+        counter.textContent = '0';
+        setTimeout(() => {
+          countUp(counter, target);
+        }, index * 200);
+      }
+    });
+  }
+  
+  // Trigger when section is visible
+  function init() {
+    const section = document.getElementById('statsSection');
+    if (!section) return;
+    
+    // Use IntersectionObserver
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animated) {
+            startCounters();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(section);
+    }
+    
+    // Fallback: check on scroll
+    window.addEventListener('scroll', function checkScroll() {
+      if (animated) {
+        window.removeEventListener('scroll', checkScroll);
+        return;
+      }
+      
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        startCounters();
+        window.removeEventListener('scroll', checkScroll);
+      }
+    });
+    
+    // Fallback: auto-start after 1.5 seconds
+    setTimeout(() => {
+      if (!animated) {
+        startCounters();
+      }
+    }, 1500);
+  }
+  
+  // Start when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  // Make it accessible globally
+  window.startCounterAnimations = startCounters;
+})();
+
+// Smooth scroll for anchor links
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+}
+
+// Parallax effect for hero image
+function initParallax() {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroImage = document.getElementById('heroImage');
+    if (heroImage) {
+      const rate = scrolled * 0.5;
+      heroImage.style.transform = `translateY(${rate}px)`;
+    }
+  });
+}
+
+// Initialize everything when DOM is ready
+function initAll() {
+  // Initialize language and theme
+  const savedLanguage = localStorage.getItem('language') || 'ro';
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  
+  setLanguage(savedLanguage);
+  setTheme(savedTheme);
+  
+  // Initialize mobile menu
+  initMobileMenu();
+  
+  // Initialize scroll animations
+  initScrollAnimations();
+  
+  // Initialize smooth scroll
+  initSmoothScroll();
+  
+  // Initialize parallax
+  initParallax();
+  
+  // Counter animation is auto-initialized
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  initAll();
+}
+
+</script>
+

@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leyr. — Our Products</title>
-<link rel="icon" href="imgages/logo3.ico">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
 :root {
-  --header-bg: #2F4F4F;
-  --accent: #c9cac8;
-  --accent-hover: #c3c4c2;
-  --bg: #e9e8e4;
-  --text: #1A1A1A;
+  --header-bg: #22543d;
+  --accent: #48bb78;
+  --accent-hover: #38a169;
+  --bg: #f0fff4;
+  --text: #2d3748;
   --radius: 14px;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -34,7 +25,7 @@ header {
 }
 
 header img {
-  max-height: 90px;
+  max-height: 120px;
   height: auto;
   cursor: pointer;
   z-index: 210;
@@ -60,7 +51,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 nav a::after {
@@ -149,68 +140,81 @@ nav a:hover::after {
 }
 .product-card button:hover { transform: scale(1.05); background: var(--accent-hover); }
 
-/* Footer */
-footer { background: var(--header-bg); color: var(--accent); text-align:center; padding:20px 10px; margin-top:40px; }
-</style>
-</head>
-<body>
-
-<header>
-  <img src="imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
-  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <nav id="navMenu">
-    <a href="index.html">Home</a>
-    <a href="catalogue.html">Our Products</a>
-    <a href="services.html">Our Services</a>
-    <a href="cart.html">Cart</a>
-  </nav>
-</header>
-
-<section class="page-title">Our Products</section>
-
-<section class="products-container">
-  <div class="product-card">
-    <img src="imgages/dogtag.jpg" alt="Leyr. Dog Tag" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-    <div style="display:none; width:100%; height:200px; background:#e9e8e4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Image coming soon</div>
-    <h3>Leyr. Dog Tag</h3>
-    <button onclick="window.location.href='dogtag.html'">View Product</button>
-  </div>
-  <div class="product-card">
-    <img src="imgages/cattag.jpg" alt="Leyr. Cat Tag" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-    <div style="display:none; width:100%; height:200px; background:#e9e8e4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Image coming soon</div>
-    <h3>Leyr. Cat Tag</h3>
-    <button onclick="window.location.href='cattag.html'">View Product</button>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 Leyr. All rights reserved.</p>
-</footer>
-
-<script>
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const navMenu = document.getElementById('navMenu');
-
-if (mobileMenuToggle) {
-  mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-  
-  // Close menu when clicking on a link (mobile)
-  const navLinks = navMenu.querySelectorAll('a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navMenu.classList.remove('active');
-      }
-    });
-  });
+/* Contact Section (before footer) */
+.contact-section {
+  background: var(--header-bg);
+  padding: 60px 20px 0 20px;
+  margin-top: 60px;
 }
-</script>
 
-</body>
-</html>
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-container h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 25px 35px;
+  background: rgba(34, 84, 61, 0.6);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--accent);
+  transition: all 0.3s ease;
+  min-width: 140px;
+  border: 1px solid rgba(72, 187, 120, 0.2);
+}
+
+.contact-link:hover {
+  background: rgba(72, 187, 120, 0.15);
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+}
+
+.contact-link .contact-icon {
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-link .contact-icon svg {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.contact-link:hover .contact-icon svg {
+  transform: scale(1.1);
+}
+
+.contact-link span:last-child {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+/* Footer */
+footer { background: var(--header-bg); color: var(--accent); text-align:center; padding:20px 10px 20px 10px; margin-top: 0; }
+

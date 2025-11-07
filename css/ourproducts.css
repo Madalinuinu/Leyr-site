@@ -1,0 +1,133 @@
+:root {
+  --header-bg: #22543d;
+  --accent: #48bb78;
+  --accent-hover: #38a169;
+  --bg: #f0fff4;
+  --text: #2d3748;
+  --radius: 14px;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+
+/* Hamburger menu */
+.hamburger {
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:220;
+  width:45px;
+  height:35px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+  cursor:pointer;
+  padding:5px;
+  background: var(--header-bg);
+  border-radius:8px;
+  transition:0.3s background;
+}
+.hamburger.active { background: transparent; }
+.hamburger span {
+  display:block;
+  height:4px;
+  width:100%;
+  background: var(--accent);
+  border-radius:2px;
+  transition:0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+  position:fixed;
+  top:0;
+  left:-250px;
+  width:250px;
+  height:100%;
+  background: var(--bg);
+  box-shadow:2px 0 10px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+  padding-top:80px;
+  transition:0.3s;
+  z-index:210;
+}
+.sidebar a {
+  padding:15px 20px;
+  font-weight:600;
+  color: var(--text);
+  transition:0.2s background;
+}
+.sidebar a:hover { background:#d6d6d6; }
+.sidebar.active { left:0; }
+
+/* Overlay */
+.overlay {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.3);
+  z-index:200;
+}
+.overlay.active { display:block; }
+
+/* Header logo centered */
+header {
+  position:sticky;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:80px;
+  z-index:200;
+  background: var(--header-bg);
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+header img {
+  max-height:120px;
+  cursor:pointer;
+  z-index:210;
+}
+
+/* Products grid */
+.products-container {
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  gap:30px;
+}
+.product-card {
+  background:#fff;
+  border-radius:var(--radius);
+  padding:20px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+.product-card img { width:100%; border-radius:var(--radius); margin-bottom:15px; }
+.product-card h2 { font-size:1.4rem; margin-bottom:10px; }
+.product-card button {
+  padding:12px 20px;
+  border:none;
+  border-radius:30px;
+  background: var(--accent);
+  color: var(--header-bg);
+  cursor:pointer;
+  font-weight:600;
+  width:100%;
+  transition:0.2s background;
+}
+.product-card button:hover { background: var(--accent-hover); }
+
+footer {
+  background: var(--header-bg);
+  color: var(--accent);
+  text-align:center;
+  padding:20px 10px;
+  margin-top:40px;
+}
+

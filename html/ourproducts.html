@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leyr.</title>
+<link rel="icon" href="../imgages/logo3.ico">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/ourproducts.css">
+</head>
+<body>
+
+<!-- Hamburger -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <a href="index.html">Home</a>
+  <a href="catalogue.html">Our Products</a>
+  <a href="services.html">Our Services</a>
+  <a href="cart.html">Cart</a>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<header>
+  <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+</header>
+
+<section class="products-container">
+  <div class="product-card">
+    <img src="../imgages/nexdog.jpg" alt="Nex Dog Tag">
+    <h2>Nex Dog Tag</h2>
+    <button onclick="window.location.href='nexdog.html'">View Product</button>
+  </div>
+  <div class="product-card">
+    <img src="../imgages/nexcat.jpg" alt="Nex Cat Tag">
+    <h2>Nex Cat Tag</h2>
+    <button onclick="window.location.href='nexcat.html'">View Product</button>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Leyr. All rights reserved.</p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('active');
+  overlay.classList.remove('active');
+  hamburger.classList.remove('active');
+});
+</script>
+
+</body>
+</html>

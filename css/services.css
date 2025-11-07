@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leyr. — Our Services</title>
-<link rel="icon" href="imgages/logo3.ico">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
-:root { --header-bg: #2F4F4F; --accent: #c9cac8; --accent-hover: #c3c4c2; --bg: #e9e8e4; --text:#1A1A1A; --radius:14px; }
+:root { --header-bg: #22543d; --accent: #48bb78; --accent-hover: #38a169; --bg: #f0fff4; --text:#2d3748; --radius:14px; }
 * { box-sizing:border-box; margin:0; padding:0; }
 body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); }
 
@@ -27,7 +18,7 @@ header {
 }
 
 header img {
-  max-height: 90px;
+  max-height: 120px;
   height: auto;
   cursor: pointer;
   z-index: 210;
@@ -53,7 +44,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 nav a::after {
@@ -135,71 +126,80 @@ nav a:hover::after {
 .service-card { background:#fff; border-radius:var(--radius); padding:20px; box-shadow:0 4px 15px rgba(0,0,0,0.1); text-align:center; }
 .service-card h3 { font-family:'Playfair Display', serif; margin-bottom:10px; color: var(--header-bg); }
 .service-card p { font-size:1.05rem; line-height:1.6; color: var(--text); }
-footer { background: var(--header-bg); color: var(--accent); text-align:center; padding:20px 10px; margin-top:40px; }
-</style>
-</head>
-<body>
-
-<header>
-  <img src="imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
-  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <nav id="navMenu">
-    <a href="index.html">Home</a>
-    <a href="catalogue.html">Our Products</a>
-    <a href="services.html">Our Services</a>
-    <a href="cart.html">Cart</a>
-  </nav>
-</header>
-
-<section class="page-title">Our Services</section>
-
-<section class="services-container">
-  <div class="service-card">
-    <h3>3D Modeling</h3>
-    <p>Custom 3D modeling for your designs, objects, or projects with precise details and professional quality.</p>
-  </div>
-  <div class="service-card">
-    <h3>3D Printing</h3>
-    <p>High-quality printing using premium materials to bring your digital designs to life with durability.</p>
-  </div>
-  <div class="service-card">
-    <h3>Custom Projects</h3>
-    <p>End-to-end service from concept to 3D modeling, prototyping, and final production.</p>
-  </div>
-  <div class="service-card">
-    <h3>Laser Engraving</h3>
-    <p>Coming Soon — personalize your products with precision laser engraving.</p>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 Leyr. All rights reserved.</p>
-</footer>
-
-<script>
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const navMenu = document.getElementById('navMenu');
-
-if (mobileMenuToggle) {
-  mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-  
-  // Close menu when clicking on a link (mobile)
-  const navLinks = navMenu.querySelectorAll('a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navMenu.classList.remove('active');
-      }
-    });
-  });
+/* Contact Section (before footer) */
+.contact-section {
+  background: var(--header-bg);
+  padding: 60px 20px 0 20px;
+  margin-top: 60px;
 }
-</script>
 
-</body>
-</html>
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-container h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 25px 35px;
+  background: rgba(34, 84, 61, 0.6);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--accent);
+  transition: all 0.3s ease;
+  min-width: 140px;
+  border: 1px solid rgba(72, 187, 120, 0.2);
+}
+
+.contact-link:hover {
+  background: rgba(72, 187, 120, 0.15);
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+}
+
+.contact-link .contact-icon {
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-link .contact-icon svg {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.contact-link:hover .contact-icon svg {
+  transform: scale(1.1);
+}
+
+.contact-link span:last-child {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+footer { background: var(--header-bg); color: var(--accent); text-align:center; padding:20px 10px 20px 10px; margin-top: 0; }
+
