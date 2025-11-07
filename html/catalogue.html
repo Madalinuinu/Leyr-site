@@ -78,34 +78,169 @@ window.toggleTheme = function() {
 
 <section class="page-title" data-i18n="pageTitle">Produsele Noastre</section>
 
-<section class="products-container">
-  <div class="product-card">
-    <img src="../imgages/3dworldproduct.jpg" alt="Figurine 3D" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-    <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
-    <h3 data-i18n="product1Title">Figurine 3D</h3>
-    <p style="font-size:0.9rem; color:#666; margin:10px 0;" data-i18n="product1Desc">Figurine personalizate pentru colecții, jocuri și decor</p>
-    <button onclick="window.location.href='figurine.html'" data-i18n="viewProducts">Vezi Produse</button>
+<section class="search-filter-section">
+  <div class="search-filter-container">
+    <div class="search-bar-wrapper">
+      <input type="text" id="searchInput" class="search-input" placeholder="Caută produse..." data-i18n-placeholder="searchPlaceholder">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </div>
+    <div class="category-filter-wrapper">
+      <select id="categoryFilter" class="category-select" data-i18n-label="categoryLabel">
+        <option value="all" data-i18n="categoryAll">Toate Categoriile</option>
+        <option value="figurine" data-i18n="categoryFigurine">Figurine 3D</option>
+        <option value="cercei" data-i18n="categoryEarrings">Cercei 3D</option>
+        <option value="bijuterii" data-i18n="categoryJewelry">Bijuterii 3D</option>
+        <option value="personalizate" data-i18n="categoryCustom">Obiecte Personalizate</option>
+      </select>
+    </div>
   </div>
-  <div class="product-card">
-    <img src="../imgages/3dworldproduct.jpg" alt="Cercei 3D" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-    <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
-    <h3 data-i18n="product2Title">Cercei 3D</h3>
-    <p style="font-size:0.9rem; color:#666; margin:10px 0;" data-i18n="product2Desc">Cercei unici și personalizați din materiale premium</p>
-    <button onclick="window.location.href='cercei.html'" data-i18n="viewProducts">Vezi Produse</button>
+</section>
+
+<div class="no-results" id="noResults" data-i18n="noResults">Nu s-au găsit produse.</div>
+
+<!-- Most Selled Section -->
+<section class="most-selled-section">
+  <div class="most-selled-wrapper">
+    <h2 class="most-selled-title" data-i18n="mostSelled">Cele Mai Vândute</h2>
+    <div class="products-container most-selled-container" id="mostSelledContainer">
+    <div class="product-card" data-category="figurine" data-most-selled="true">
+      <img src="../imgages/3dworldproduct.jpg" alt="Dragon Figurine" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Dragon Figurine</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină dragon detaliată, printare 3D de înaltă calitate</p>
+      <div class="product-price">299 RON</div>
+      <button onclick="addToCart('dragon-figurine', 299)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="cercei" data-most-selled="true">
+      <img src="../imgages/3dworldproduct.jpg" alt="Floral Earrings" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Cercei Floral</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Cercei cu design floral, materiale premium</p>
+      <div class="product-price">149 RON</div>
+      <button onclick="addToCart('floral-earrings', 149)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="bijuterii" data-most-selled="true">
+      <img src="../imgages/3dworldproduct.jpg" alt="Geometric Necklace" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Colier Geometric</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Colier cu design geometric modern</p>
+      <div class="product-price">199 RON</div>
+      <button onclick="addToCart('geometric-necklace', 199)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="figurine" data-most-selled="true">
+      <img src="../imgages/3dworldproduct.jpg" alt="Warrior Figurine" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Figurină Războinic</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină războinic detaliată, perfectă pentru colecții</p>
+      <div class="product-price">349 RON</div>
+      <button onclick="addToCart('warrior-figurine', 349)">Adaugă în Coș</button>
+    </div>
+    </div>
   </div>
-  <div class="product-card">
-    <img src="../imgages/3dworldproduct.jpg" alt="Bijuterii 3D" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-    <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
-    <h3 data-i18n="product3Title">Bijuterii 3D</h3>
-    <p style="font-size:0.9rem; color:#666; margin:10px 0;" data-i18n="product3Desc">Bijuterii moderne și accesorii personalizate</p>
-    <button onclick="window.location.href='bijuterii.html'" data-i18n="viewProducts">Vezi Produse</button>
-  </div>
-  <div class="product-card">
-    <img src="../imgages/3dworldproduct.jpg" alt="Obiecte Personalizate" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-    <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
-    <h3 data-i18n="product4Title">Obiecte Personalizate</h3>
-    <p style="font-size:0.9rem; color:#666; margin:10px 0;" data-i18n="product4Desc">Obiecte 3D personalizate după designul tău</p>
-    <button onclick="window.location.href='personalizate.html'" data-i18n="viewProducts">Vezi Produse</button>
+</section>
+
+<!-- All Products Section -->
+<section class="all-products-section">
+  <div class="products-container" id="productsContainer">
+    <div class="product-card" data-category="figurine">
+      <img src="../imgages/3dworldproduct.jpg" alt="Fantasy Character" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Personaj Fantasy</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Personaj fantasy detaliat, printare 3D profesională</p>
+      <div class="product-price">279 RON</div>
+      <button onclick="addToCart('fantasy-character', 279)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="cercei">
+      <img src="../imgages/3dworldproduct.jpg" alt="Minimalist Earrings" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Cercei Minimalist</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Cercei cu design minimalist, elegante și moderne</p>
+      <div class="product-price">129 RON</div>
+      <button onclick="addToCart('minimalist-earrings', 129)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="bijuterii">
+      <img src="../imgages/3dworldproduct.jpg" alt="Abstract Ring" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Inel Abstract</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Inel cu design abstract, unic și modern</p>
+      <div class="product-price">179 RON</div>
+      <button onclick="addToCart('abstract-ring', 179)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="personalizate">
+      <img src="../imgages/3dworldproduct.jpg" alt="Custom Phone Case" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Husă Telefon Personalizată</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Husă telefon personalizată după designul tău</p>
+      <div class="product-price">89 RON</div>
+      <button onclick="addToCart('custom-phone-case', 89)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="figurine">
+      <img src="../imgages/3dworldproduct.jpg" alt="Animal Figurine" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Figurină Animal</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină animal realistă, perfectă pentru decor</p>
+      <div class="product-price">229 RON</div>
+      <button onclick="addToCart('animal-figurine', 229)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="cercei">
+      <img src="../imgages/3dworldproduct.jpg" alt="Statement Earrings" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Cercei Statement</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Cercei statement, bold și expresivi</p>
+      <div class="product-price">169 RON</div>
+      <button onclick="addToCart('statement-earrings', 169)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="bijuterii">
+      <img src="../imgages/3dworldproduct.jpg" alt="Bracelet Set" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Set Brățări</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Set de brățări coordonate, design modern</p>
+      <div class="product-price">249 RON</div>
+      <button onclick="addToCart('bracelet-set', 249)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="personalizate">
+      <img src="../imgages/3dworldproduct.jpg" alt="Custom Keychain" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Cheiță Personalizată</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Cheiță personalizată cu designul tău</p>
+      <div class="product-price">59 RON</div>
+      <button onclick="addToCart('custom-keychain', 59)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="figurine">
+      <img src="../imgages/3dworldproduct.jpg" alt="Sci-Fi Model" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Model Sci-Fi</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Model science-fiction detaliat, perfect pentru colecții</p>
+      <div class="product-price">319 RON</div>
+      <button onclick="addToCart('sci-fi-model', 319)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="cercei">
+      <img src="../imgages/3dworldproduct.jpg" alt="Vintage Earrings" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Cercei Vintage</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Cercei cu design vintage, elegante și atemporale</p>
+      <div class="product-price">139 RON</div>
+      <button onclick="addToCart('vintage-earrings', 139)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="bijuterii">
+      <img src="../imgages/3dworldproduct.jpg" alt="Pendant Necklace" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Colier cu Pendant</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Colier cu pendant elegant, design clasic</p>
+      <div class="product-price">189 RON</div>
+      <button onclick="addToCart('pendant-necklace', 189)">Adaugă în Coș</button>
+    </div>
+    <div class="product-card" data-category="personalizate">
+      <img src="../imgages/3dworldproduct.jpg" alt="Custom Desk Organizer" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      <h3>Organizator Birou</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Organizator birou personalizat, funcțional și elegant</p>
+      <div class="product-price">159 RON</div>
+      <button onclick="addToCart('desk-organizer', 159)">Adaugă în Coș</button>
+    </div>
   </div>
 </section>
 
@@ -174,7 +309,16 @@ const translations = {
     product4Title: 'Obiecte Personalizate',
     product4Desc: 'Obiecte 3D personalizate după designul tău',
     viewProducts: 'Vezi Produse',
-    contactTitle: 'Contactează-ne'
+    contactTitle: 'Contactează-ne',
+    searchPlaceholder: 'Caută produse...',
+    categoryAll: 'Toate Categoriile',
+    categoryFigurine: 'Figurine 3D',
+    categoryEarrings: 'Cercei 3D',
+    categoryJewelry: 'Bijuterii 3D',
+    categoryCustom: 'Obiecte Personalizate',
+    noResults: 'Nu s-au găsit produse.',
+    mostSelled: 'Cele Mai Vândute',
+    allProducts: 'Toate Produsele'
   },
   en: {
     navHome: 'Home',
@@ -192,7 +336,16 @@ const translations = {
     product4Title: 'Custom Objects',
     product4Desc: 'Custom 3D objects according to your design',
     viewProducts: 'View Products',
-    contactTitle: 'Contact Us'
+    contactTitle: 'Contact Us',
+    searchPlaceholder: 'Search products...',
+    categoryAll: 'All Categories',
+    categoryFigurine: '3D Figurines',
+    categoryEarrings: '3D Earrings',
+    categoryJewelry: '3D Jewelry',
+    categoryCustom: 'Custom Objects',
+    noResults: 'No products found.',
+    mostSelled: 'Most Selled',
+    allProducts: 'All Products'
   }
 };
 
@@ -226,6 +379,25 @@ function updatePageContent(lang) {
       el.textContent = t[key];
     }
   });
+  
+  // Update placeholder attributes
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key]) {
+      el.placeholder = t[key];
+    }
+  });
+  
+  // Update select options
+  const categoryFilter = document.getElementById('categoryFilter');
+  if (categoryFilter) {
+    categoryFilter.querySelectorAll('option').forEach(option => {
+      const key = option.getAttribute('data-i18n');
+      if (key && t[key]) {
+        option.textContent = t[key];
+      }
+    });
+  }
   
   // Update page title
   if (lang === 'en') {
@@ -310,6 +482,162 @@ setLanguage(savedLang);
 // Initialize theme on page load
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
+
+// Add to Cart Function
+function addToCart(productId, price) {
+  // Get existing cart from localStorage
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  // Check if product already exists in cart
+  const existingProduct = cart.find(item => item.id === productId);
+  
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    // Get product name from the card
+    const productCard = event.target.closest('.product-card');
+    const productName = productCard.querySelector('h3')?.textContent || 'Produs';
+    
+    cart.push({
+      id: productId,
+      name: productName,
+      price: price,
+      quantity: 1
+    });
+  }
+  
+  // Save to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // Show confirmation
+  alert('Produs adăugat în coș!');
+}
+
+// Shuffle Products Randomly
+function shuffleProducts() {
+  const productsContainer = document.getElementById('productsContainer');
+  const mostSelledContainer = document.getElementById('mostSelledContainer');
+  
+  if (!productsContainer) return;
+  
+  // Get all products from both sections
+  const allProducts = Array.from(productsContainer.querySelectorAll('.product-card'));
+  const mostSelledProducts = mostSelledContainer ? Array.from(mostSelledContainer.querySelectorAll('.product-card')) : [];
+  
+  // Combine all products (excluding most selled from shuffle, they stay in their section)
+  const products = [...allProducts];
+  
+  // Fisher-Yates shuffle algorithm
+  for (let i = products.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [products[i], products[j]] = [products[j], products[i]];
+  }
+  
+  // Re-append shuffled products
+  products.forEach(product => {
+    productsContainer.appendChild(product);
+  });
+}
+
+// Search and Filter Functionality
+function filterProducts() {
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const allProductCards = document.querySelectorAll('#productsContainer .product-card');
+  const mostSelledCards = document.querySelectorAll('#mostSelledContainer .product-card');
+  const noResults = document.getElementById('noResults');
+  
+  if (!searchInput || !categoryFilter) return;
+  
+  const searchTerm = searchInput.value.toLowerCase().trim();
+  const selectedCategory = categoryFilter.value;
+  
+  let visibleCount = 0;
+  
+  // Filter all products (not most selled)
+  allProductCards.forEach(card => {
+    const cardCategory = card.getAttribute('data-category');
+    const cardTitle = card.querySelector('h3')?.textContent.toLowerCase() || '';
+    const cardDesc = card.querySelector('p')?.textContent.toLowerCase() || '';
+    
+    // Check if card matches search term
+    const matchesSearch = searchTerm === '' || 
+      cardTitle.includes(searchTerm) || 
+      cardDesc.includes(searchTerm);
+    
+    // Check if card matches category filter
+    const matchesCategory = selectedCategory === 'all' || cardCategory === selectedCategory;
+    
+    // Show or hide card
+    if (matchesSearch && matchesCategory) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  
+  // Filter most selled products (but always show them if category is "all")
+  mostSelledCards.forEach(card => {
+    if (selectedCategory === 'all') {
+      // Always show most selled when "all" is selected
+      card.classList.remove('hidden');
+    } else {
+      // Filter most selled by category
+      const cardCategory = card.getAttribute('data-category');
+      const cardTitle = card.querySelector('h3')?.textContent.toLowerCase() || '';
+      const cardDesc = card.querySelector('p')?.textContent.toLowerCase() || '';
+      
+      const matchesSearch = searchTerm === '' || 
+        cardTitle.includes(searchTerm) || 
+        cardDesc.includes(searchTerm);
+      
+      const matchesCategory = cardCategory === selectedCategory;
+      
+      if (matchesSearch && matchesCategory) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    }
+  });
+  
+  // Show or hide no results message
+  const totalVisible = visibleCount + Array.from(mostSelledCards).filter(card => !card.classList.contains('hidden')).length;
+  if (totalVisible === 0) {
+    noResults.classList.add('show');
+  } else {
+    noResults.classList.remove('show');
+  }
+}
+
+  // Add event listeners for search and filter
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    
+    if (searchInput) {
+      searchInput.addEventListener('input', filterProducts);
+    }
+    
+    if (categoryFilter) {
+      categoryFilter.addEventListener('change', function() {
+        // Shuffle products when "all" category is selected
+        if (this.value === 'all') {
+          shuffleProducts();
+        }
+        filterProducts();
+      });
+    }
+    
+    // Shuffle products on page load when category is "all"
+    if (categoryFilter && categoryFilter.value === 'all') {
+      shuffleProducts();
+    }
+    
+    // Initial filter to ensure everything is set up correctly
+    filterProducts();
+  });
 </script>
 
 </body>

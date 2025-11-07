@@ -334,18 +334,200 @@ nav a:hover::after {
 .hero::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(47,79,79,0.1) 0%, transparent 70%);
-  animation: rotate 20s linear infinite;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.15) 0%, transparent 70%);
+  animation: rotateGradient 12s linear infinite, pulseGradient 8s ease-in-out infinite;
   z-index: 0;
 }
 
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.08) 50%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, rgba(139, 92, 246, 0.08) 50%, transparent 70%);
+  animation: waveMove 15s ease-in-out infinite, shimmer 10s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes rotateGradient {
+  0% { 
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGradient {
+  0%, 100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  50% {
+    filter: blur(20px);
+    opacity: 0.7;
+  }
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(-100%) translateY(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(0%) translateY(-20px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(100%) translateY(0px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Animated Particles */
+.hero-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  animation: floatParticle 20s infinite ease-in-out;
+  filter: blur(1px);
+}
+
+.particle-1 {
+  width: 80px;
+  height: 80px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.3), transparent);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.4), 0 0 60px rgba(139, 92, 246, 0.3);
+}
+
+.particle-2 {
+  width: 60px;
+  height: 60px;
+  top: 60%;
+  right: 15%;
+  animation-delay: -2s;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5), rgba(236, 72, 153, 0.3), transparent);
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.4), 0 0 50px rgba(236, 72, 153, 0.3);
+}
+
+.particle-3 {
+  width: 100px;
+  height: 100px;
+  top: 30%;
+  right: 30%;
+  animation-delay: -4s;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.4), rgba(99, 102, 241, 0.3), transparent);
+  box-shadow: 0 0 45px rgba(236, 72, 153, 0.4), 0 0 65px rgba(99, 102, 241, 0.3);
+}
+
+.particle-4 {
+  width: 70px;
+  height: 70px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: -6s;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.45), rgba(139, 92, 246, 0.35), transparent);
+  box-shadow: 0 0 38px rgba(99, 102, 241, 0.4), 0 0 55px rgba(139, 92, 246, 0.3);
+}
+
+.particle-5 {
+  width: 90px;
+  height: 90px;
+  top: 50%;
+  left: 50%;
+  animation-delay: -8s;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.3), transparent);
+  box-shadow: 0 0 42px rgba(139, 92, 246, 0.4), 0 0 60px rgba(236, 72, 153, 0.3);
+}
+
+.particle-6 {
+  width: 50px;
+  height: 50px;
+  top: 20%;
+  right: 50%;
+  animation-delay: -10s;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.5), rgba(99, 102, 241, 0.3), transparent);
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.4), 0 0 45px rgba(99, 102, 241, 0.3);
+}
+
+.particle-7 {
+  width: 65px;
+  height: 65px;
+  bottom: 30%;
+  right: 25%;
+  animation-delay: -12s;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.45), rgba(139, 92, 246, 0.35), transparent);
+  box-shadow: 0 0 36px rgba(99, 102, 241, 0.4), 0 0 52px rgba(139, 92, 246, 0.3);
+}
+
+.particle-8 {
+  width: 55px;
+  height: 55px;
+  top: 70%;
+  left: 40%;
+  animation-delay: -14s;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.5), rgba(236, 72, 153, 0.3), transparent);
+  box-shadow: 0 0 32px rgba(139, 92, 246, 0.4), 0 0 48px rgba(236, 72, 153, 0.3);
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.25;
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-20px, -60px) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translate(-30px, -20px) scale(1.05);
+    opacity: 0.35;
+  }
 }
 
 .hero > * {
@@ -383,18 +565,32 @@ nav a:hover::after {
 .hero-buttons button {
   padding:14px 28px;
   font-size:1.1rem;
-  border:none;
+  border: 2px solid transparent;
   border-radius:30px;
   background: var(--accent);
   color: var(--header-bg);
   cursor:pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-weight: 600;
+  z-index: 1;
 }
 
 .hero-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+.hero-buttons button::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -402,24 +598,32 @@ nav a:hover::after {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition: width 0.6s ease, height 0.6s ease;
+  z-index: -1;
 }
 
 .hero-buttons button:hover::before {
+  left: 100%;
+}
+
+.hero-buttons button:hover::after {
   width: 300px;
   height: 300px;
 }
 
 .hero-buttons button:hover {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-3px);
   background: var(--accent-hover);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4), 0 4px 12px rgba(0,0,0,0.15);
+  color: var(--header-bg);
 }
 
 .hero-buttons button:active {
-  transform: translateY(-1px) scale(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
 }
 
 @keyframes fadeInUp {
@@ -541,25 +745,80 @@ nav a:hover::after {
   font-family: 'Playfair Display', serif;
   margin-bottom: 10px;
   display: block;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.2s ease, color 0.3s ease, opacity 0.3s ease;
   transform-origin: center;
+  opacity: 1 !important;
+  transform: scale(1) translateY(0);
+  visibility: visible !important;
+  min-height: 3.5rem;
+  line-height: 1.2;
 }
 
-.stat-number.animated {
+.stat-number.animating {
+  opacity: 1;
   color: var(--accent);
-  animation: pulse 0.5s ease;
+  animation: numberAppear 0.5s ease forwards, numberPulse 0.3s ease 0.5s;
+  transform: scale(1) translateY(0);
+  visibility: visible;
+}
+
+.stat-number.counting {
+  animation: numberPulse 0.1s ease infinite;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(72, 187, 120, 0.5);
 }
 
 .stat-number.animation-complete {
+  opacity: 1;
   color: var(--header-bg);
+  transform: scale(1) translateY(0);
+  animation: numberComplete 0.4s ease;
+  text-shadow: none;
 }
 
-@keyframes pulse {
+.stat-item {
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-item:hover .stat-number {
+  transform: scale(1.1);
+}
+
+@keyframes numberAppear {
+  0% {
+    opacity: 1;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes numberPulse {
   0%, 100% {
     transform: scale(1);
   }
   50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes numberComplete {
+  0% {
     transform: scale(1.15);
+    color: var(--accent);
+  }
+  100% {
+    transform: scale(1);
+    color: var(--header-bg);
   }
 }
 

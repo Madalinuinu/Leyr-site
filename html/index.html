@@ -52,6 +52,8 @@ window.toggleTheme = function() {
 </head>
 <body>
 <script>
+// TEST: First line of body script
+console.log('=== BODY TOP SCRIPT STARTED ===');
 // Language translations - MUST be defined FIRST
 const translations = {
   ro: {
@@ -181,9 +183,29 @@ window.translations = translations;
       applyLanguage();
     }
   } catch (error) {
-    // Silent error handling
+    console.error('ERROR in body top script:', error);
   }
 })();
+console.log('=== BODY TOP SCRIPT ENDED ===');
+
+// TEST: Try to initialize counters here
+console.log('=== TESTING COUNTERS IN BODY TOP SCRIPT ===');
+setTimeout(function() {
+  console.log('=== TIMEOUT IN BODY TOP SCRIPT ===');
+  var section = document.getElementById('statsSection');
+  console.log('Section element:', section);
+  if (section) {
+    var counters = section.querySelectorAll('.stat-number');
+    console.log('Found counters:', counters.length);
+    for (var i = 0; i < counters.length; i++) {
+      var target = parseInt(counters[i].getAttribute('data-target')) || 0;
+      counters[i].textContent = target.toString();
+      console.log('Counter', (i+1), 'set to:', target);
+    }
+  } else {
+    console.error('Section NOT found!');
+  }
+}, 1000);
 </script>
 
 <header>
@@ -226,6 +248,16 @@ window.translations = translations;
 </header>
 
 <section class="hero">
+  <div class="hero-particles">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="particle particle-6"></div>
+    <div class="particle particle-7"></div>
+    <div class="particle particle-8"></div>
+  </div>
   <h1 data-i18n="heroTitle">Bun venit la Leyr.</h1>
   <p data-i18n="heroSubtitle">Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.</p>
   <div class="hero-buttons">
@@ -242,19 +274,19 @@ window.translations = translations;
 <section class="stats-section" id="statsSection">
   <div class="stats-grid">
     <div class="stat-item">
-      <span class="stat-number" data-target="500">0</span>
+      <span class="stat-number" data-target="500">500</span>
       <div class="stat-label" data-i18n="statClients">Clienți Mulțumiți</div>
     </div>
     <div class="stat-item">
-      <span class="stat-number" data-target="500">0</span>
+      <span class="stat-number" data-target="500">500</span>
       <div class="stat-label" data-i18n="statProjects">Proiecte Realizate</div>
     </div>
     <div class="stat-item">
-      <span class="stat-number" data-target="25">0</span>
+      <span class="stat-number" data-target="25">25</span>
       <div class="stat-label" data-i18n="statMaterials">Materiale Disponibile</div>
     </div>
     <div class="stat-item">
-      <span class="stat-number" data-target="98">0</span>
+      <span class="stat-number" data-target="98">98</span>
       <div class="stat-label" data-i18n="statSatisfaction">% Satisfacție</div>
     </div>
   </div>
@@ -351,6 +383,21 @@ window.translations = translations;
 </footer>
 
 <script>
+// TEST: First line of script - MUST APPEAR FIRST
+console.log('=== SCRIPT TAG REACHED ===');
+console.log('=== BEFORE IIFE ===');
+(function() {
+  'use strict';
+  console.log('=== SCRIPT TAG OPENED ===');
+  try {
+    console.log('=== BODY SCRIPT STARTED ===');
+    console.log('Script is executing...');
+  } catch(e) {
+    console.error('ERROR at start of script:', e);
+  }
+})();
+console.log('=== AFTER IIFE ===');
+
 // Language toggle function - redefine to use setLanguage directly
 window.toggleLanguage = function() {
   const currentLang = localStorage.getItem('language') || 'ro';
@@ -391,8 +438,13 @@ function setLanguage(lang) {
 }
 
 function updatePageContent(lang) {
+  if (typeof translations === 'undefined') {
+    console.error('ERROR: translations is not defined!');
+    return;
+  }
   const t = translations[lang];
   if (!t) {
+    console.error('ERROR: translations[', lang, '] is not defined!');
     return;
   }
   
@@ -485,157 +537,208 @@ function initMobileMenu() {
   }
 }
 
+// TEST: Check if script is running
+try {
+  console.log('=== COUNTER SCRIPT SECTION STARTED ===');
+} catch(e) {
+  console.error('ERROR in counter section:', e);
+}
+
 // Intersection Observer for scroll animations
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observe elements for animation
+const elementsToAnimate = document.querySelectorAll('.hero-image, .about-us, .stats-section, .features-section');
+elementsToAnimate.forEach(el => observer.observe(el));
+
+// Slow and Visible CountUp Animation - Numbers scroll from 0 to target
+function animateCountUp(element, from, to, duration = 3, delay = 0, onStart, onEnd) {
+  console.log('animateCountUp called:', element, 'from:', from, 'to:', to, 'duration:', duration);
+  if (!element || isNaN(from) || isNaN(to)) {
+    console.error('animateCountUp: Invalid parameters!');
+    return;
+  }
+
+  // Format value function
+  const formatValue = (value) => {
+    return Math.round(value).toString();
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, observerOptions);
+  // Set initial value
+  element.textContent = formatValue(from);
+  
+  // Add animating class for CSS effects
+  element.classList.add('animating');
+  element.classList.remove('counting', 'animation-complete');
 
-  // Observe elements for animation
-  const elementsToAnimate = document.querySelectorAll('.hero-image, .about-us, .stats-section, .features-section');
-  elementsToAnimate.forEach(el => observer.observe(el));
+  let animationId = null;
+  let startTime = null;
+  let timeoutId = null;
+  let durationTimeoutId = null;
+  let lastDisplayedValue = from;
+
+  // Easing function that slows down at the end (ease-out cubic)
+  // This creates a smooth deceleration as it approaches the target
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  // Function to update animation - called every frame
+  function update(currentTime) {
+    if (!startTime) {
+      startTime = currentTime;
+    }
+
+    const elapsed = (currentTime - startTime) / 1000; // Convert to seconds
+    const progress = Math.min(elapsed / duration, 1);
+
+    // Apply easing - starts fast, slows down at the end
+    const eased = easeOutCubic(progress);
+    const currentValue = from + (to - from) * eased;
+    const roundedValue = Math.round(currentValue);
+
+    // Always update text to show every number change
+    // This ensures we see: 0, 1, 2, 3, 4... up to the target
+    if (roundedValue !== lastDisplayedValue || progress === 0) {
+      element.textContent = formatValue(roundedValue);
+      lastDisplayedValue = roundedValue;
+      
+      // Add counting class for visual pulse effect
+      if (!element.classList.contains('counting')) {
+        element.classList.add('counting');
+      }
+    }
+
+    if (progress < 1) {
+      // Continue animation - update every frame
+      animationId = requestAnimationFrame(update);
+    } else {
+      // Animation complete - ensure final value is displayed
+      element.textContent = formatValue(to);
+      element.classList.remove('counting', 'animating');
+      element.classList.add('animation-complete');
+      
+      if (typeof onEnd === 'function') {
+        onEnd();
+      }
+    }
+  }
+
+  // Start animation after delay
+  timeoutId = setTimeout(() => {
+    if (typeof onStart === 'function') {
+      onStart();
+    }
+    startTime = null;
+    lastDisplayedValue = from;
+    // Start animation immediately
+    animationId = requestAnimationFrame(update);
+  }, delay * 1000);
+
+  // Call onEnd after duration (fallback)
+  durationTimeoutId = setTimeout(() => {
+    if (typeof onEnd === 'function') {
+      onEnd();
+    }
+  }, delay * 1000 + duration * 1000);
+
+  // Return cleanup function
+  return () => {
+    if (timeoutId) clearTimeout(timeoutId);
+    if (durationTimeoutId) clearTimeout(durationTimeoutId);
+    if (animationId) cancelAnimationFrame(animationId);
+    element.classList.remove('animating', 'counting');
+  };
 }
 
-// Counter Animation - Brand New Simple Version
-(function() {
-  let animated = false;
+// Initialize counters when DOM is ready - Set values directly without animation
+function initCounters() {
+  console.log('=== initCounters() CALLED ===');
+  const statsSection = document.getElementById('statsSection');
+  console.log('statsSection element:', statsSection);
   
-  function countUp(element, target) {
-    if (!element || !target) return;
-    
-    const duration = 2000;
-    const start = 0;
-    const startTime = Date.now();
-    
-    function update() {
-      const now = Date.now();
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      const ease = 1 - Math.pow(1 - progress, 3);
-      const value = Math.floor(start + (target - start) * ease);
-      
-      element.textContent = value;
-      
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        element.textContent = target;
-      }
-    }
-    
-    requestAnimationFrame(update);
+  if (!statsSection) {
+    console.error('ERROR: statsSection NOT FOUND!');
+    return;
   }
   
-  function startCounters() {
-    if (animated) return;
-    animated = true;
-    
-    const section = document.getElementById('statsSection');
-    if (!section) return;
-    
-    const counters = section.querySelectorAll('.stat-number');
-    if (counters.length === 0) return;
-    
-    counters.forEach((counter, index) => {
-      const target = parseInt(counter.getAttribute('data-target'));
-      if (target && !isNaN(target)) {
-        counter.textContent = '0';
-        setTimeout(() => {
-          countUp(counter, target);
-        }, index * 200);
-      }
-    });
-  }
+  console.log('Found statsSection, setting values directly...');
   
-  // Trigger when section is visible
-  function init() {
-    const section = document.getElementById('statsSection');
-    if (!section) return;
-    
-    // Use IntersectionObserver
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !animated) {
-            startCounters();
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      observer.observe(section);
-    }
-    
-    // Fallback: check on scroll
-    window.addEventListener('scroll', function checkScroll() {
-      if (animated) {
-        window.removeEventListener('scroll', checkScroll);
-        return;
-      }
-      
-      const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        startCounters();
-        window.removeEventListener('scroll', checkScroll);
-      }
-    });
-    
-    // Fallback: auto-start after 1.5 seconds
-    setTimeout(() => {
-      if (!animated) {
-        startCounters();
-      }
-    }, 1500);
-  }
+  // Get all stat numbers and set values directly
+  const counters = statsSection.querySelectorAll('.stat-number');
+  console.log('Found', counters.length, 'counters');
   
-  // Start when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-  
-  // Make it accessible globally
-  window.startCounterAnimations = startCounters;
-})();
-
-// Smooth scroll for anchor links
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
+  counters.forEach((counter, index) => {
+    const target = parseInt(counter.getAttribute('data-target')) || 0;
+    counter.textContent = target.toString();
+    console.log(`Counter ${index + 1}: Set to ${target}`);
   });
 }
+
+// Run when DOM is ready
+console.log('=== SETTING UP COUNTER INITIALIZATION ===');
+console.log('Document readyState:', document.readyState);
+
+if (document.readyState === 'loading') {
+  console.log('DOM loading, waiting for DOMContentLoaded...');
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded fired, calling initCounters...');
+    initCounters();
+  });
+} else {
+  console.log('DOM already loaded, calling initCounters immediately...');
+  initCounters();
+}
+
+// Also try after a delay as fallback
+setTimeout(function() {
+  console.log('=== FALLBACK: Checking counters after 2 seconds ===');
+  const section = document.getElementById('statsSection');
+  if (section) {
+    const counters = section.querySelectorAll('.stat-number');
+    console.log('Fallback: Found', counters.length, 'counters');
+    counters.forEach(function(counter, index) {
+      const target = parseInt(counter.getAttribute('data-target')) || 0;
+      counter.textContent = target.toString();
+      console.log('Fallback: Set counter', index + 1, 'to', target);
+    });
+  }
+}, 2000);
 
 // Parallax effect for hero image
-function initParallax() {
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroImage = document.getElementById('heroImage');
-    if (heroImage) {
-      const rate = scrolled * 0.5;
-      heroImage.style.transform = `translateY(${rate}px)`;
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const heroImage = document.getElementById('heroImage');
+  if (heroImage) {
+    const rate = scrolled * 0.5;
+    heroImage.style.transform = `translateY(${rate}px)`;
+  }
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   });
-}
+});
 
 // Initialize everything when DOM is ready
 function initAll() {
@@ -652,16 +755,15 @@ function initAll() {
   // Initialize mobile menu
   initMobileMenu();
   
-  // Initialize scroll animations
-  initScrollAnimations();
+  // Initialize counters
+  if (typeof initCounters === 'function') {
+    console.log('Calling initCounters from initAll...');
+    initCounters();
+  } else {
+    console.error('initCounters function not found!');
+  }
   
-  // Initialize smooth scroll
-  initSmoothScroll();
-  
-  // Initialize parallax
-  initParallax();
-  
-  // Counter animation is auto-initialized
+  // Scroll animations, counter animation, parallax and smooth scroll are auto-initialized above
 }
 
 // Initialize on DOM ready
@@ -681,6 +783,27 @@ try {
 } catch (error) {
   // Silent error handling
 }
+
+// FINAL TEST: Set counters directly at the very end - SIMPLE VERSION
+(function() {
+  console.log('=== FINAL TEST STARTED ===');
+  setTimeout(function() {
+    console.log('=== TIMEOUT FIRED ===');
+    var section = document.getElementById('statsSection');
+    console.log('Section element:', section);
+    if (section) {
+      var counters = section.querySelectorAll('.stat-number');
+      console.log('Found counters:', counters.length);
+      for (var i = 0; i < counters.length; i++) {
+        var target = parseInt(counters[i].getAttribute('data-target')) || 0;
+        counters[i].textContent = target.toString();
+        console.log('Counter', (i+1), 'set to:', target);
+      }
+    } else {
+      console.error('Section NOT found!');
+    }
+  }, 2000);
+})();
 
 </script>
 
