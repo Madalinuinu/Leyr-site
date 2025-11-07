@@ -17,8 +17,29 @@
   --max-width: 1200px;
 }
 
+/* Dark theme */
+[data-theme="dark"] {
+  --header-bg: #1a1a1a;
+  --accent: #c9cac8;
+  --accent-hover: #e0e0e0;
+  --bg: #2d2d2d;
+  --text: #e9e8e4;
+}
+
+[data-theme="dark"] .stats-section,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .hero-image img {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(201, 202, 200, 0.2);
+}
+
+[data-theme="dark"] .hero-image img {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
 * { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+html { scroll-behavior: smooth; }
+body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
 /* Header with horizontal menu */
 header {
@@ -40,6 +61,11 @@ header img {
   height: auto;
   cursor: pointer;
   z-index: 210;
+  transition: transform 0.3s ease;
+}
+
+header img:hover {
+  transform: scale(1.1) rotate(2deg);
 }
 
 /* Navigation menu */
@@ -80,6 +106,59 @@ nav a:hover::after {
   width: 100%;
 }
 
+/* Header controls (language and theme) */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 210;
+}
+
+.control-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 50px;
+  text-align: center;
+}
+
+.control-btn:hover {
+  background: var(--accent);
+  color: var(--header-bg);
+  transform: scale(1.05);
+}
+
+.control-btn.active {
+  background: var(--accent);
+  color: var(--header-bg);
+}
+
+.control-btn-group {
+  display: flex;
+  gap: 5px;
+  background: rgba(0,0,0,0.1);
+  padding: 3px;
+  border-radius: 25px;
+}
+
+.control-btn-group .control-btn {
+  border: none;
+  padding: 6px 14px;
+  min-width: 45px;
+}
+
+.control-btn-group .control-btn.active {
+  background: var(--accent);
+  color: var(--header-bg);
+}
+
 /* Mobile menu toggle (hidden by default) */
 .mobile-menu-toggle {
   display: none;
@@ -107,6 +186,22 @@ nav a:hover::after {
   
   header img {
     max-height: 70px;
+  }
+  
+  .header-controls {
+    gap: 5px;
+  }
+  
+  .control-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-width: 40px;
+  }
+  
+  .control-btn-group .control-btn {
+    padding: 5px 10px;
+    min-width: 35px;
+    font-size: 0.75rem;
   }
   
   nav {
@@ -137,19 +232,67 @@ nav a:hover::after {
 }
 
 /* Hero section */
-.hero { text-align:center; padding:60px 20px; }
+.hero { 
+  text-align:center; 
+  padding:80px 20px;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(47,79,79,0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
 .hero h1 {
   font-family:'Playfair Display', serif;
   font-size:2.8rem;
   margin-bottom:15px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
 }
-.hero p { font-size:1.2rem; margin-bottom:20px; }
+
+.hero p { 
+  font-size:1.2rem; 
+  margin-bottom:30px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease 0.3s forwards;
+}
+
 .hero-buttons {
   display:flex;
   justify-content:center;
   gap:15px;
   flex-wrap:wrap;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease 0.6s forwards;
 }
+
 .hero-buttons button {
   padding:14px 28px;
   font-size:1.1rem;
@@ -158,25 +301,248 @@ nav a:hover::after {
   background: var(--accent);
   color: var(--header-bg);
   cursor:pointer;
-  transition:0.2s transform, 0.2s background;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+
+.hero-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.hero-buttons button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
 .hero-buttons button:hover {
-  transform: scale(1.05);
+  transform: translateY(-3px) scale(1.05);
   background: var(--accent-hover);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.hero-buttons button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Hero Image */
-.hero-image { text-align:center; margin:40px 0; }
-.hero-image img { max-width:100%; border-radius: var(--radius); }
+.hero-image { 
+  text-align:center; 
+  margin:60px 0;
+  padding: 0 20px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.hero-image.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-image img { 
+  max-width:100%; 
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.hero-image img:hover {
+  transform: scale(1.02) translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+}
 
 /* About Us Section */
 .about-us {
   max-width:1200px;
-  margin:60px auto;
+  margin:80px auto;
   padding:0 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
 }
-.about-us h1 { text-align:center; font-family:'Playfair Display', serif; font-size:2.4rem; margin-bottom:20px; color:var(--header-bg); }
-.about-us p { font-size:1.05rem; line-height:1.6; color:var(--text); text-align:center; }
+
+.about-us.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-us h1 { 
+  text-align:center; 
+  font-family:'Playfair Display', serif; 
+  font-size:2.4rem; 
+  margin-bottom:30px; 
+  color:var(--header-bg);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.about-us h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--header-bg);
+  border-radius: 2px;
+}
+
+.about-us p { 
+  font-size:1.05rem; 
+  line-height:1.8; 
+  color:var(--text); 
+  text-align:center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Stats Section */
+.stats-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 60px 20px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.stats-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 20px;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--header-bg);
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Features Section */
+.features-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.features-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.features-section h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  margin-bottom: 50px;
+  color: var(--header-bg);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background: white;
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(47,79,79,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.feature-card:hover::before {
+  left: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.feature-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--header-bg);
+}
+
+.feature-card p {
+  color: var(--text);
+  line-height: 1.6;
+}
 
 /* Footer */
 footer {
@@ -192,36 +558,103 @@ footer {
 
 <header>
   <img src="imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
+  <div class="header-controls">
+    <div class="control-btn-group">
+      <button class="control-btn" id="langRO" onclick="setLanguage('ro')">RO</button>
+      <button class="control-btn active" id="langEN" onclick="setLanguage('en')">EN</button>
+    </div>
+    <div class="control-btn-group">
+      <button class="control-btn" id="themeLight" onclick="setTheme('light')">☀️</button>
+      <button class="control-btn" id="themeDark" onclick="setTheme('dark')">🌙</button>
+    </div>
+  </div>
   <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
   <nav id="navMenu">
-    <a href="index.html">Home</a>
-    <a href="catalogue.html">Our Products</a>
-    <a href="services.html">Our Services</a>
-    <a href="cart.html">Cart</a>
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="catalogue.html" data-i18n="nav.products">Our Products</a>
+    <a href="services.html" data-i18n="nav.services">Our Services</a>
+    <a href="cart.html" data-i18n="nav.cart">Cart</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>Welcome to Leyr.</h1>
-  <p>Premium smart pet tags designed for the modern pet owner — quality, style, and convenience combined.</p>
+  <h1 data-i18n="hero.title">Welcome to Leyr.</h1>
+  <p data-i18n="hero.subtitle">Premium smart pet tags designed for the modern pet owner — quality, style, and convenience combined.</p>
   <div class="hero-buttons">
-    <button onclick="window.location.href='catalogue.html'">Our Products</button>
-    <button onclick="window.location.href='services.html'">Our Services</button>
+    <button onclick="window.location.href='catalogue.html'" data-i18n="hero.products">Our Products</button>
+    <button onclick="window.location.href='services.html'" data-i18n="hero.services">Our Services</button>
   </div>
 </section>
 
-<section class="hero-image">
+<section class="hero-image" id="heroImage">
   <img src="imgages/3dworldproduct.jpg" alt="Leyr. Product" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
   <div style="display:none; text-align:center; padding:40px; background:#fff; border-radius:14px; color:#666;">Image coming soon</div>
 </section>
 
-<section class="about-us">
-  <h1>About Us</h1>
-  <p>
+<section class="stats-section" id="statsSection">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-number" data-target="500">0</span>
+      <div class="stat-label" data-i18n="stats.customers">Happy Customers</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="1000">0</span>
+      <div class="stat-label" data-i18n="stats.products">Products Sold</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="50">0</span>
+      <div class="stat-label" data-i18n="stats.countries">Countries</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-target="98">0</span>
+      <div class="stat-label" data-i18n="stats.satisfaction">% Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<section class="features-section" id="featuresSection">
+  <h2 data-i18n="features.title">Why Choose Leyr?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🔒</span>
+      <h3 data-i18n="features.secure.title">Secure & Reliable</h3>
+      <p data-i18n="features.secure.desc">Advanced technology ensures your pet's safety with GPS tracking and secure data protection.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎨</span>
+      <h3 data-i18n="features.design.title">Stylish Design</h3>
+      <p data-i18n="features.design.desc">Premium materials and modern aesthetics that complement your pet's unique personality.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3 data-i18n="features.battery.title">Long Battery Life</h3>
+      <p data-i18n="features.battery.desc">Extended battery performance ensures your pet tag stays connected when you need it most.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📱</span>
+      <h3 data-i18n="features.app.title">Smart App</h3>
+      <p data-i18n="features.app.desc">Intuitive mobile app for real-time tracking, health monitoring, and instant notifications.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🌊</span>
+      <h3 data-i18n="features.waterproof.title">Waterproof</h3>
+      <p data-i18n="features.waterproof.desc">Durable design that withstands all weather conditions and water activities.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💎</span>
+      <h3 data-i18n="features.quality.title">Premium Quality</h3>
+      <p data-i18n="features.quality.desc">Built to last with high-quality materials and rigorous quality testing standards.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-us" id="aboutUs">
+  <h1 data-i18n="about.title">About Us</h1>
+  <p data-i18n="about.text">
     Leyr. is dedicated to creating premium smart pet tags that combine technology, style, and reliability.
     Our mission is to ensure that pets and their owners stay connected safely and stylishly. From design to delivery, we focus on quality and customer satisfaction.
   </p>
@@ -232,6 +665,103 @@ footer {
 </footer>
 
 <script>
+// Translations
+const translations = {
+  en: {
+    'nav.home': 'Home',
+    'nav.products': 'Our Products',
+    'nav.services': 'Our Services',
+    'nav.cart': 'Cart',
+    'hero.title': 'Welcome to Leyr.',
+    'hero.subtitle': 'Premium smart pet tags designed for the modern pet owner — quality, style, and convenience combined.',
+    'hero.products': 'Our Products',
+    'hero.services': 'Our Services',
+    'stats.customers': 'Happy Customers',
+    'stats.products': 'Products Sold',
+    'stats.countries': 'Countries',
+    'stats.satisfaction': '% Satisfaction',
+    'features.title': 'Why Choose Leyr?',
+    'features.secure.title': 'Secure & Reliable',
+    'features.secure.desc': 'Advanced technology ensures your pet\'s safety with GPS tracking and secure data protection.',
+    'features.design.title': 'Stylish Design',
+    'features.design.desc': 'Premium materials and modern aesthetics that complement your pet\'s unique personality.',
+    'features.battery.title': 'Long Battery Life',
+    'features.battery.desc': 'Extended battery performance ensures your pet tag stays connected when you need it most.',
+    'features.app.title': 'Smart App',
+    'features.app.desc': 'Intuitive mobile app for real-time tracking, health monitoring, and instant notifications.',
+    'features.waterproof.title': 'Waterproof',
+    'features.waterproof.desc': 'Durable design that withstands all weather conditions and water activities.',
+    'features.quality.title': 'Premium Quality',
+    'features.quality.desc': 'Built to last with high-quality materials and rigorous quality testing standards.',
+    'about.title': 'About Us',
+    'about.text': 'Leyr. is dedicated to creating premium smart pet tags that combine technology, style, and reliability. Our mission is to ensure that pets and their owners stay connected safely and stylishly. From design to delivery, we focus on quality and customer satisfaction.'
+  },
+  ro: {
+    'nav.home': 'Acasă',
+    'nav.products': 'Produsele Noastre',
+    'nav.services': 'Serviciile Noastre',
+    'nav.cart': 'Coș',
+    'hero.title': 'Bun venit la Leyr.',
+    'hero.subtitle': 'Etichete inteligente premium pentru animale de companie, concepute pentru proprietarul modern — calitate, stil și confort combinate.',
+    'hero.products': 'Produsele Noastre',
+    'hero.services': 'Serviciile Noastre',
+    'stats.customers': 'Clienți Mulțumiți',
+    'stats.products': 'Produse Vândute',
+    'stats.countries': 'Țări',
+    'stats.satisfaction': '% Satisfacție',
+    'features.title': 'De Ce Să Alegi Leyr?',
+    'features.secure.title': 'Sigur și Fiabil',
+    'features.secure.desc': 'Tehnologie avansată care asigură siguranța animalului tău cu urmărire GPS și protecție securizată a datelor.',
+    'features.design.title': 'Design Elegant',
+    'features.design.desc': 'Materiale premium și estetică modernă care completează personalitatea unică a animalului tău.',
+    'features.battery.title': 'Baterie de Lungă Durată',
+    'features.battery.desc': 'Performanță extinsă a bateriei care asigură că eticheta rămâne conectată când ai nevoie cel mai mult.',
+    'features.app.title': 'Aplicație Inteligentă',
+    'features.app.desc': 'Aplicație mobilă intuitivă pentru urmărire în timp real, monitorizare a sănătății și notificări instantanee.',
+    'features.waterproof.title': 'Rezistent la Apă',
+    'features.waterproof.desc': 'Design durabil care rezistă la toate condițiile meteorologice și activitățile în apă.',
+    'features.quality.title': 'Calitate Premium',
+    'features.quality.desc': 'Construit să reziste cu materiale de înaltă calitate și standarde riguroase de testare a calității.',
+    'about.title': 'Despre Noi',
+    'about.text': 'Leyr. este dedicat creării de etichete inteligente premium pentru animale de companie care combină tehnologie, stil și fiabilitate. Misiunea noastră este să ne asigurăm că animalele și proprietarii lor rămân conectați în siguranță și stil. De la design la livrare, ne concentrăm pe calitate și satisfacerea clienților.'
+  }
+};
+
+// Language functions
+function setLanguage(lang) {
+  localStorage.setItem('language', lang);
+  document.documentElement.lang = lang;
+  
+  // Update button states
+  document.getElementById('langRO').classList.toggle('active', lang === 'ro');
+  document.getElementById('langEN').classList.toggle('active', lang === 'en');
+  
+  // Update all translatable elements
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+  });
+}
+
+// Theme functions
+function setTheme(theme) {
+  localStorage.setItem('theme', theme);
+  document.documentElement.setAttribute('data-theme', theme);
+  
+  // Update button states
+  document.getElementById('themeLight').classList.toggle('active', theme === 'light');
+  document.getElementById('themeDark').classList.toggle('active', theme === 'dark');
+}
+
+// Initialize language and theme
+const savedLanguage = localStorage.getItem('language') || 'en';
+const savedTheme = localStorage.getItem('theme') || 'light';
+
+setLanguage(savedLanguage);
+setTheme(savedTheme);
+
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -250,6 +780,88 @@ if (mobileMenuToggle) {
     });
   });
 }
+
+// Intersection Observer for scroll animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observe elements for animation
+const elementsToAnimate = document.querySelectorAll('.hero-image, .about-us, .stats-section, .features-section');
+elementsToAnimate.forEach(el => observer.observe(el));
+
+// Animated counter for stats
+function animateCounter(element) {
+  const target = parseInt(element.getAttribute('data-target'));
+  const duration = 2000;
+  const increment = target / (duration / 16);
+  let current = 0;
+  
+  const updateCounter = () => {
+    current += increment;
+    if (current < target) {
+      element.textContent = Math.floor(current);
+      requestAnimationFrame(updateCounter);
+    } else {
+      element.textContent = target;
+    }
+  };
+  
+  updateCounter();
+}
+
+// Observe stats section for counter animation
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('.stat-number');
+      counters.forEach(counter => {
+        if (!counter.classList.contains('animated')) {
+          counter.classList.add('animated');
+          animateCounter(counter);
+        }
+      });
+    }
+  });
+}, { threshold: 0.5 });
+
+const statsSection = document.getElementById('statsSection');
+if (statsSection) {
+  statsObserver.observe(statsSection);
+}
+
+// Parallax effect for hero image
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const heroImage = document.getElementById('heroImage');
+  if (heroImage) {
+    const rate = scrolled * 0.5;
+    heroImage.style.transform = `translateY(${rate}px)`;
+  }
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
 </script>
 
 </body>
