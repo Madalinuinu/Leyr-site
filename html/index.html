@@ -436,11 +436,11 @@ window.toggleLanguage = function() {
     localStorage.setItem('language', 'ro');
   }
   const newLang = currentLang === 'ro' ? 'en' : 'ro';
-  // Use window.setLanguage to ensure it's the global function
+  // Use window.setLanguage directly to avoid recursion
   if (typeof window.setLanguage === 'function') {
-    window.setLanguage(newLang);
-  } else if (typeof setLanguage === 'function') {
-    setLanguage(newLang);
+    // Store reference to avoid infinite recursion
+    const setLangFunc = window.setLanguage;
+    setLangFunc(newLang);
   } else {
     // Fallback: reload if setLanguage is not available
     localStorage.setItem('language', newLang);
@@ -479,8 +479,19 @@ if (typeof window.setLanguage !== 'function') {
   };
 }
 
-// Also define it locally for backwards compatibility
+// Also define it locally for backwards compatibility (but avoid recursion)
+// IMPORTANT: This function should only be used if window.setLanguage is not available
+// Otherwise, always use window.setLanguage directly to avoid infinite recursion
 function setLanguage(lang) {
+  // Only use this if window.setLanguage is not available
+  if (typeof window.setLanguage !== 'function') {
+    // Fallback: reload if window.setLanguage is not available
+    localStorage.setItem('language', lang);
+    document.documentElement.setAttribute('lang', lang);
+    location.reload();
+    return;
+  }
+  // If window.setLanguage exists, use it directly (no recursion)
   window.setLanguage(lang);
 }
 
@@ -802,8 +813,8 @@ function initAll() {
     savedLang = 'ro';
     localStorage.setItem('language', 'ro');
   }
-  if (typeof setLanguage === 'function') {
-    setLanguage(savedLang);
+  if (typeof window.setLanguage === 'function') {
+    window.setLanguage(savedLang);
   }
   
   // Initialize mobile menu
@@ -835,8 +846,8 @@ try {
     savedLang = 'ro';
     localStorage.setItem('language', 'ro');
   }
-  if (typeof setLanguage === 'function') {
-    setLanguage(savedLang);
+  if (typeof window.setLanguage === 'function') {
+    window.setLanguage(savedLang);
   }
 } catch (error) {
   // Silent error handling
