@@ -258,6 +258,11 @@ nav a:hover::after {
   color: var(--header-bg);
 }
 
+/* Dark theme for cart title */
+[data-theme="dark"] .cart-title {
+  color: #e9d5ff;
+}
+
 .cart-item {
   display: flex;
   align-items: center;

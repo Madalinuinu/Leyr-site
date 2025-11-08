@@ -882,6 +882,22 @@ function initAll() {
   }
   
   // Scroll animations, counter animation, parallax and smooth scroll are auto-initialized above
+  
+  // Listen for storage changes to sync language and theme across all open pages
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'language') {
+      const newLang = e.newValue || 'ro';
+      if (typeof window.setLanguage === 'function') {
+        window.setLanguage(newLang);
+      }
+    }
+    if (e.key === 'theme') {
+      const newTheme = e.newValue || 'light';
+      if (typeof setTheme === 'function') {
+        setTheme(newTheme);
+      }
+    }
+  });
 }
 
 // Initialize on DOM ready

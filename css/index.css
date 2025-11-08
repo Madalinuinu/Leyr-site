@@ -689,6 +689,11 @@ nav a:hover::after {
   width: 100%;
 }
 
+/* Dark theme for About Us title */
+[data-theme="dark"] .about-us h1 {
+  color: #e9d5ff;
+}
+
 .about-us h1::after {
   content: '';
   position: absolute;
@@ -699,6 +704,11 @@ nav a:hover::after {
   height: 3px;
   background: var(--header-bg);
   border-radius: 2px;
+}
+
+/* Dark theme for About Us title underline */
+[data-theme="dark"] .about-us h1::after {
+  background: #e9d5ff;
 }
 
 .about-us p { 
@@ -852,6 +862,11 @@ nav a:hover::after {
   color: var(--header-bg);
 }
 
+/* Dark theme for features section title */
+[data-theme="dark"] .features-section h2 {
+  color: #e9d5ff;
+}
+
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -905,6 +920,11 @@ nav a:hover::after {
   font-size: 1.5rem;
   margin-bottom: 15px;
   color: var(--header-bg);
+}
+
+/* Dark theme for feature card titles */
+[data-theme="dark"] .feature-card h3 {
+  color: #e9d5ff;
 }
 
 .feature-card p {

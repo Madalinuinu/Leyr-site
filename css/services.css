@@ -229,6 +229,11 @@ nav a:hover::after {
 /* Page Title */
 .page-title { text-align:center; padding:40px 20px; font-family:'Playfair Display', serif; font-size:2.5rem; color: var(--header-bg); }
 
+/* Dark theme for page title */
+[data-theme="dark"] .page-title {
+  color: #e9d5ff;
+}
+
 /* Interactive Services */
 .services-interactive {
   max-width: 1200px;

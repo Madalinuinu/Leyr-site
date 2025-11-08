@@ -440,6 +440,18 @@ setLanguage(savedLang);
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
 
+// Listen for storage changes to sync language and theme across all open pages
+window.addEventListener('storage', function(e) {
+  if (e.key === 'language') {
+    const newLang = e.newValue || 'ro';
+    setLanguage(newLang);
+  }
+  if (e.key === 'theme') {
+    const newTheme = e.newValue || 'light';
+    setTheme(newTheme);
+  }
+});
+
 // Interactive Services Tabs
 function initServiceTabs() {
   const tabs = document.querySelectorAll('.service-tab');

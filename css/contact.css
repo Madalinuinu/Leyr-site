@@ -199,6 +199,11 @@ nav a:hover::after {
   box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
+/* Dark theme - keep white background for container */
+[data-theme="dark"] .contact-page-container {
+  background: #ffffff;
+}
+
 .contact-page-title {
   text-align: center;
   font-family: 'Playfair Display', serif;
@@ -207,11 +212,21 @@ nav a:hover::after {
   margin-bottom: 10px;
 }
 
+/* Dark theme for contact page title - black text on white background */
+[data-theme="dark"] .contact-page-title {
+  color: #000000;
+}
+
 .contact-page-subtitle {
   text-align: center;
   font-size: 1.1rem;
   color: var(--text);
   margin-bottom: 40px;
+}
+
+/* Dark theme for contact page subtitle - black text on white background */
+[data-theme="dark"] .contact-page-subtitle {
+  color: #000000;
 }
 
 .contact-content {
@@ -230,6 +245,12 @@ nav a:hover::after {
   margin-bottom: 25px;
 }
 
+/* Dark theme for contact form and info section titles - black text on white background */
+[data-theme="dark"] .contact-form-section h2,
+[data-theme="dark"] .contact-info-section h2 {
+  color: #000000;
+}
+
 .form-group {
   margin-bottom: 20px;
 }
@@ -239,6 +260,11 @@ nav a:hover::after {
   font-weight: 600;
   margin-bottom: 8px;
   color: var(--text);
+}
+
+/* Dark theme for form labels - black text on white background */
+[data-theme="dark"] .form-group label {
+  color: #000000;
 }
 
 .form-group input,
@@ -332,6 +358,11 @@ nav a:hover::after {
 .contact-item strong {
   color: var(--header-bg);
   font-size: 1rem;
+}
+
+/* Dark theme for contact item strong text - black text on white background */
+[data-theme="dark"] .contact-item strong {
+  color: #000000;
 }
 
 .contact-item a {
