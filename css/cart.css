@@ -1,20 +1,20 @@
 :root {
-  --header-bg: #22543d;
-  --accent: #48bb78;
-  --accent-hover: #38a169;
-  --bg: #f0fff4;
-  --text: #2d3748;
+  --header-bg: #1b1734;
+  --accent: #5c038c;
+  --accent-hover: #420264;
+  --bg: #f5f3ff;
+  --text: #1b1734;
   --radius: 14px;
   --max-width: 1200px;
 }
 
 /* Dark theme */
 [data-theme="dark"] {
-  --header-bg: #0f2027;
-  --accent: #68d391;
-  --accent-hover: #48bb78;
-  --bg: #1a202c;
-  --text: #e2e8f0;
+  --header-bg: #1b1734;
+  --accent: #896fbc;
+  --accent-hover: #5c038c;
+  --bg: #2a1f3d;
+  --text: #e9d5ff;
 }
 
 * {
@@ -461,14 +461,14 @@ nav a:hover::after {
   color: var(--accent);
   transition: all 0.3s ease;
   min-width: 140px;
-  border: 1px solid rgba(72, 187, 120, 0.2);
+  border: 1px solid rgba(92, 3, 140, 0.2);
 }
 
 .contact-link:hover {
-  background: rgba(72, 187, 120, 0.15);
+  background: rgba(92, 3, 140, 0.15);
   transform: translateY(-3px);
   border-color: var(--accent);
-  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+  box-shadow: 0 4px 15px rgba(92, 3, 140, 0.2);
 }
 
 .contact-link .contact-icon {

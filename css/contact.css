@@ -1,19 +1,19 @@
 :root {
-  --header-bg: #22543d;
-  --accent: #48bb78;
-  --accent-hover: #38a169;
-  --bg: #f0fff4;
-  --text: #2d3748;
+  --header-bg: #1b1734;
+  --accent: #5c038c;
+  --accent-hover: #420264;
+  --bg: #f5f3ff;
+  --text: #1b1734;
   --radius: 14px;
 }
 
 /* Dark theme */
 [data-theme="dark"] {
-  --header-bg: #0f2027;
-  --accent: #68d391;
-  --accent-hover: #48bb78;
-  --bg: #1a202c;
-  --text: #e2e8f0;
+  --header-bg: #1b1734;
+  --accent: #896fbc;
+  --accent-hover: #5c038c;
+  --bg: #2a1f3d;
+  --text: #e9d5ff;
 }
 
 * {
@@ -281,7 +281,7 @@ nav a:hover::after {
 .submit-btn:hover {
   background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+  box-shadow: 0 4px 12px rgba(92, 3, 140, 0.3);
 }
 
 /* Contact Info Section */
@@ -378,7 +378,7 @@ nav a:hover::after {
   align-items: center;
   gap: 10px;
   padding: 20px 30px;
-  background: rgba(72, 187, 120, 0.1);
+  background: rgba(92, 3, 140, 0.1);
   border-radius: var(--radius);
   text-decoration: none;
   color: var(--accent);
@@ -390,7 +390,7 @@ nav a:hover::after {
   background: var(--accent);
   color: var(--header-bg);
   transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(72, 187, 120, 0.3);
+  box-shadow: 0 5px 20px rgba(92, 3, 140, 0.3);
 }
 
 .contact-link .contact-icon {

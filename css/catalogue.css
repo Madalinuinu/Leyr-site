@@ -1,19 +1,19 @@
 :root {
-  --header-bg: #22543d;
-  --accent: #48bb78;
-  --accent-hover: #38a169;
-  --bg: #f0fff4;
-  --text: #2d3748;
+  --header-bg: #1b1734;
+  --accent: #5c038c;
+  --accent-hover: #420264;
+  --bg: #f5f3ff;
+  --text: #1b1734;
   --radius: 14px;
 }
 
 /* Dark theme */
 [data-theme="dark"] {
-  --header-bg: #0f2027;
-  --accent: #68d391;
-  --accent-hover: #48bb78;
-  --bg: #1a202c;
-  --text: #e2e8f0;
+  --header-bg: #1b1734;
+  --accent: #896fbc;
+  --accent-hover: #5c038c;
+  --bg: #2a1f3d;
+  --text: #e9d5ff;
 }
 
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -273,7 +273,7 @@ nav a:hover::after {
 
 .search-input:focus {
   border-color: var(--accent-hover);
-  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+  box-shadow: 0 0 0 3px rgba(92, 3, 140, 0.1);
 }
 
 .search-icon {
@@ -310,7 +310,7 @@ nav a:hover::after {
 
 .category-select:focus {
   border-color: var(--accent-hover);
-  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+  box-shadow: 0 0 0 3px rgba(92, 3, 140, 0.1);
 }
 
 .category-select:hover {
@@ -549,14 +549,14 @@ nav a:hover::after {
   color: var(--accent);
   transition: all 0.3s ease;
   min-width: 140px;
-  border: 1px solid rgba(72, 187, 120, 0.2);
+  border: 1px solid rgba(92, 3, 140, 0.2);
 }
 
 .contact-link:hover {
-  background: rgba(72, 187, 120, 0.15);
+  background: rgba(92, 3, 140, 0.15);
   transform: translateY(-3px);
   border-color: var(--accent);
-  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+  box-shadow: 0 4px 15px rgba(92, 3, 140, 0.2);
 }
 
 .contact-link .contact-icon {
@@ -580,6 +580,225 @@ nav a:hover::after {
   font-weight: 600;
   font-size: 1rem;
   color: var(--accent);
+}
+
+/* Custom Product Card - Special Design */
+.custom-product-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(66, 2, 100, 0.1), rgba(92, 3, 140, 0.1));
+  border: 2px solid rgba(66, 2, 100, 0.3);
+  overflow: hidden;
+}
+
+.custom-product-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(66, 2, 100, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.custom-product-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #25D366;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(66, 2, 100, 0.3);
+}
+
+.custom-product-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 15px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(66, 2, 100, 0.2), rgba(92, 3, 140, 0.2));
+  border-radius: 50%;
+  color: #25D366;
+  z-index: 2;
+  position: relative;
+}
+
+.custom-product-card h3 {
+  color: #25D366;
+  z-index: 2;
+  position: relative;
+}
+
+.custom-product-card p {
+  z-index: 2;
+  position: relative;
+}
+
+.custom-product-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 30px;
+  background: #25D366;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+  text-decoration: none;
+  z-index: 2;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.custom-product-whatsapp-btn:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(66, 2, 100, 0.4);
+}
+
+.custom-product-whatsapp-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.custom-product-whatsapp-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* Dark theme for custom product card */
+[data-theme="dark"] .custom-product-card {
+  background: linear-gradient(135deg, rgba(66, 2, 100, 0.15), rgba(92, 3, 140, 0.15));
+  border: 2px solid rgba(66, 2, 100, 0.4);
+}
+
+[data-theme="dark"] .custom-product-card h3 {
+  color: #896fbc;
+}
+
+[data-theme="dark"] .custom-product-icon {
+  background: linear-gradient(135deg, rgba(66, 2, 100, 0.3), rgba(92, 3, 140, 0.3));
+  color: #896fbc;
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(66, 2, 100, 0.4);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(66, 2, 100, 0.6);
+  background: #20BA5A;
+}
+
+.whatsapp-float svg {
+  width: 28px;
+  height: 28px;
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 70px;
+  background: var(--header-bg);
+  color: var(--accent);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: var(--header-bg);
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(66, 2, 100, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(66, 2, 100, 0.7);
+  }
+}
+
+/* Dark theme for WhatsApp button */
+[data-theme="dark"] .whatsapp-tooltip {
+  background: var(--header-bg);
+  color: var(--accent);
+}
+
+[data-theme="dark"] .whatsapp-tooltip::after {
+  border-left-color: var(--header-bg);
+}
+
+/* Responsive for WhatsApp button */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 55px;
+    height: 55px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-float svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .whatsapp-tooltip {
+    display: none;
+  }
 }
 
 /* Footer */

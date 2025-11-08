@@ -1,10 +1,19 @@
 :root {
-  --header-bg: #22543d;
-  --accent: #48bb78;
-  --accent-hover: #38a169;
-  --bg: #f0fff4;
-  --text: #2d3748;
+  --header-bg: #1b1734;
+  --accent: #5c038c;
+  --accent-hover: #420264;
+  --bg: #f5f3ff;
+  --text: #1b1734;
   --radius: 14px;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --header-bg: #1b1734;
+  --accent: #896fbc;
+  --accent-hover: #5c038c;
+  --bg: #2a1f3d;
+  --text: #e9d5ff;
 }
 
 * { box-sizing:border-box; margin:0; padding:0; }

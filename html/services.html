@@ -81,30 +81,117 @@ window.toggleTheme = function() {
 
 <section class="page-title" data-i18n="pageTitle">Serviciile Noastre</section>
 
-<section class="services-container">
-  <div class="service-card">
-    <h3><span>🎨</span> <span data-i18n="service1Title">Modelare 3D</span></h3>
-    <p data-i18n="service1Desc">Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.</p>
+<section class="services-interactive">
+  <div class="services-tabs">
+    <button class="service-tab active" data-service="modeling" data-i18n="serviceModeling">Modelare 3D</button>
+    <button class="service-tab" data-service="printing" data-i18n="servicePrinting">Printare 3D</button>
+    <button class="service-tab" data-service="both" data-i18n="serviceBoth">Modelare și Printare 3D</button>
   </div>
-  <div class="service-card">
-    <h3><span>🖨️</span> <span data-i18n="service2Title">Printare 3D</span></h3>
-    <p data-i18n="service2Desc">Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.</p>
-  </div>
-  <div class="service-card">
-    <h3><span>🎯</span> <span data-i18n="service3Title">Figurine Personalizate</span></h3>
-    <p data-i18n="service3Desc">Creăm figurine unice și personalizate pentru colecții, jocuri, decor sau cadouri speciale cu atenție la detalii.</p>
-  </div>
-  <div class="service-card">
-    <h3><span>💎</span> <span data-i18n="service4Title">Bijuterii & Cercei</span></h3>
-    <p data-i18n="service4Desc">Design și printare 3D pentru bijuterii moderne, cercei unici și accesorii personalizate din materiale de calitate.</p>
-  </div>
-  <div class="service-card">
-    <h3><span>🔧</span> <span data-i18n="service5Title">Prototipare Rapidă</span></h3>
-    <p data-i18n="service5Desc">Servicii de prototipare rapidă pentru teste de concept, validare de design și dezvoltare de produse.</p>
-  </div>
-  <div class="service-card">
-    <h3><span>✨</span> <span data-i18n="service6Title">Finisare & Post-Processing</span></h3>
-    <p data-i18n="service6Desc">Servicii complete de finisare: șlefuire, vopsire, tratare de suprafață și asamblare pentru rezultate perfecte.</p>
+  
+  <div class="service-content">
+    <!-- Modelare 3D -->
+    <div class="service-details active" id="modeling">
+      <div class="service-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      </div>
+      <h2 data-i18n="serviceModelingTitle">Modelare 3D</h2>
+      <p class="service-description" data-i18n="serviceModelingDesc">Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.</p>
+      <div class="service-features">
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature1">Design personalizat</span>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature2">Detalii precise</span>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature3">Calitate profesională</span>
+        </div>
+      </div>
+      <a href="https://wa.me/40712345678?text=Bună!%20Aș%20dori%20să%20comand%20servicii%20de%20modelare%203D." target="_blank" class="service-cta-btn" data-i18n="serviceCTA">Comandă Acum</a>
+    </div>
+    
+    <!-- Printare 3D -->
+    <div class="service-details" id="printing">
+      <div class="service-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+      </div>
+      <h2 data-i18n="servicePrintingTitle">Printare 3D</h2>
+      <p class="service-description" data-i18n="servicePrintingDesc">Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.</p>
+      <div class="service-features">
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature4">Materiale premium</span>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature5">Rezoluție înaltă</span>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature6">Durabilitate maximă</span>
+        </div>
+      </div>
+      <a href="https://wa.me/40712345678?text=Bună!%20Aș%20dori%20să%20comand%20servicii%20de%20printare%203D." target="_blank" class="service-cta-btn" data-i18n="serviceCTA">Comandă Acum</a>
+    </div>
+    
+    <!-- Modelare și Printare 3D -->
+    <div class="service-details" id="both">
+      <div class="service-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+      </div>
+      <h2 data-i18n="serviceBothTitle">Modelare și Printare 3D</h2>
+      <p class="service-description" data-i18n="serviceBothDesc">Pachet complet de la concept la produs final. Modelăm și printăm produsele tale 3D cu atenție la detalii și calitate premium.</p>
+      <div class="service-features">
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature7">Servicii complete</span>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature8">De la concept la produs</span>
+        </div>
+        <div class="feature-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span data-i18n="feature9">Calitate premium garantată</span>
+        </div>
+      </div>
+      <a href="https://wa.me/40712345678?text=Bună!%20Aș%20dori%20să%20comand%20servicii%20complete%20de%20modelare%20și%20printare%203D." target="_blank" class="service-cta-btn" data-i18n="serviceCTA">Comandă Acum</a>
+    </div>
   </div>
 </section>
 
@@ -150,6 +237,14 @@ window.toggleTheme = function() {
   </div>
 </section>
 
+<!-- Floating WhatsApp Button for Custom Product -->
+<a href="https://wa.me/40712345678?text=Bună!%20Aș%20dori%20să%20comand%20un%20produs%20custom." target="_blank" class="whatsapp-float" aria-label="Comandă produs custom pe WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+  <span class="whatsapp-tooltip" data-i18n="whatsappTooltip">Produs Custom</span>
+</a>
+
 <footer>
   <p>&copy; 2025 Leyr. All rights reserved.</p>
 </footer>
@@ -164,18 +259,26 @@ const translations = {
     navContact: 'Contactează-ne',
     navCart: 'Coș',
     pageTitle: 'Serviciile Noastre',
-    service1Title: 'Modelare 3D',
-    service1Desc: 'Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.',
-    service2Title: 'Printare 3D',
-    service2Desc: 'Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.',
-    service3Title: 'Figurine Personalizate',
-    service3Desc: 'Creăm figurine unice și personalizate pentru colecții, jocuri, decor sau cadouri speciale cu atenție la detalii.',
-    service4Title: 'Bijuterii & Cercei',
-    service4Desc: 'Design și printare 3D pentru bijuterii moderne, cercei unici și accesorii personalizate din materiale de calitate.',
-    service5Title: 'Prototipare Rapidă',
-    service5Desc: 'Servicii de prototipare rapidă pentru teste de concept, validare de design și dezvoltare de produse.',
-    service6Title: 'Finisare & Post-Processing',
-    service6Desc: 'Servicii complete de finisare: șlefuire, vopsire, tratare de suprafață și asamblare pentru rezultate perfecte.',
+    serviceModeling: 'Modelare 3D',
+    servicePrinting: 'Printare 3D',
+    serviceBoth: 'Modelare și Printare 3D',
+    serviceModelingTitle: 'Modelare 3D',
+    serviceModelingDesc: 'Servicii complete de modelare 3D pentru designuri personalizate, obiecte sau proiecte cu detalii precise și calitate profesională.',
+    servicePrintingTitle: 'Printare 3D',
+    servicePrintingDesc: 'Printare de înaltă calitate folosind materiale premium pentru a transforma designurile tale digitale în realitate cu durabilitate.',
+    serviceBothTitle: 'Modelare și Printare 3D',
+    serviceBothDesc: 'Pachet complet de la concept la produs final. Modelăm și printăm produsele tale 3D cu atenție la detalii și calitate premium.',
+    feature1: 'Design personalizat',
+    feature2: 'Detalii precise',
+    feature3: 'Calitate profesională',
+    feature4: 'Materiale premium',
+    feature5: 'Rezoluție înaltă',
+    feature6: 'Durabilitate maximă',
+    feature7: 'Servicii complete',
+    feature8: 'De la concept la produs',
+    feature9: 'Calitate premium garantată',
+    serviceCTA: 'Comandă Acum',
+    whatsappTooltip: 'Produs Custom',
     contactTitle: 'Contactează-ne'
   },
   en: {
@@ -185,18 +288,26 @@ const translations = {
     navContact: 'Contact Us',
     navCart: 'Cart',
     pageTitle: 'Our Services',
-    service1Title: '3D Modeling',
-    service1Desc: 'Complete 3D modeling services for custom designs, objects or projects with precise details and professional quality.',
-    service2Title: '3D Printing',
-    service2Desc: 'High quality printing using premium materials to transform your digital designs into reality with durability.',
-    service3Title: 'Custom Figurines',
-    service3Desc: 'We create unique and custom figurines for collections, games, decoration or special gifts with attention to detail.',
-    service4Title: 'Jewelry & Earrings',
-    service4Desc: '3D design and printing for modern jewelry, unique earrings and custom accessories from quality materials.',
-    service5Title: 'Rapid Prototyping',
-    service5Desc: 'Rapid prototyping services for concept testing, design validation and product development.',
-    service6Title: 'Finishing & Post-Processing',
-    service6Desc: 'Complete finishing services: sanding, painting, surface treatment and assembly for perfect results.',
+    serviceModeling: '3D Modeling',
+    servicePrinting: '3D Printing',
+    serviceBoth: '3D Modeling & Printing',
+    serviceModelingTitle: '3D Modeling',
+    serviceModelingDesc: 'Complete 3D modeling services for custom designs, objects or projects with precise details and professional quality.',
+    servicePrintingTitle: '3D Printing',
+    servicePrintingDesc: 'High quality printing using premium materials to transform your digital designs into reality with durability.',
+    serviceBothTitle: '3D Modeling & Printing',
+    serviceBothDesc: 'Complete package from concept to final product. We model and print your 3D products with attention to detail and premium quality.',
+    feature1: 'Custom design',
+    feature2: 'Precise details',
+    feature3: 'Professional quality',
+    feature4: 'Premium materials',
+    feature5: 'High resolution',
+    feature6: 'Maximum durability',
+    feature7: 'Complete services',
+    feature8: 'From concept to product',
+    feature9: 'Guaranteed premium quality',
+    serviceCTA: 'Order Now',
+    whatsappTooltip: 'Custom Product',
     contactTitle: 'Contact Us'
   }
 };
@@ -328,6 +439,36 @@ setLanguage(savedLang);
 // Initialize theme on page load
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
+
+// Interactive Services Tabs
+function initServiceTabs() {
+  const tabs = document.querySelectorAll('.service-tab');
+  const details = document.querySelectorAll('.service-details');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const serviceId = tab.getAttribute('data-service');
+      
+      // Remove active class from all tabs and details
+      tabs.forEach(t => t.classList.remove('active'));
+      details.forEach(d => d.classList.remove('active'));
+      
+      // Add active class to clicked tab and corresponding detail
+      tab.classList.add('active');
+      const targetDetail = document.getElementById(serviceId);
+      if (targetDetail) {
+        targetDetail.classList.add('active');
+      }
+    });
+  });
+}
+
+// Initialize service tabs when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initServiceTabs);
+} else {
+  initServiceTabs();
+}
 </script>
 
 </body>
