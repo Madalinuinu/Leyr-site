@@ -320,7 +320,7 @@ nav a:hover::after {
 /* Dark theme for search and filter */
 [data-theme="dark"] .search-input,
 [data-theme="dark"] .category-select {
-  background: #1a202c;
+  background: #2a1f3d;
   color: var(--text);
   border-color: var(--accent);
 }
@@ -328,7 +328,7 @@ nav a:hover::after {
 [data-theme="dark"] .search-input:focus,
 [data-theme="dark"] .category-select:focus {
   border-color: var(--accent-hover);
-  box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.1);
+  box-shadow: 0 0 0 3px rgba(137, 111, 188, 0.1);
 }
 
 /* Product card hidden state */
@@ -482,8 +482,8 @@ nav a:hover::after {
 
 /* Dark theme for products */
 [data-theme="dark"] .product-card {
-  background: #1a202c;
-  border: 1px solid rgba(104, 211, 145, 0.2);
+  background: #2a1f3d;
+  border: 1px solid rgba(137, 111, 188, 0.2);
 }
 
 [data-theme="dark"] .product-card h3 {
