@@ -61,7 +61,7 @@ nav {
 }
 
 nav a {
-  color: var(--accent);
+  color: #896fbc;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -103,10 +103,10 @@ nav a:hover::after {
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
-  border: 2px solid var(--accent);
+  border: 2px solid #896fbc;
   border-radius: 25px;
-  background: rgba(201, 202, 200, 0.1);
-  color: var(--accent);
+  background: rgba(137, 111, 188, 0.3);
+  color: #896fbc;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
@@ -115,7 +115,7 @@ nav a:hover::after {
   overflow: hidden;
   min-width: 45px;
   height: 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(137, 111, 188, 0.3);
 }
 
 .toggle-btn::before {
@@ -268,7 +268,7 @@ nav a:hover::after {
   width: 100%;
   padding: 14px 0;
   background: var(--accent);
-  color: #ffffff;
+  color: #e9d5ff;
   border: none;
   border-radius: 30px;
   font-weight: 600;
@@ -361,7 +361,7 @@ nav a:hover::after {
 .contact-container h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
-  color: var(--accent);
+  color: #896fbc;
   margin-bottom: 30px;
 }
 
@@ -378,19 +378,20 @@ nav a:hover::after {
   align-items: center;
   gap: 10px;
   padding: 20px 30px;
-  background: rgba(92, 3, 140, 0.1);
+  background: rgba(137, 111, 188, 0.3);
   border-radius: var(--radius);
   text-decoration: none;
-  color: var(--accent);
+  color: #e9d5ff;
   transition: all 0.3s ease;
   min-width: 120px;
+  border: 1px solid rgba(137, 111, 188, 0.4);
 }
 
 .contact-link:hover {
-  background: var(--accent);
-  color: var(--header-bg);
+  background: rgba(137, 111, 188, 0.5);
+  color: #e9d5ff;
   transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(92, 3, 140, 0.3);
+  box-shadow: 0 5px 20px rgba(137, 111, 188, 0.4);
 }
 
 .contact-link .contact-icon {
@@ -413,12 +414,13 @@ nav a:hover::after {
 .contact-link span:last-child {
   font-weight: 600;
   font-size: 1rem;
+  color: #e9d5ff;
 }
 
 /* Footer */
 footer {
   background: var(--header-bg);
-  color: var(--accent);
+  color: #896fbc;
   text-align: center;
   padding: 20px 10px 20px 10px;
   margin-top: 0;

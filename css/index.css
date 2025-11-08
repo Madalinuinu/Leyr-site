@@ -82,7 +82,7 @@ nav {
 }
 
 nav a {
-  color: var(--accent);
+  color: #896fbc;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -124,10 +124,10 @@ nav a:hover::after {
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
-  border: 2px solid var(--accent);
+  border: 2px solid #896fbc;
   border-radius: 25px;
-  background: rgba(201, 202, 200, 0.1);
-  color: var(--accent);
+  background: rgba(137, 111, 188, 0.3);
+  color: #896fbc;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
@@ -136,7 +136,7 @@ nav a:hover::after {
   overflow: hidden;
   min-width: 45px;
   height: 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(137, 111, 188, 0.3);
 }
 
 .toggle-btn::before {
@@ -212,8 +212,9 @@ nav a:hover::after {
 
 /* Theme toggle specific styles */
 .theme-toggle.dark-active {
-  background: linear-gradient(135deg, rgba(201, 202, 200, 0.2), rgba(201, 202, 200, 0.1));
-  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(137, 111, 188, 0.4), rgba(137, 111, 188, 0.3));
+  border-color: #896fbc;
+  color: #896fbc;
 }
 
 .theme-toggle.dark-active:hover {
@@ -568,7 +569,7 @@ nav a:hover::after {
   border: 2px solid transparent;
   border-radius:30px;
   background: var(--accent);
-  color: var(--header-bg);
+  color: #e9d5ff;
   cursor:pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -618,7 +619,7 @@ nav a:hover::after {
   background: var(--accent-hover);
   border-color: rgba(255,255,255,0.3);
   box-shadow: 0 8px 25px rgba(92, 3, 140, 0.4), 0 4px 12px rgba(0,0,0,0.15);
-  color: var(--header-bg);
+  color: #e9d5ff;
 }
 
 .hero-buttons button:active {
@@ -927,7 +928,7 @@ nav a:hover::after {
 .contact-container h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.2rem;
-  color: var(--accent);
+  color: #896fbc;
   margin-bottom: 40px;
   font-weight: 700;
 }
@@ -947,20 +948,20 @@ nav a:hover::after {
   align-items: center;
   gap: 12px;
   padding: 25px 35px;
-  background: rgba(34, 84, 61, 0.6);
+  background: rgba(137, 111, 188, 0.3);
   border-radius: 12px;
   text-decoration: none;
-  color: var(--accent);
+  color: #e9d5ff;
   transition: all 0.3s ease;
   min-width: 140px;
-  border: 1px solid rgba(92, 3, 140, 0.2);
+  border: 1px solid rgba(137, 111, 188, 0.4);
 }
 
 .contact-link:hover {
-  background: rgba(92, 3, 140, 0.15);
+  background: rgba(137, 111, 188, 0.5);
   transform: translateY(-3px);
-  border-color: var(--accent);
-  box-shadow: 0 4px 15px rgba(92, 3, 140, 0.2);
+  border-color: #896fbc;
+  box-shadow: 0 4px 15px rgba(137, 111, 188, 0.4);
 }
 
 .contact-link .contact-icon {
@@ -983,7 +984,7 @@ nav a:hover::after {
 .contact-link span:last-child {
   font-weight: 600;
   font-size: 1rem;
-  color: var(--accent);
+  color: #e9d5ff;
 }
 
 /* Floating WhatsApp Button */
@@ -993,23 +994,25 @@ nav a:hover::after {
   right: 30px;
   width: 60px;
   height: 60px;
-  background: #25D366;
+  background: rgba(137, 111, 188, 0.8);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(66, 2, 100, 0.4);
+  box-shadow: 0 4px 20px rgba(137, 111, 188, 0.5);
   z-index: 1000;
   transition: all 0.3s ease;
   text-decoration: none;
-  color: white;
+  color: #e9d5ff;
   animation: pulse 2s infinite;
+  border: 2px solid rgba(137, 111, 188, 0.5);
 }
 
 .whatsapp-float:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(66, 2, 100, 0.6);
-  background: #20BA5A;
+  box-shadow: 0 6px 30px rgba(137, 111, 188, 0.7);
+  background: rgba(137, 111, 188, 1);
+  border-color: #896fbc;
 }
 
 .whatsapp-float svg {
@@ -1049,10 +1052,10 @@ nav a:hover::after {
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 4px 20px rgba(66, 2, 100, 0.4);
+    box-shadow: 0 4px 20px rgba(137, 111, 188, 0.5);
   }
   50% {
-    box-shadow: 0 4px 30px rgba(66, 2, 100, 0.7);
+    box-shadow: 0 4px 30px rgba(137, 111, 188, 0.8);
   }
 }
 
@@ -1088,7 +1091,7 @@ nav a:hover::after {
 /* Footer */
 footer {
   background: var(--header-bg);
-  color: var(--accent);
+  color: #896fbc;
   text-align:center;
   padding:20px 10px 20px 10px;
   margin-top: 0;

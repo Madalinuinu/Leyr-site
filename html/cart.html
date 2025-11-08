@@ -85,7 +85,7 @@ window.toggleTheme = function() {
   <div id="cartItems"></div>
   <div id="emptyMsg" class="empty-cart" style="display: none;">
     <span data-i18n="emptyCart">Coșul tău este gol.</span>
-    <button onclick="window.location.href='catalogue.html'" data-i18n="shopNow">Cumpără Acum!</button>
+    <button class="shop-now-btn" onclick="window.location.href='catalogue.html'" data-i18n="shopNow">Cumpără Acum!</button>
   </div>
   <div id="cartSummary" class="cart-summary" style="display: none;">
     <div class="summary-row">
@@ -394,6 +394,46 @@ setLanguage(savedLang);
 // Initialize theme on page load
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
+
+// Letter-by-letter animation for shop now button
+function wrapLettersInShopButton() {
+  const shopButton = document.querySelector('.shop-now-btn');
+  if (!shopButton) return;
+  
+  // Skip if already wrapped
+  if (shopButton.querySelector('.letter')) {
+    return;
+  }
+  
+  const text = shopButton.textContent.trim();
+  shopButton.innerHTML = '';
+  
+  // Split text into characters (including spaces)
+  const letters = text.split('');
+  
+  letters.forEach((letter, index) => {
+    const span = document.createElement('span');
+    span.className = 'letter';
+    span.textContent = letter === ' ' ? '\u00A0' : letter; // Non-breaking space for regular spaces
+    span.style.transitionDelay = `${index * 0.03}s`; // Progressive delay
+    shopButton.appendChild(span);
+  });
+}
+
+// Wrap letters after cart render and language change
+const originalRenderCart = renderCart;
+renderCart = function() {
+  originalRenderCart();
+  // Wrap letters after a short delay to ensure button is rendered
+  setTimeout(wrapLettersInShopButton, 50);
+};
+
+const originalUpdatePageContent = updatePageContent;
+updatePageContent = function(lang) {
+  originalUpdatePageContent(lang);
+  // Re-wrap letters after language change
+  setTimeout(wrapLettersInShopButton, 100);
+};
 
 // Initial render
 renderCart();

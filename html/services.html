@@ -463,11 +463,51 @@ function initServiceTabs() {
   });
 }
 
+// Letter-by-letter hover effect for service tabs
+function wrapLettersInTabs() {
+  const serviceTabs = document.querySelectorAll('.service-tab');
+  
+  serviceTabs.forEach(tab => {
+    // Skip if already wrapped
+    if (tab.querySelector('.letter')) {
+      return;
+    }
+    
+    const text = tab.textContent.trim();
+    tab.innerHTML = '';
+    
+    // Split text into characters (including spaces)
+    const letters = text.split('');
+    
+    letters.forEach((letter, index) => {
+      const span = document.createElement('span');
+      span.className = 'letter';
+      span.textContent = letter === ' ' ? '\u00A0' : letter; // Non-breaking space for regular spaces
+      span.style.transitionDelay = `${index * 0.03}s`; // Progressive delay
+      tab.appendChild(span);
+    });
+  });
+}
+
 // Initialize service tabs when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initServiceTabs);
-} else {
+function initializeServices() {
   initServiceTabs();
+  wrapLettersInTabs();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeServices);
+} else {
+  initializeServices();
+}
+
+// Re-wrap letters after language change
+const originalToggleLanguage = window.toggleLanguage;
+if (originalToggleLanguage) {
+  window.toggleLanguage = function() {
+    originalToggleLanguage();
+    setTimeout(wrapLettersInTabs, 100); // Re-wrap after translation
+  };
 }
 </script>
 

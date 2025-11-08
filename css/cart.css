@@ -62,7 +62,7 @@ nav {
 }
 
 nav a {
-  color: var(--accent);
+  color: #896fbc;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -104,10 +104,10 @@ nav a:hover::after {
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
-  border: 2px solid var(--accent);
+  border: 2px solid #896fbc;
   border-radius: 25px;
-  background: rgba(201, 202, 200, 0.1);
-  color: var(--accent);
+  background: rgba(137, 111, 188, 0.3);
+  color: #896fbc;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
@@ -116,7 +116,7 @@ nav a:hover::after {
   overflow: hidden;
   min-width: 45px;
   height: 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(137, 111, 188, 0.3);
 }
 
 .toggle-btn::before {
@@ -348,21 +348,29 @@ nav a:hover::after {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.empty-cart button {
+.empty-cart button,
+.shop-now-btn {
   margin-top: 15px;
   padding: 12px 24px;
   border: none;
   border-radius: 30px;
   background: var(--accent);
-  color: var(--header-bg);
+  color: #e9d5ff;
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s transform, 0.2s background;
 }
 
-.empty-cart button:hover {
+.empty-cart button:hover,
+.shop-now-btn:hover {
   transform: scale(1.05);
   background: var(--accent-hover);
+}
+
+/* Letter-by-letter animation for shop now button */
+.shop-now-btn .letter {
+  display: inline-block;
+  color: inherit;
 }
 
 .cart-summary {
@@ -435,7 +443,7 @@ nav a:hover::after {
 .contact-container h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.2rem;
-  color: var(--accent);
+  color: #896fbc;
   margin-bottom: 40px;
   font-weight: 700;
 }
@@ -455,20 +463,20 @@ nav a:hover::after {
   align-items: center;
   gap: 12px;
   padding: 25px 35px;
-  background: rgba(34, 84, 61, 0.6);
+  background: rgba(137, 111, 188, 0.3);
   border-radius: 12px;
   text-decoration: none;
-  color: var(--accent);
+  color: #e9d5ff;
   transition: all 0.3s ease;
   min-width: 140px;
-  border: 1px solid rgba(92, 3, 140, 0.2);
+  border: 1px solid rgba(137, 111, 188, 0.4);
 }
 
 .contact-link:hover {
-  background: rgba(92, 3, 140, 0.15);
+  background: rgba(137, 111, 188, 0.5);
   transform: translateY(-3px);
-  border-color: var(--accent);
-  box-shadow: 0 4px 15px rgba(92, 3, 140, 0.2);
+  border-color: #896fbc;
+  box-shadow: 0 4px 15px rgba(137, 111, 188, 0.4);
 }
 
 .contact-link .contact-icon {
@@ -491,12 +499,12 @@ nav a:hover::after {
 .contact-link span:last-child {
   font-weight: 600;
   font-size: 1rem;
-  color: var(--accent);
+  color: #e9d5ff;
 }
 
 footer {
   background: var(--header-bg);
-  color: var(--accent);
+  color: #896fbc;
   text-align: center;
   padding: 20px 10px 20px 10px;
   margin-top: 0;

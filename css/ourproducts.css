@@ -124,7 +124,7 @@ header img {
   border:none;
   border-radius:30px;
   background: var(--accent);
-  color: var(--header-bg);
+  color: #e9d5ff;
   cursor:pointer;
   font-weight:600;
   width:100%;
@@ -134,7 +134,7 @@ header img {
 
 footer {
   background: var(--header-bg);
-  color: var(--accent);
+  color: #896fbc;
   text-align:center;
   padding:20px 10px;
   margin-top:40px;
