@@ -465,34 +465,52 @@ if (typeof window.setLanguage === 'function') {
 // Only define if not already defined (to avoid overwriting the one from body top)
 if (typeof window.setLanguage !== 'function') {
   window.setLanguage = function(lang) {
-    localStorage.setItem('language', lang);
-    document.documentElement.setAttribute('lang', lang);
-    
-    const languageToggleText = document.getElementById('languageToggleText');
-    if (languageToggleText) {
-      languageToggleText.textContent = lang.toUpperCase();
+    // Prevent infinite recursion by checking if we're already executing
+    if (window._settingLanguage) {
+      console.warn('setLanguage already executing, skipping to prevent recursion');
+      return;
     }
+    window._settingLanguage = true;
     
-    if (typeof updatePageContent === 'function') {
-      updatePageContent(lang);
+    try {
+      localStorage.setItem('language', lang);
+      document.documentElement.setAttribute('lang', lang);
+      
+      const languageToggleText = document.getElementById('languageToggleText');
+      if (languageToggleText) {
+        // Show the opposite language (the one you can switch to)
+        const oppositeLang = lang === 'ro' ? 'EN' : 'RO';
+        languageToggleText.textContent = oppositeLang;
+      }
+      
+      // Only call updatePageContent if it exists and translations are available
+      if (typeof updatePageContent === 'function' && typeof translations !== 'undefined') {
+        updatePageContent(lang);
+      }
+    } catch (error) {
+      console.error('Error in setLanguage:', error);
+    } finally {
+      window._settingLanguage = false;
     }
   };
 }
 
 // Also define it locally for backwards compatibility (but avoid recursion)
-// IMPORTANT: This function should only be used if window.setLanguage is not available
-// Otherwise, always use window.setLanguage directly to avoid infinite recursion
+// IMPORTANT: This is just an alias to window.setLanguage to avoid recursion
+// We use a direct reference to prevent infinite recursion
 function setLanguage(lang) {
-  // Only use this if window.setLanguage is not available
-  if (typeof window.setLanguage !== 'function') {
+  // Always use window.setLanguage directly, but store reference first to avoid recursion
+  if (typeof window.setLanguage === 'function') {
+    // Store reference to avoid any potential recursion issues
+    const func = window.setLanguage;
+    // Call the stored reference directly
+    func.call(window, lang);
+  } else {
     // Fallback: reload if window.setLanguage is not available
     localStorage.setItem('language', lang);
     document.documentElement.setAttribute('lang', lang);
     location.reload();
-    return;
   }
-  // If window.setLanguage exists, use it directly (no recursion)
-  window.setLanguage(lang);
 }
 
 function updatePageContent(lang) {
