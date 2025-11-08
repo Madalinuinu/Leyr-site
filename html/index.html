@@ -19,8 +19,13 @@ window.toggleLanguage = function() {
   const newLang = currentLang === 'ro' ? 'en' : 'ro';
   // Save language immediately
   localStorage.setItem('language', newLang);
-  // Always reload to ensure language is applied correctly
-  location.reload();
+  // Call setLanguage if available, otherwise reload
+  if (typeof window.setLanguage === 'function') {
+    window.setLanguage(newLang);
+  } else {
+    // Fallback: reload if setLanguage is not yet available
+    location.reload();
+  }
 };
 
 // Theme toggle function - MUST be defined in head before body loads
@@ -431,7 +436,16 @@ window.toggleLanguage = function() {
     localStorage.setItem('language', 'ro');
   }
   const newLang = currentLang === 'ro' ? 'en' : 'ro';
-  setLanguage(newLang);
+  // Use window.setLanguage to ensure it's the global function
+  if (typeof window.setLanguage === 'function') {
+    window.setLanguage(newLang);
+  } else if (typeof setLanguage === 'function') {
+    setLanguage(newLang);
+  } else {
+    // Fallback: reload if setLanguage is not available
+    localStorage.setItem('language', newLang);
+    location.reload();
+  }
 };
 
 // Translations are already defined at the top of the body script
