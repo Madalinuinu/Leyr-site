@@ -163,31 +163,44 @@ window.translations = translations;
     // Define setLanguage function here if not already defined
     if (typeof window.setLanguage !== 'function') {
       window.setLanguage = function(lang) {
-        localStorage.setItem('language', lang);
-        document.documentElement.setAttribute('lang', lang);
-        
-        const languageToggleText = document.getElementById('languageToggleText');
-        if (languageToggleText) {
-          // Show the opposite language (the one you can switch to)
-          const oppositeLang = lang === 'ro' ? 'EN' : 'RO';
-          languageToggleText.textContent = oppositeLang;
+        // Prevent infinite recursion by checking if we're already executing
+        if (window._settingLanguage) {
+          console.warn('setLanguage already executing, skipping to prevent recursion');
+          return;
         }
+        window._settingLanguage = true;
         
-        // Update page content if translations are available
-        if (typeof window.translations !== 'undefined' && window.translations[lang]) {
-          const t = window.translations[lang];
-          document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (t[key]) {
-              el.textContent = t[key];
-            }
-          });
+        try {
+          localStorage.setItem('language', lang);
+          document.documentElement.setAttribute('lang', lang);
           
-          if (lang === 'en') {
-            document.title = 'Leyr. — Professional 3D Printing | Figurines, Earrings, Jewelry';
-          } else {
-            document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
+          const languageToggleText = document.getElementById('languageToggleText');
+          if (languageToggleText) {
+            // Show the opposite language (the one you can switch to)
+            const oppositeLang = lang === 'ro' ? 'EN' : 'RO';
+            languageToggleText.textContent = oppositeLang;
           }
+          
+          // Update page content if translations are available
+          if (typeof window.translations !== 'undefined' && window.translations[lang]) {
+            const t = window.translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+              const key = el.getAttribute('data-i18n');
+              if (t[key]) {
+                el.textContent = t[key];
+              }
+            });
+            
+            if (lang === 'en') {
+              document.title = 'Leyr. — Professional 3D Printing | Figurines, Earrings, Jewelry';
+            } else {
+              document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
+            }
+          }
+        } catch (error) {
+          console.error('Error in setLanguage (body top):', error);
+        } finally {
+          window._settingLanguage = false;
         }
       };
     }
@@ -463,13 +476,18 @@ if (typeof window.setLanguage === 'function') {
 
 // Make setLanguage global so it can be called from head
 // Only define if not already defined (to avoid overwriting the one from body top)
+// CRITICAL: This must be defined AFTER the body top script to avoid conflicts on Netlify
 if (typeof window.setLanguage !== 'function') {
+  // Store a reference to prevent recursion
+  let setLanguageExecuting = false;
+  
   window.setLanguage = function(lang) {
     // Prevent infinite recursion by checking if we're already executing
-    if (window._settingLanguage) {
+    if (setLanguageExecuting || window._settingLanguage) {
       console.warn('setLanguage already executing, skipping to prevent recursion');
       return;
     }
+    setLanguageExecuting = true;
     window._settingLanguage = true;
     
     try {
@@ -490,26 +508,43 @@ if (typeof window.setLanguage !== 'function') {
     } catch (error) {
       console.error('Error in setLanguage:', error);
     } finally {
+      setLanguageExecuting = false;
       window._settingLanguage = false;
     }
   };
 }
 
-// Also define it locally for backwards compatibility (but avoid recursion)
-// IMPORTANT: This is just an alias to window.setLanguage to avoid recursion
-// We use a direct reference to prevent infinite recursion
+// Also define it locally for backwards compatibility
+// IMPORTANT: This function should match the implementation from other pages (contact.html, services.html)
+// CRITICAL: On Netlify, we must ensure no recursion occurs
+// We implement it directly like on other pages to avoid recursion issues
 function setLanguage(lang) {
-  // Always use window.setLanguage directly, but store reference first to avoid recursion
-  if (typeof window.setLanguage === 'function') {
-    // Store reference to avoid any potential recursion issues
-    const func = window.setLanguage;
-    // Call the stored reference directly
-    func.call(window, lang);
-  } else {
-    // Fallback: reload if window.setLanguage is not available
+  // Prevent infinite recursion by checking if we're already executing
+  if (window._settingLanguage) {
+    console.warn('setLanguage already executing, skipping to prevent recursion');
+    return;
+  }
+  window._settingLanguage = true;
+  
+  try {
     localStorage.setItem('language', lang);
     document.documentElement.setAttribute('lang', lang);
-    location.reload();
+    
+    const languageToggleText = document.getElementById('languageToggleText');
+    if (languageToggleText) {
+      // Show the opposite language (the one you can switch to)
+      const oppositeLang = lang === 'ro' ? 'EN' : 'RO';
+      languageToggleText.textContent = oppositeLang;
+    }
+    
+    // Update page content if translations are available
+    if (typeof updatePageContent === 'function' && typeof translations !== 'undefined') {
+      updatePageContent(lang);
+    }
+  } catch (error) {
+    console.error('Error in setLanguage:', error);
+  } finally {
+    window._settingLanguage = false;
   }
 }
 
