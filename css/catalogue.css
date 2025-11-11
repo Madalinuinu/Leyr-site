@@ -364,6 +364,11 @@ nav a:hover::after {
   padding: 0 20px;
 }
 
+/* Dark theme for section title */
+[data-theme="dark"] .section-title {
+  color: #e9d5ff;
+}
+
 /* Most Selled Section */
 .most-selled-section {
   max-width: 1200px;
@@ -385,6 +390,11 @@ nav a:hover::after {
   padding: 0;
   text-align: left;
   font-weight: 600;
+}
+
+/* Dark theme for most selled title */
+[data-theme="dark"] .most-selled-title {
+  color: #e9d5ff;
 }
 
 .most-selled-container {
@@ -496,7 +506,7 @@ nav a:hover::after {
 }
 
 [data-theme="dark"] .product-card p {
-  color: var(--text);
+  color: rgba(233, 213, 255, 0.9) !important;
 }
 
 [data-theme="dark"] .product-card[data-most-selled="true"] {
@@ -704,6 +714,10 @@ nav a:hover::after {
   color: #896fbc;
 }
 
+[data-theme="dark"] .custom-product-card p {
+  color: rgba(233, 213, 255, 0.9) !important;
+}
+
 [data-theme="dark"] .custom-product-icon {
   background: linear-gradient(135deg, rgba(66, 2, 100, 0.3), rgba(92, 3, 140, 0.3));
   color: #896fbc;
@@ -807,6 +821,185 @@ nav a:hover::after {
   
   .whatsapp-tooltip {
     display: none;
+  }
+}
+
+/* Custom Notification Toast */
+.notification-container {
+  position: fixed;
+  top: 100px;
+  right: 30px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  pointer-events: none;
+}
+
+.notification-toast {
+  background: linear-gradient(135deg, rgba(92, 3, 140, 0.95), rgba(137, 111, 188, 0.95));
+  color: #e9d5ff;
+  padding: 18px 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(92, 3, 140, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 320px;
+  max-width: 400px;
+  pointer-events: auto;
+  animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 1px solid rgba(137, 111, 188, 0.5);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.notification-toast::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #e9d5ff;
+  animation: progressBar 3s linear forwards;
+  border-radius: 0 0 14px 14px;
+}
+
+.notification-toast.success {
+  background: linear-gradient(135deg, rgba(92, 3, 140, 0.95), rgba(137, 111, 188, 0.95));
+}
+
+.notification-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(233, 213, 255, 0.2);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.notification-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: #e9d5ff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.notification-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notification-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #e9d5ff;
+  margin: 0;
+}
+
+.notification-message {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: rgba(233, 213, 255, 0.9);
+  margin: 0;
+}
+
+.notification-close {
+  background: transparent;
+  border: none;
+  color: #e9d5ff;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  opacity: 1;
+  background: rgba(233, 213, 255, 0.1);
+}
+
+.notification-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Dark theme for notifications */
+[data-theme="dark"] .notification-toast {
+  background: linear-gradient(135deg, rgba(137, 111, 188, 0.95), rgba(92, 3, 140, 0.95));
+  border-color: rgba(137, 111, 188, 0.6);
+  box-shadow: 0 8px 30px rgba(137, 111, 188, 0.5);
+}
+
+[data-theme="dark"] .notification-icon {
+  background: rgba(233, 213, 255, 0.15);
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.notification-toast.hiding {
+  animation: slideOutRight 0.3s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notification-container {
+    top: 80px;
+    right: 15px;
+    left: 15px;
+  }
+  
+  .notification-toast {
+    min-width: auto;
+    max-width: 100%;
+    padding: 16px 20px;
   }
 }
 

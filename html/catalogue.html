@@ -351,7 +351,9 @@ const translations = {
     customProductTitle: 'Produs Custom',
     customProductDesc: 'Ai o idee unică? Creează-ți propriul produs 3D personalizat! Contactează-ne pe WhatsApp pentru a discuta despre proiectul tău.',
     customProductBtn: 'Comandă pe WhatsApp',
-    whatsappTooltip: 'Produs Custom'
+    whatsappTooltip: 'Produs Custom',
+    notificationTitle: 'Succes!',
+    notificationMessage: 'Produs adăugat în coș!'
   },
   en: {
     navHome: 'Home',
@@ -383,7 +385,9 @@ const translations = {
     customProductTitle: 'Custom Product',
     customProductDesc: 'Have a unique idea? Create your own personalized 3D product! Contact us on WhatsApp to discuss your project.',
     customProductBtn: 'Order on WhatsApp',
-    whatsappTooltip: 'Custom Product'
+    whatsappTooltip: 'Custom Product',
+    notificationTitle: 'Success!',
+    notificationMessage: 'Product added to cart!'
   }
 };
 
@@ -573,7 +577,7 @@ function addToCart(productId, price) {
   localStorage.setItem('cart', JSON.stringify(cart));
   
   // Show confirmation
-  alert('Produs adăugat în coș!');
+  showNotification();
 }
 
 // Shuffle Products Randomly
@@ -701,6 +705,78 @@ function filterProducts() {
     // Initial filter to ensure everything is set up correctly
     filterProducts();
   });
+</script>
+
+<!-- Notification Container -->
+<div class="notification-container" id="notificationContainer"></div>
+
+<script>
+// Notification System
+function showNotification(type = 'success', title = null, message = null) {
+  const container = document.getElementById('notificationContainer');
+  if (!container) return;
+  
+  // Get current language
+  const lang = localStorage.getItem('language') || 'ro';
+  const t = translations[lang] || translations['ro'];
+  
+  // Use provided title/message or defaults from translations
+  const notificationTitle = title || t.notificationTitle || 'Succes!';
+  const notificationMessage = message || t.notificationMessage || 'Produs adăugat în coș!';
+  
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification-toast ${type}`;
+  
+  notification.innerHTML = `
+    <div class="notification-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">${notificationTitle}</div>
+      <div class="notification-message">${notificationMessage}</div>
+    </div>
+    <button class="notification-close" aria-label="Close notification">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  `;
+  
+  // Add to container
+  container.appendChild(notification);
+  
+  // Close button functionality
+  const closeBtn = notification.querySelector('.notification-close');
+  closeBtn.addEventListener('click', () => {
+    removeNotification(notification);
+  });
+  
+  // Auto-remove after 3 seconds
+  setTimeout(() => {
+    removeNotification(notification);
+  }, 3000);
+  
+  // Trigger animation
+  requestAnimationFrame(() => {
+    notification.style.animation = 'slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+  });
+}
+
+function removeNotification(notification) {
+  if (!notification) return;
+  
+  notification.classList.add('hiding');
+  
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 300);
+}
 </script>
 
 </body>
