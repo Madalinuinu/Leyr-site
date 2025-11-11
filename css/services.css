@@ -151,6 +151,60 @@ nav a:hover::after {
   min-width: 50px;
 }
 
+/* Cart toggle specific styles */
+.cart-toggle-wrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.cart-toggle {
+  min-width: 45px;
+  padding: 8px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 2px solid var(--header-bg);
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.6);
+  animation: badgePulse 0.3s ease;
+  z-index: 10;
+  line-height: 1;
+  min-width: 20px;
+  padding: 0;
+  pointer-events: none;
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cart-toggle:hover .cart-badge {
+  animation: badgePulse 0.3s ease;
+}
+
 /* Mobile menu toggle (hidden by default) */
 .mobile-menu-toggle {
   display: none;
@@ -193,6 +247,20 @@ nav a:hover::after {
   
   .language-toggle {
     min-width: 45px;
+  }
+  
+  .cart-toggle {
+    min-width: 40px;
+    padding: 6px;
+  }
+  
+  .cart-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
   }
   
   .toggle-icon {
