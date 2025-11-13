@@ -395,14 +395,24 @@ nav a:hover::after {
 [data-theme="dark"] .search-input,
 [data-theme="dark"] .category-select {
   background: #2a1f3d;
-  color: var(--text);
+  color: #e9d5ff;
   border-color: var(--accent);
+}
+
+[data-theme="dark"] .search-input::placeholder {
+  color: rgba(233, 213, 255, 0.7);
+  opacity: 1;
 }
 
 [data-theme="dark"] .search-input:focus,
 [data-theme="dark"] .category-select:focus {
   border-color: var(--accent-hover);
   box-shadow: 0 0 0 3px rgba(137, 111, 188, 0.1);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .search-input:focus::placeholder {
+  color: rgba(233, 213, 255, 0.5);
 }
 
 /* Product card hidden state */

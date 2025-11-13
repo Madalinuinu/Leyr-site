@@ -483,7 +483,7 @@ nav a:hover::after {
   border: none;
   border-radius: 30px;
   background: var(--accent);
-  color: var(--header-bg);
+  color: #e9d5ff;
   cursor: pointer;
   transition: 0.2s transform, 0.2s background;
   text-align: center;
@@ -493,6 +493,7 @@ nav a:hover::after {
 .checkout-btn:hover {
   transform: scale(1.05);
   background: var(--accent-hover);
+  color: #ffffff;
 }
 
 .checkout-btn:disabled {

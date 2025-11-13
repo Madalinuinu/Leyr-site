@@ -223,13 +223,18 @@ let cart = [];
 try {
   const cartData = localStorage.getItem('cart');
   cart = cartData ? JSON.parse(cartData) : [];
-  // Ensure cart items have required properties
-  cart = cart.map(item => ({
-    name: item.name || 'Unknown Product',
-    price: item.price || 0,
-    img: item.img || 'placeholder.jpg',
-    qty: item.qty || 1
-  }));
+  // Ensure cart items have required properties - normalize quantity to qty
+  cart = cart.map(item => {
+    // Normalize quantity to qty - use qty if exists, otherwise quantity
+    const qty = item.qty !== undefined ? item.qty : (item.quantity !== undefined ? item.quantity : 1);
+    return {
+      ...item, // Keep all properties including id
+      name: item.name || 'Unknown Product',
+      price: item.price || 0,
+      img: item.img || 'placeholder.jpg',
+      qty: qty
+    };
+  });
 } catch (error) {
   console.error('Error loading cart:', error);
   cart = [];

@@ -161,14 +161,6 @@ window.toggleTheme = function() {
       <div class="product-price">199 RON</div>
       <button onclick="addToCart('geometric-necklace', 199)">Adaugă în Coș</button>
     </div>
-    <div class="product-card" data-category="figurine" data-most-selled="true">
-      <img src="../imgages/3dworldproduct.jpg" alt="Warrior Figurine" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
-      <div style="display:none; width:100%; height:200px; background:#f0fff4; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
-      <h3>Figurină Războinic</h3>
-      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină războinic detaliată, perfectă pentru colecții</p>
-      <div class="product-price">349 RON</div>
-      <button onclick="addToCart('warrior-figurine', 349)">Adaugă în Coș</button>
-    </div>
     </div>
   </div>
 </section>
@@ -596,11 +588,26 @@ function addToCart(productId, price) {
   // Get existing cart from localStorage
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   
+  // Normalize existing cart items to use qty
+  cart = cart.map(item => {
+    if (item.quantity !== undefined && item.qty === undefined) {
+      item.qty = item.quantity;
+      delete item.quantity;
+    }
+    return item;
+  });
+  
   // Check if product already exists in cart
   const existingProduct = cart.find(item => item.id === productId);
   
   if (existingProduct) {
-    existingProduct.quantity += 1;
+    // Increment quantity - use qty if exists, otherwise quantity
+    const currentQty = existingProduct.qty !== undefined ? existingProduct.qty : (existingProduct.quantity || 1);
+    existingProduct.qty = currentQty + 1;
+    // Remove old quantity property if it exists
+    if (existingProduct.quantity !== undefined) {
+      delete existingProduct.quantity;
+    }
   } else {
     // Get product name from the card
     const productCard = event.target.closest('.product-card');
@@ -610,7 +617,7 @@ function addToCart(productId, price) {
       id: productId,
       name: productName,
       price: price,
-      quantity: 1
+      qty: 1
     });
   }
   
