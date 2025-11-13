@@ -668,6 +668,7 @@ function filterProducts() {
   const searchInput = document.getElementById('searchInput');
   const categoryFilter = document.getElementById('categoryFilter');
   const allProductCards = document.querySelectorAll('#productsContainer .product-card');
+  const mostSelledSection = document.querySelector('.most-selled-section');
   const mostSelledCards = document.querySelectorAll('#mostSelledContainer .product-card');
   const noResults = document.getElementById('noResults');
   
@@ -677,6 +678,21 @@ function filterProducts() {
   const selectedCategory = categoryFilter.value;
   
   let visibleCount = 0;
+  
+  // Show or hide Most Selled section based on category selection
+  if (mostSelledSection) {
+    if (selectedCategory === 'all') {
+      // Show Most Selled section when "all" is selected
+      mostSelledSection.style.display = 'block';
+      // Show all most selled products
+      mostSelledCards.forEach(card => {
+        card.classList.remove('hidden');
+      });
+    } else {
+      // Hide entire Most Selled section when a specific category is selected
+      mostSelledSection.style.display = 'none';
+    }
+  }
   
   // Filter all products (not most selled)
   allProductCards.forEach(card => {
@@ -701,33 +717,12 @@ function filterProducts() {
     }
   });
   
-  // Filter most selled products (but always show them if category is "all")
-  mostSelledCards.forEach(card => {
-    if (selectedCategory === 'all') {
-      // Always show most selled when "all" is selected
-      card.classList.remove('hidden');
-    } else {
-      // Filter most selled by category
-      const cardCategory = card.getAttribute('data-category');
-      const cardTitle = card.querySelector('h3')?.textContent.toLowerCase() || '';
-      const cardDesc = card.querySelector('p')?.textContent.toLowerCase() || '';
-      
-      const matchesSearch = searchTerm === '' || 
-        cardTitle.includes(searchTerm) || 
-        cardDesc.includes(searchTerm);
-      
-      const matchesCategory = cardCategory === selectedCategory;
-      
-      if (matchesSearch && matchesCategory) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
-    }
-  });
-  
   // Show or hide no results message
-  const totalVisible = visibleCount + Array.from(mostSelledCards).filter(card => !card.classList.contains('hidden')).length;
+  // Only count most selled products if the section is visible
+  const mostSelledVisible = selectedCategory === 'all' ? 
+    Array.from(mostSelledCards).filter(card => !card.classList.contains('hidden')).length : 0;
+  const totalVisible = visibleCount + mostSelledVisible;
+  
   if (totalVisible === 0) {
     noResults.classList.add('show');
   } else {
