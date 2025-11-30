@@ -63,22 +63,23 @@ window.toggleTheme = function() {
 </head>
 <body>
 <script>
-// TEST: First line of body script
-console.log('=== BODY TOP SCRIPT STARTED ===');
 // Language translations - MUST be defined FIRST
 const translations = {
   ro: {
     // Navigation
     navHome: 'Acasă',
-    navProducts: 'Produsele Noastre',
-    navServices: 'Serviciile Noastre',
+    navProducts: 'Produse',
+    navServices: 'Servicii',
+    navAbout: 'Despre Noi',
     navContact: 'Contactează-ne',
     navCart: 'Coș',
     // Hero section
     heroTitle: 'Bun venit la Leyr.',
     heroSubtitle: 'Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.',
-    heroBtnProducts: 'Produsele Noastre',
+    heroBtnProducts: 'Vezi Produsele Noastre',
     heroBtnServices: 'Serviciile Noastre',
+    requestQuote: 'Cerere Ofertă',
+    aboutUs: 'Despre noi',
     // Stats
     statClients: 'Clienți Mulțumiți',
     statProjects: 'Proiecte Realizate',
@@ -111,13 +112,16 @@ const translations = {
     navHome: 'Home',
     navProducts: 'Our Products',
     navServices: 'Our Services',
+    navAbout: 'About Us',
     navContact: 'Contact Us',
     navCart: 'Cart',
     // Hero section
     heroTitle: 'Welcome to Leyr.',
     heroSubtitle: 'Professional 3D printing for figurines, earrings, jewelry and much more — quality, precision and creativity combined.',
-    heroBtnProducts: 'Our Products',
+    heroBtnProducts: 'See Our Products',
     heroBtnServices: 'Our Services',
+    requestQuote: 'Request Quote',
+    aboutUs: 'About Us',
     // Stats
     statClients: 'Satisfied Clients',
     statProjects: 'Completed Projects',
@@ -153,12 +157,9 @@ window.translations = translations;
 // Initialize language IMMEDIATELY - before any HTML loads
 (function() {
   try {
-    // Set default language to Romanian if not set
-    let savedLang = localStorage.getItem('language');
-    if (!savedLang) {
-      savedLang = 'ro';
-      localStorage.setItem('language', 'ro');
-    }
+    // Force language to Romanian always
+    let savedLang = 'ro';
+    localStorage.setItem('language', 'ro');
     
     // Define setLanguage function here if not already defined
     if (typeof window.setLanguage !== 'function') {
@@ -191,14 +192,10 @@ window.translations = translations;
               }
             });
             
-            if (lang === 'en') {
-              document.title = 'Leyr. — Professional 3D Printing | Figurines, Earrings, Jewelry';
-            } else {
-              document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
-            }
+            document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
           }
         } catch (error) {
-          console.error('Error in setLanguage (body top):', error);
+          // Silent error handling
         } finally {
           window._settingLanguage = false;
         }
@@ -218,138 +215,201 @@ window.translations = translations;
       applyLanguage();
     }
   } catch (error) {
-    console.error('ERROR in body top script:', error);
+    // Silent error handling
   }
 })();
-console.log('=== BODY TOP SCRIPT ENDED ===');
 
-// TEST: Try to initialize counters here
-console.log('=== TESTING COUNTERS IN BODY TOP SCRIPT ===');
+// Initialize counters
 setTimeout(function() {
-  console.log('=== TIMEOUT IN BODY TOP SCRIPT ===');
   var section = document.getElementById('statsSection');
-  console.log('Section element:', section);
   if (section) {
     var counters = section.querySelectorAll('.stat-number');
-    console.log('Found counters:', counters.length);
     for (var i = 0; i < counters.length; i++) {
       var target = parseInt(counters[i].getAttribute('data-target')) || 0;
       counters[i].textContent = target.toString();
-      console.log('Counter', (i+1), 'set to:', target);
     }
-  } else {
-    console.error('Section NOT found!');
   }
 }, 1000);
+
+// SLIDER INITIALIZATION - Simple and working version
+(function() {
+  'use strict';
+  
+  function initSlider() {
+    const slider = document.getElementById('heroSlider');
+    
+    if (!slider) {
+      return;
+    }
+    
+    const slides = slider.querySelectorAll('.slide');
+    if (slides.length === 0) {
+      return;
+    }
+    
+    let currentSlide = 0;
+    const intervalTime = 7000; // 7 seconds
+    
+    function showSlide(index) {
+      // Remove active from all slides
+      slides.forEach(function(slide) {
+        slide.classList.remove('active');
+      });
+      
+      // Add active to current slide
+      if (slides[index]) {
+        slides[index].classList.add('active');
+        currentSlide = index;
+      }
+    }
+    
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+    
+    // Initialize - show first slide
+    showSlide(0);
+    
+    // Auto-advance slides
+    setInterval(function() {
+      nextSlide();
+    }, intervalTime);
+  }
+  
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlider);
+  } else {
+    // DOM already loaded
+    initSlider();
+  }
+  
+  // Also try after a delay as fallback
+  setTimeout(initSlider, 1000);
+})();
 </script>
 
 <header>
-  <img src="../imgages/logo1.png" alt="Leyr." onclick="window.location.href='index.html'">
-  <div class="header-controls">
-    <div class="cart-toggle-wrapper">
-      <a href="cart.html" class="toggle-btn cart-toggle" id="cartToggle" aria-label="Cart">
-        <span class="toggle-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-        </span>
-      </a>
-      <span class="cart-badge" id="cartBadge">0</span>
-    </div>
-    <button class="toggle-btn language-toggle" id="languageToggle" onclick="toggleLanguage()" aria-label="Language">
-      <span class="toggle-icon" id="languageToggleText">EN</span>
-    </button>
-    <button class="toggle-btn theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
-      <span class="toggle-icon">
-        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </span>
-    </button>
+  <div class="header-logo" onclick="window.location.href='index.html'">
+    <img src="../imgages/logo1.png" alt="Leyr.">
   </div>
-  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+  <nav id="navMenu">
+    <a href="catalogue.html" data-i18n="navProducts">Produse</a>
+    <a href="services.html" data-i18n="navServices">Servicii</a>
+    <a href="#aboutUs" data-i18n="navAbout">Despre Noi</a>
+    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
+  </nav>
+  <div class="header-actions">
+    <a href="cart.html" class="header-icon-btn" id="cartToggle" aria-label="Coș">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </a>
+    <button class="header-icon-btn" id="searchToggle" aria-label="Search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </button>
+    <a href="contact.html" class="header-cta-btn" data-i18n="requestQuote">Cerere Ofertă</a>
+  </div>
+  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Meniu">
     <span></span>
     <span></span>
     <span></span>
   </button>
-  <nav id="navMenu">
-    <a href="index.html" data-i18n="navHome">Acasă</a>
-    <a href="catalogue.html" data-i18n="navProducts">Produsele Noastre</a>
-    <a href="services.html" data-i18n="navServices">Serviciile Noastre</a>
-    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
-  </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-particles">
-    <div class="particle particle-1"></div>
-    <div class="particle particle-2"></div>
-    <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-    <div class="particle particle-5"></div>
-    <div class="particle particle-6"></div>
-    <div class="particle particle-7"></div>
-    <div class="particle particle-8"></div>
+  <!-- Background Image Slider -->
+  <div class="hero-slider" id="heroSlider">
+    <div class="slider-wrapper">
+      <div class="slide active">
+        <img src="../imgages/Studio Session-039_1024px.jpg" alt="Leyr. Product">
+        <div class="slide-content">
+          <h1 class="slide-title">Transformă ideile în realitate</h1>
+          <h2 class="slide-subtitle-large">cu printare 3D profesională</h2>
+          <p class="slide-description">De la concept la produs final, oferim soluții complete de printare 3D pentru fiecare proiect</p>
+          <a href="about-us.html" class="hero-cta-btn" data-i18n="aboutUs">Despre noi</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="../imgages/Studio Session-046_1024px.jpg" alt="Leyr. Product">
+        <div class="slide-content">
+          <h1 class="slide-title">Designuri unice</h1>
+          <h2 class="slide-subtitle-large">realizate cu precizie</h2>
+          <p class="slide-description">Figurine, cercei, bijuterii și multe altele - fiecare produs este o operă de artă</p>
+          <a href="catalogue.html" class="hero-cta-btn" data-i18n="heroBtnProducts">Vezi Produsele</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="../imgages/Studio Session-045_1024px.jpg" alt="Leyr. Product">
+        <div class="slide-content">
+          <h1 class="slide-title">Tehnologie avansată</h1>
+          <h2 class="slide-subtitle-large">pentru rezultate perfecte</h2>
+          <p class="slide-description">Utilizăm cele mai moderne imprimante 3D și materiale premium pentru calitate superioară</p>
+          <a href="services.html" class="hero-cta-btn" data-i18n="heroBtnServices">Serviciile Noastre</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="../imgages/Studio Session-044_1024px.jpg" alt="Leyr. Product">
+        <div class="slide-content">
+          <h1 class="slide-title">Livrare rapidă</h1>
+          <h2 class="slide-subtitle-large">în toată România</h2>
+          <p class="slide-description">Produsele tale ajung la tine rapid și sigur, oriunde te afli în țară</p>
+          <a href="catalogue.html" class="hero-cta-btn" data-i18n="heroBtnProducts">Vezi Produsele</a>
+        </div>
+      </div>
+    </div>
+    <!-- Overlay for better text readability -->
+    <div class="slider-overlay"></div>
   </div>
-  <h1 data-i18n="heroTitle">Bun venit la Leyr.</h1>
-  <p data-i18n="heroSubtitle">Printare 3D profesională pentru figurine, cercei, bijuterii și multe altele — calitate, precizie și creativitate combinate.</p>
-  <div class="hero-buttons">
-    <button onclick="window.location.href='catalogue.html'" data-i18n="heroBtnProducts">Produsele Noastre</button>
-    <button onclick="window.location.href='services.html'" data-i18n="heroBtnServices">Serviciile Noastre</button>
-  </div>
+  
 </section>
 
-<section class="hero-image" id="heroImage">
-  <img src="../imgages/3dworldproduct.jpg" alt="Leyr. Product" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';">
-  <div style="display:none; text-align:center; padding:40px; background:#fff; border-radius:14px; color:#666;">Image coming soon</div>
-</section>
 
-<section class="features-section" id="featuresSection">
-  <h2 data-i18n="featuresTitle">De Ce Să Alegi Leyr?</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <span class="feature-icon">🎨</span>
-      <h3 data-i18n="feature1Title">Design Personalizat</h3>
-      <p data-i18n="feature1Desc">Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.</p>
+<section class="featured-products-section">
+  <h2 class="featured-products-title">Cele mai vândute</h2>
+  <div class="featured-products-container">
+    <div class="featured-product-card">
+      <div class="product-image-wrapper">
+        <img src="../imgages/Studio Session-039_1024px.jpg" alt="Figurină 3D" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+        <div style="display:none; width:100%; height:250px; background:#0f0f0f; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      </div>
+      <h4>Figurine 3D</h4>
+      <p class="product-price">299 RON</p>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔧</span>
-      <h3 data-i18n="feature2Title">Precizie Maximă</h3>
-      <p data-i18n="feature2Desc">Tehnologie avansată de printare 3D pentru detalii fine și rezoluție înaltă în fiecare proiect.</p>
+    <div class="featured-product-card">
+      <div class="product-image-wrapper">
+        <img src="../imgages/Studio Session-046_1024px.jpg" alt="Cercei 3D" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+        <div style="display:none; width:100%; height:250px; background:#0f0f0f; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      </div>
+      <h4>Cercei 3D</h4>
+      <p class="product-price">149 RON</p>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">💎</span>
-      <h3 data-i18n="feature3Title">Materiale Premium</h3>
-      <p data-i18n="feature3Desc">O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.</p>
+    <div class="featured-product-card">
+      <div class="product-image-wrapper">
+        <img src="../imgages/Studio Session-045_1024px.jpg" alt="Bijuterii 3D" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+        <div style="display:none; width:100%; height:250px; background:#0f0f0f; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      </div>
+      <h4>Bijuterii 3D</h4>
+      <p class="product-price">199 RON</p>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">⚡</span>
-      <h3 data-i18n="feature4Title">Livrare Rapidă</h3>
-      <p data-i18n="feature4Desc">Procesare rapidă și livrare eficientă pentru a-ți aduce produsele 3D cât mai repede.</p>
+    <div class="featured-product-card">
+      <div class="product-image-wrapper">
+        <img src="../imgages/Studio Session-044_1024px.jpg" alt="Obiecte Personalizate" onerror="this.style.display='none'; this.nextElementSibling?.style.display='block';">
+        <div style="display:none; width:100%; height:250px; background:#0f0f0f; border-radius:14px; display:flex; align-items:center; justify-content:center; color:#666;">Imagine în curând</div>
+      </div>
+      <h4>Obiecte Personalizate</h4>
+      <p class="product-price">159 RON</p>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">🎯</span>
-      <h3 data-i18n="feature5Title">Proiecte Personalizate</h3>
-      <p data-i18n="feature5Desc">Servicii complete de modelare 3D și printare pentru proiecte unice și personalizate.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">✨</span>
-      <h3 data-i18n="feature6Title">Calitate Premium</h3>
-      <p data-i18n="feature6Desc">Standarde riguroase de control al calității pentru a asigura rezultate perfecte în fiecare printare.</p>
-    </div>
+  </div>
+  <div class="featured-products-cta">
+    <a href="catalogue.html" class="view-more-products-btn">Vezi și alte produse</a>
   </div>
 </section>
 
@@ -359,6 +419,42 @@ setTimeout(function() {
     Leyr. este o firmă specializată în printare 3D profesională, oferind servicii complete de modelare și printare pentru figurine, cercei, bijuterii și multe alte produse personalizate.
     Misiunea noastră este să transformăm ideile tale în realitate prin tehnologie avansată și creativitate. De la concept la produs final, ne concentrăm pe calitate, precizie și satisfacerea clienților.
   </p>
+</section>
+
+<section class="features-section" id="featuresSection">
+  <div class="features-container">
+    <div class="feature-card-large">
+      <div class="feature-icon-large">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5"></path>
+          <path d="M2 12l10 5 10-5"></path>
+        </svg>
+      </div>
+      <h3>Materiale Premium</h3>
+      <p>O gamă largă de materiale de calitate: PLA, ABS, PETG, resină și multe altele pentru fiecare nevoie.</p>
+    </div>
+    <div class="feature-card-large">
+      <div class="feature-icon-large">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <h3>Produs Personalizat</h3>
+      <p>Creează-ți propriile modele 3D sau alege din colecția noastră de designuri unice pentru figurine, cercei și bijuterii.</p>
+    </div>
+    <div class="feature-card-large">
+      <div class="feature-icon-large">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </div>
+      <h3>Livrare în Toată Țara</h3>
+      <p>Livrăm produsele 3D în toată România, cu opțiuni rapide și sigure de transport.</p>
+    </div>
+  </div>
 </section>
 
 <section class="contact-section">
@@ -416,20 +512,6 @@ setTimeout(function() {
 </footer>
 
 <script>
-// TEST: First line of script - MUST APPEAR FIRST
-console.log('=== SCRIPT TAG REACHED ===');
-console.log('=== BEFORE IIFE ===');
-(function() {
-  'use strict';
-  console.log('=== SCRIPT TAG OPENED ===');
-  try {
-    console.log('=== BODY SCRIPT STARTED ===');
-    console.log('Script is executing...');
-  } catch(e) {
-    console.error('ERROR at start of script:', e);
-  }
-})();
-console.log('=== AFTER IIFE ===');
 
 // Language toggle function - redefine to use setLanguage directly
 window.toggleLanguage = function() {
@@ -474,7 +556,6 @@ if (typeof window.setLanguage !== 'function') {
   window.setLanguage = function(lang) {
     // Prevent infinite recursion by checking if we're already executing
     if (setLanguageExecuting || window._settingLanguage) {
-      console.warn('setLanguage already executing, skipping to prevent recursion');
       return;
     }
     setLanguageExecuting = true;
@@ -496,7 +577,7 @@ if (typeof window.setLanguage !== 'function') {
         updatePageContent(lang);
       }
     } catch (error) {
-      console.error('Error in setLanguage:', error);
+      // Silent error handling
     } finally {
       setLanguageExecuting = false;
       window._settingLanguage = false;
@@ -511,7 +592,6 @@ if (typeof window.setLanguage !== 'function') {
 function setLanguage(lang) {
   // Prevent infinite recursion by checking if we're already executing
   if (window._settingLanguage) {
-    console.warn('setLanguage already executing, skipping to prevent recursion');
     return;
   }
   window._settingLanguage = true;
@@ -532,7 +612,7 @@ function setLanguage(lang) {
       updatePageContent(lang);
     }
   } catch (error) {
-    console.error('Error in setLanguage:', error);
+    // Silent error handling
   } finally {
     window._settingLanguage = false;
   }
@@ -540,12 +620,10 @@ function setLanguage(lang) {
 
 function updatePageContent(lang) {
   if (typeof translations === 'undefined') {
-    console.error('ERROR: translations is not defined!');
     return;
   }
   const t = translations[lang];
   if (!t) {
-    console.error('ERROR: translations[', lang, '] is not defined!');
     return;
   }
   
@@ -557,42 +635,27 @@ function updatePageContent(lang) {
     }
   });
   
-  // Update page title
-  if (lang === 'en') {
-    document.title = 'Leyr. — Professional 3D Printing | Figurines, Earrings, Jewelry';
-  } else {
-    document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
-  }
+  // Update page title - always Romanian
+  document.title = 'Leyr. — Printare 3D Profesională | Figurine, Cercei, Bijuterii';
 }
 
 // Theme toggle function - must be global
 window.toggleTheme = function() {
-  console.log('=== toggleTheme called ===');
   const currentTheme = localStorage.getItem('theme') || 'light';
-  console.log('Current theme:', currentTheme);
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  console.log('Switching to theme:', newTheme);
   setTheme(newTheme);
 };
 
 // Theme function
 function setTheme(theme) {
-  console.log('=== setTheme called with:', theme, '===');
   localStorage.setItem('theme', theme);
-  console.log('Theme saved to localStorage:', theme);
-  
   document.documentElement.setAttribute('data-theme', theme);
-  console.log('data-theme attribute set on html element:', document.documentElement.getAttribute('data-theme'));
   
   // Update toggle button - only icon, no label
   const themeToggle = document.getElementById('themeToggle');
-  console.log('Looking for themeToggle element...');
   if (themeToggle) {
-    console.log('Found themeToggle element:', themeToggle);
     const sunIcon = themeToggle.querySelector('.sun-icon');
     const moonIcon = themeToggle.querySelector('.moon-icon');
-    console.log('Sun icon found:', !!sunIcon);
-    console.log('Moon icon found:', !!moonIcon);
     
     if (sunIcon && moonIcon) {
       // Show the opposite icon (the one you can switch to)
@@ -601,22 +664,14 @@ function setTheme(theme) {
         sunIcon.style.display = 'block';
         moonIcon.style.display = 'none';
         themeToggle.classList.remove('dark-active');
-        console.log('Theme set to dark - showing sun icon (can switch to light)');
       } else {
         // Theme is light, show moon icon (to switch to dark)
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'block';
         themeToggle.classList.add('dark-active');
-        console.log('Theme set to light - showing moon icon (can switch to dark)');
       }
-    } else {
-      console.error('Sun or moon icon NOT found!');
-      console.log('Available children:', Array.from(themeToggle.children).map(c => c.tagName + (c.className ? '.' + c.className : '')));
     }
-  } else {
-    console.error('themeToggle element NOT found!');
   }
-  console.log('=== setTheme finished ===');
 }
 
 // Mobile menu toggle
@@ -641,12 +696,6 @@ function initMobileMenu() {
   }
 }
 
-// TEST: Check if script is running
-try {
-  console.log('=== COUNTER SCRIPT SECTION STARTED ===');
-} catch(e) {
-  console.error('ERROR in counter section:', e);
-}
 
 // Intersection Observer for scroll animations
 const observerOptions = {
@@ -663,14 +712,12 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-const elementsToAnimate = document.querySelectorAll('.hero-image, .about-us, .stats-section, .features-section');
+const elementsToAnimate = document.querySelectorAll('.hero-slider, .about-us, .stats-section, .features-section');
 elementsToAnimate.forEach(el => observer.observe(el));
 
 // Slow and Visible CountUp Animation - Numbers scroll from 0 to target
 function animateCountUp(element, from, to, duration = 3, delay = 0, onStart, onEnd) {
-  console.log('animateCountUp called:', element, 'from:', from, 'to:', to, 'duration:', duration);
   if (!element || isNaN(from) || isNaN(to)) {
-    console.error('animateCountUp: Invalid parameters!');
     return;
   }
 
@@ -768,67 +815,41 @@ function animateCountUp(element, from, to, duration = 3, delay = 0, onStart, onE
 
 // Initialize counters when DOM is ready - Set values directly without animation
 function initCounters() {
-  console.log('=== initCounters() CALLED ===');
   const statsSection = document.getElementById('statsSection');
-  console.log('statsSection element:', statsSection);
   
   if (!statsSection) {
-    console.error('ERROR: statsSection NOT FOUND!');
     return;
   }
   
-  console.log('Found statsSection, setting values directly...');
-  
   // Get all stat numbers and set values directly
   const counters = statsSection.querySelectorAll('.stat-number');
-  console.log('Found', counters.length, 'counters');
   
-  counters.forEach((counter, index) => {
+  counters.forEach((counter) => {
     const target = parseInt(counter.getAttribute('data-target')) || 0;
     counter.textContent = target.toString();
-    console.log(`Counter ${index + 1}: Set to ${target}`);
   });
 }
 
 // Run when DOM is ready
-console.log('=== SETTING UP COUNTER INITIALIZATION ===');
-console.log('Document readyState:', document.readyState);
-
 if (document.readyState === 'loading') {
-  console.log('DOM loading, waiting for DOMContentLoaded...');
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOMContentLoaded fired, calling initCounters...');
     initCounters();
   });
 } else {
-  console.log('DOM already loaded, calling initCounters immediately...');
   initCounters();
 }
 
 // Also try after a delay as fallback
 setTimeout(function() {
-  console.log('=== FALLBACK: Checking counters after 2 seconds ===');
   const section = document.getElementById('statsSection');
   if (section) {
     const counters = section.querySelectorAll('.stat-number');
-    console.log('Fallback: Found', counters.length, 'counters');
-    counters.forEach(function(counter, index) {
+    counters.forEach(function(counter) {
       const target = parseInt(counter.getAttribute('data-target')) || 0;
       counter.textContent = target.toString();
-      console.log('Fallback: Set counter', index + 1, 'to', target);
     });
   }
 }, 2000);
-
-// Parallax effect for hero image
-window.addEventListener('scroll', () => {
-  const scrolled = window.pageYOffset;
-  const heroImage = document.getElementById('heroImage');
-  if (heroImage) {
-    const rate = scrolled * 0.5;
-    heroImage.style.transform = `translateY(${rate}px)`;
-  }
-});
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -860,7 +881,6 @@ function updateCartBadge() {
       cartBadge.style.display = 'none';
     }
   } catch (error) {
-    console.error('Error updating cart badge:', error);
     cartBadge.style.display = 'none';
   }
 }
@@ -871,14 +891,11 @@ function initAll() {
   const savedTheme = localStorage.getItem('theme') || 'light';
   setTheme(savedTheme);
   
-  // Initialize language - MUST be after DOM is ready
-  let savedLang = localStorage.getItem('language');
-  if (!savedLang) {
-    savedLang = 'ro';
-    localStorage.setItem('language', 'ro');
-  }
+  // Force language to Romanian always
+  let savedLang = 'ro';
+  localStorage.setItem('language', 'ro');
   if (typeof window.setLanguage === 'function') {
-    window.setLanguage(savedLang);
+    window.setLanguage('ro');
   }
   
   // Initialize mobile menu
@@ -899,11 +916,11 @@ function initAll() {
   
   // Initialize counters
   if (typeof initCounters === 'function') {
-    console.log('Calling initCounters from initAll...');
     initCounters();
-  } else {
-    console.error('initCounters function not found!');
   }
+  
+  // Initialize header scroll effect
+  initHeaderScroll();
   
   // Scroll animations, counter animation, parallax and smooth scroll are auto-initialized above
   
@@ -927,6 +944,44 @@ function initAll() {
   });
 }
 
+// Header stays transparent always - no scroll effect needed
+function initHeaderScroll() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  
+  // Always keep header transparent - remove scrolled class
+  header.classList.remove('scrolled');
+}
+
+// Header stays transparent always - no scroll effect
+(function() {
+  function ensureHeaderTransparent() {
+    const header = document.querySelector('header');
+    if (header) {
+      // Always remove scrolled class to keep header transparent
+      header.classList.remove('scrolled');
+      // Force transparent background
+      header.style.background = 'transparent';
+      header.style.backgroundColor = 'transparent';
+      header.style.boxShadow = 'none';
+    } else {
+      // If header not found yet, try again after a short delay
+      setTimeout(ensureHeaderTransparent, 50);
+    }
+  }
+  
+  // Ensure header is transparent immediately
+  ensureHeaderTransparent();
+  
+  // Also ensure when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureHeaderTransparent);
+  }
+  
+  // Also ensure on window load
+  window.addEventListener('load', ensureHeaderTransparent);
+})();
+
 // Initialize on DOM ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initAll);
@@ -948,27 +1003,6 @@ try {
 } catch (error) {
   // Silent error handling
 }
-
-// FINAL TEST: Set counters directly at the very end - SIMPLE VERSION
-(function() {
-  console.log('=== FINAL TEST STARTED ===');
-  setTimeout(function() {
-    console.log('=== TIMEOUT FIRED ===');
-    var section = document.getElementById('statsSection');
-    console.log('Section element:', section);
-    if (section) {
-      var counters = section.querySelectorAll('.stat-number');
-      console.log('Found counters:', counters.length);
-      for (var i = 0; i < counters.length; i++) {
-        var target = parseInt(counters[i].getAttribute('data-target')) || 0;
-        counters[i].textContent = target.toString();
-        console.log('Counter', (i+1), 'set to:', target);
-      }
-    } else {
-      console.error('Section NOT found!');
-    }
-  }, 2000);
-})();
 
 </script>
 
