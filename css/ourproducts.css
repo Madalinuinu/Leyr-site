@@ -134,9 +134,79 @@ header img {
 
 footer {
   background: var(--header-bg);
-  color: #896fbc;
+  color: rgba(255, 255, 255, 0.7);
   text-align:center;
   padding:20px 10px;
   margin-top:40px;
+}
+
+/* Floating WhatsApp Button - same as Home */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #e63946;
+  animation: pulse 2s infinite;
+  border: 2px solid #e63946;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(230, 57, 70, 0.7);
+  background: #e63946;
+  color: #ffffff;
+  border-color: #e63946;
+}
+
+.whatsapp-float svg {
+  width: 24px;
+  height: 24px;
+}
+
+.whatsapp-tooltip {
+  display: none;
+}
+
+.whatsapp-tooltip::after {
+  display: none;
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+  display: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(230, 57, 70, 0.8);
+  }
+}
+
+/* Responsive for WhatsApp button */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 45px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-float svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 

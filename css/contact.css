@@ -294,41 +294,29 @@ nav a:hover {
 }
 
 .contact-page-container {
-  background: #ffffff;
+  background: #0f0f0f;
   border-radius: var(--radius);
   padding: 40px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-}
-
-/* Dark theme - keep white background for container */
-[data-theme="dark"] .contact-page-container {
-  background: #ffffff;
+  box-shadow: none;
+  border: 1px solid rgba(230, 57, 70, 0.25);
 }
 
 .contact-page-title {
   text-align: center;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 2.5rem;
-  color: var(--text);
-  margin-bottom: 10px;
+  color: #ffffff;
+  margin-bottom: 12px;
   padding-top: 120px;
-}
-
-/* Dark theme for contact page title - black text on white background */
-[data-theme="dark"] .contact-page-title {
-  color: #000000;
 }
 
 .contact-page-subtitle {
   text-align: center;
   font-size: 1.1rem;
-  color: var(--text);
-  margin-bottom: 40px;
-}
-
-/* Dark theme for contact page subtitle - black text on white background */
-[data-theme="dark"] .contact-page-subtitle {
-  color: #000000;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 50px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .contact-content {
@@ -341,16 +329,10 @@ nav a:hover {
 /* Contact Form */
 .contact-form-section h2,
 .contact-info-section h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
-  color: var(--header-bg);
+  color: #ffffff;
   margin-bottom: 25px;
-}
-
-/* Dark theme for contact form and info section titles - black text on white background */
-[data-theme="dark"] .contact-form-section h2,
-[data-theme="dark"] .contact-info-section h2 {
-  color: #000000;
 }
 
 .form-group {
@@ -361,24 +343,20 @@ nav a:hover {
   display: block;
   font-weight: 600;
   margin-bottom: 8px;
-  color: var(--text);
-}
-
-/* Dark theme for form labels - black text on white background */
-[data-theme="dark"] .form-group label {
-  color: #000000;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #e9d5ff;
+  border: 1px solid rgba(230, 57, 70, 0.35);
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   transition: border-color 0.3s ease;
-  background: #ffffff;
+  background: #1a1a1a;
+  color: #ffffff;
 }
 
 .form-group input:focus,
@@ -424,8 +402,9 @@ nav a:hover {
   align-items: flex-start;
   gap: 15px;
   padding: 20px;
-  background: #f5f3ff;
+  background: #1a1a1a;
   border-radius: var(--radius);
+  border: 1px solid rgba(230, 57, 70, 0.35);
   transition: transform 0.3s ease;
 }
 
@@ -458,13 +437,8 @@ nav a:hover {
 }
 
 .contact-item strong {
-  color: var(--header-bg);
+  color: #ffffff;
   font-size: 1rem;
-}
-
-/* Dark theme for contact item strong text - black text on white background */
-[data-theme="dark"] .contact-item strong {
-  color: #000000;
 }
 
 .contact-item a {
@@ -480,7 +454,7 @@ nav a:hover {
 
 /* Contact Section (before footer) */
 .contact-section {
-  background: var(--header-bg);
+  background: #0f0f0f;
   padding: 60px 20px 0 20px;
   margin-top: 60px;
 }
@@ -492,9 +466,9 @@ nav a:hover {
 }
 
 .contact-container h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 2rem;
-  color: #896fbc;
+  color: #ffffff;
   margin-bottom: 30px;
 }
 
@@ -511,20 +485,20 @@ nav a:hover {
   align-items: center;
   gap: 10px;
   padding: 20px 30px;
-  background: rgba(137, 111, 188, 0.3);
+  background: rgba(230, 57, 70, 0.1);
   border-radius: var(--radius);
   text-decoration: none;
-  color: #e9d5ff;
+  color: #ffffff;
   transition: all 0.3s ease;
   min-width: 120px;
-  border: 1px solid rgba(137, 111, 188, 0.4);
+  border: 1px solid rgba(230, 57, 70, 0.3);
 }
 
 .contact-link:hover {
-  background: rgba(137, 111, 188, 0.5);
-  color: #e9d5ff;
+  background: rgba(230, 57, 70, 0.2);
+  color: #ffffff;
   transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(137, 111, 188, 0.4);
+  box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
 }
 
 .contact-link .contact-icon {
@@ -547,16 +521,86 @@ nav a:hover {
 .contact-link span:last-child {
   font-weight: 600;
   font-size: 1rem;
-  color: #e9d5ff;
+  color: #ffffff;
 }
 
 /* Footer */
 footer {
   background: var(--header-bg);
-  color: #896fbc;
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
   padding: 20px 10px 20px 10px;
   margin-top: 0;
+}
+
+/* Floating WhatsApp Button - same as Home */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #e63946;
+  animation: pulse 2s infinite;
+  border: 2px solid #e63946;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(230, 57, 70, 0.7);
+  background: #e63946;
+  color: #ffffff;
+  border-color: #e63946;
+}
+
+.whatsapp-float svg {
+  width: 24px;
+  height: 24px;
+}
+
+.whatsapp-tooltip {
+  display: none;
+}
+
+.whatsapp-tooltip::after {
+  display: none;
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+  display: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(230, 57, 70, 0.8);
+  }
+}
+
+/* Responsive for WhatsApp button */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 45px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .whatsapp-float svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 /* Responsive */
