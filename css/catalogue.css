@@ -566,16 +566,18 @@ nav a:hover {
   border-radius:16px; 
   padding:20px; 
   text-align:center; 
-  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  box-shadow:0 4px 18px rgba(0,0,0,0.35);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   position: relative;
-  border: 2px solid rgba(230, 57, 70, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(230, 57, 70, 0.25);
-  border-color: rgba(230, 57, 70, 0.6);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.5);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .product-card img { 
@@ -594,11 +596,16 @@ nav a:hover {
   font-size: 1.3rem;
 }
 
+.product-card p {
+  min-height: 96px; /* aliniază preț + buton indiferent de lungimea descrierii */
+}
+
 .product-price {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent);
-  margin: 15px 0;
+  margin-top: auto;   /* împinge prețul și butonul jos în card */
+  margin-bottom: 14px;
   font-family: 'Playfair Display', serif;
 }
 
@@ -612,7 +619,7 @@ nav a:hover {
   cursor:pointer; 
   transition:0.3s transform,0.3s background;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 0;      /* butonul rămâne imediat sub preț */
 }
 
 .product-card button:hover { 
@@ -620,21 +627,22 @@ nav a:hover {
   background: var(--accent-hover); 
 }
 
-/* Best Selled Products - subtle highlight but same red/black palette */
+/* Best Selled Products - accent red/neon */
 .product-card[data-most-selled="true"] {
-  border-color: rgba(230, 57, 70, 0.6);
-  box-shadow: 0 6px 28px rgba(230, 57, 70, 0.35);
+  border-width: 2px;
+  border-color: rgba(230, 57, 70, 0.7);
+  box-shadow: 0 8px 32px rgba(230, 57, 70, 0.45);
 }
 
 .product-card[data-most-selled="true"]:hover {
-  border-color: rgba(230, 57, 70, 0.9);
-  box-shadow: 0 10px 36px rgba(230, 57, 70, 0.45);
+  border-color: rgba(230, 57, 70, 0.95);
+  box-shadow: 0 12px 40px rgba(230, 57, 70, 0.6);
 }
 
-/* Dark theme for products – keep close to home */
+/* Dark theme for products */
 [data-theme="dark"] .product-card {
   background: #1a1a1a;
-  border-color: rgba(230, 57, 70, 0.4);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="dark"] .product-card h3 {
@@ -646,16 +654,12 @@ nav a:hover {
 }
 
 [data-theme="dark"] .product-card[data-most-selled="true"] {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-  border-color: rgba(99, 102, 241, 0.4);
-}
-
-[data-theme="dark"] .product-card[data-most-selled="true"] h3 {
-  color: #e9d5ff;
+  border-color: rgba(230, 57, 70, 0.8);
+  box-shadow: 0 8px 32px rgba(230, 57, 70, 0.5);
 }
 
 [data-theme="dark"] .product-card[data-most-selled="true"] .product-price {
-  color: rgba(139, 92, 246, 0.9);
+  color: var(--accent);
 }
 
 /* Contact Section – match home page */
@@ -739,6 +743,8 @@ nav a:hover {
   background: #1a1a1a;
   border: 2px solid rgba(230, 57, 70, 0.6);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .custom-product-badge {
@@ -779,6 +785,7 @@ nav a:hover {
 .custom-product-card p {
   z-index: 2;
   position: relative;
+  min-height: 96px; /* același spațiu ca descrierile celorlalte produse */
 }
 
 .custom-product-whatsapp-btn {
@@ -795,7 +802,7 @@ nav a:hover {
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
-  margin-top: 15px;
+  margin-top: auto;
   text-decoration: none;
   z-index: 2;
   position: relative;
@@ -923,11 +930,11 @@ nav a:hover {
 }
 
 .notification-toast {
-  background: linear-gradient(135deg, rgba(92, 3, 140, 0.95), rgba(137, 111, 188, 0.95));
-  color: #e9d5ff;
+  background: #1a1a1a;
+  color: #ffffff;
   padding: 18px 24px;
   border-radius: 14px;
-  box-shadow: 0 8px 30px rgba(92, 3, 140, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   gap: 15px;
@@ -935,7 +942,7 @@ nav a:hover {
   max-width: 400px;
   pointer-events: auto;
   animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  border: 1px solid rgba(137, 111, 188, 0.5);
+  border: 1px solid rgba(230, 57, 70, 0.4);
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
@@ -948,13 +955,13 @@ nav a:hover {
   left: 0;
   width: 100%;
   height: 3px;
-  background: #e9d5ff;
+  background: var(--accent);
   animation: progressBar 3s linear forwards;
   border-radius: 0 0 14px 14px;
 }
 
 .notification-toast.success {
-  background: linear-gradient(135deg, rgba(92, 3, 140, 0.95), rgba(137, 111, 188, 0.95));
+  background: radial-gradient(circle at top left, rgba(230, 57, 70, 0.25), transparent 55%), #1a1a1a;
 }
 
 .notification-icon {
@@ -964,7 +971,7 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(233, 213, 255, 0.2);
+  background: rgba(230, 57, 70, 0.15);
   border-radius: 50%;
   padding: 8px;
 }
@@ -972,7 +979,7 @@ nav a:hover {
 .notification-icon svg {
   width: 20px;
   height: 20px;
-  stroke: #e9d5ff;
+  stroke: var(--accent);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -990,7 +997,7 @@ nav a:hover {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 1rem;
-  color: #e9d5ff;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -998,14 +1005,14 @@ nav a:hover {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
-  color: rgba(233, 213, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   margin: 0;
 }
 
 .notification-close {
   background: transparent;
   border: none;
-  color: #e9d5ff;
+  color: #ffffff;
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -1019,7 +1026,7 @@ nav a:hover {
 
 .notification-close:hover {
   opacity: 1;
-  background: rgba(233, 213, 255, 0.1);
+  background: rgba(230, 57, 70, 0.15);
 }
 
 .notification-close svg {
@@ -1029,13 +1036,13 @@ nav a:hover {
 
 /* Dark theme for notifications */
 [data-theme="dark"] .notification-toast {
-  background: linear-gradient(135deg, rgba(137, 111, 188, 0.95), rgba(92, 3, 140, 0.95));
-  border-color: rgba(137, 111, 188, 0.6);
-  box-shadow: 0 8px 30px rgba(137, 111, 188, 0.5);
+  background: radial-gradient(circle at top left, rgba(230, 57, 70, 0.22), transparent 55%), #111111;
+  border-color: rgba(230, 57, 70, 0.55);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.8);
 }
 
 [data-theme="dark"] .notification-icon {
-  background: rgba(233, 213, 255, 0.15);
+  background: rgba(230, 57, 70, 0.18);
 }
 
 /* Animations */

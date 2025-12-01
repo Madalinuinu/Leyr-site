@@ -306,8 +306,8 @@ nav a:hover {
   font-family: 'Poppins', sans-serif;
   font-size: 2.5rem;
   color: #ffffff;
-  margin-bottom: 12px;
-  padding-top: 120px;
+  margin: 40px 0 12px 0;
+  padding-top: 0;
 }
 
 .contact-page-subtitle {
@@ -324,6 +324,17 @@ nav a:hover {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   margin-top: 40px;
+}
+
+.contact-form-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* Contact Form */
@@ -381,7 +392,7 @@ nav a:hover {
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  margin-top: auto;
 }
 
 .submit-btn:hover {
@@ -455,7 +466,7 @@ nav a:hover {
 /* Contact Section (before footer) */
 .contact-section {
   background: #0f0f0f;
-  padding: 60px 20px 0 20px;
+  padding: 60px 20px 100px 20px;
   margin-top: 60px;
 }
 

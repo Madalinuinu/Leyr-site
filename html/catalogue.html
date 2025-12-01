@@ -115,21 +115,21 @@ window.toggleTheme = function() {
       </a>
     </div>
     <div class="product-card" data-category="figurine" data-most-selled="true">
-      <img src="../imgages/Studio Session-039_1024px.jpg" alt="Dragon Figurine">
-      <h3>Dragon Figurine</h3>
-      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină dragon detaliată, printare 3D de înaltă calitate</p>
-      <div class="product-price">299 RON</div>
-      <button onclick="addToCart('dragon-figurine', 299)">Adaugă în Coș</button>
+      <img src="../imgages/Studio Session-039_1024px.jpg" alt="Cod QR decorativ">
+      <h3>Cod QR decorativ</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Suport decorativ cu cod QR care permite conectarea rapidă la rețeaua ta Wi‑Fi, fără să mai fie nevoie să introduci parola manual.</p>
+      <div class="product-price">49.99 RON</div>
+      <button onclick="addToCart('cod-qr-decorativ', 49.99)">Adaugă în Coș</button>
     </div>
-    <div class="product-card" data-category="cercei" data-most-selled="true">
-      <img src="../imgages/Studio Session-046_1024px.jpg" alt="Floral Earrings">
-      <h3>Cercei Floral</h3>
-      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Cercei cu design floral, materiale premium</p>
-      <div class="product-price">149 RON</div>
-      <button onclick="addToCart('floral-earrings', 149)">Adaugă în Coș</button>
+    <div class="product-card" data-category="figurine" data-most-selled="true">
+      <img src="../imgages/Studio Session-046_1024px.jpg" alt="Figurină brad">
+      <h3>Figurină brad</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină brad decorativ, perfectă pentru a aduce un plus de atmosferă de sărbători în orice spațiu.</p>
+      <div class="product-price">29.99 RON</div>
+      <button onclick="addToCart('figurina-brad-046', 29.99)">Adaugă în Coș</button>
     </div>
     <div class="product-card" data-category="bijuterii" data-most-selled="true">
-      <img src="../imgages/Studio Session-045_1024px.jpg" alt="Geometric Necklace">
+      <img src="../imgages/Studio Session-035_1024px.jpg" alt="Colier Geometric">
       <h3>Colier Geometric</h3>
       <p style="font-size:0.9rem; color:#666; margin:10px 0;">Colier cu design geometric modern</p>
       <div class="product-price">199 RON</div>
@@ -171,11 +171,11 @@ window.toggleTheme = function() {
       <button onclick="addToCart('custom-phone-case', 89)">Adaugă în Coș</button>
     </div>
     <div class="product-card" data-category="figurine">
-      <img src="../imgages/Studio Session-036_1024px.jpg" alt="Animal Figurine">
-      <h3>Figurină Animal</h3>
-      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină animal realistă, perfectă pentru decor</p>
-      <div class="product-price">229 RON</div>
-      <button onclick="addToCart('animal-figurine', 229)">Adaugă în Coș</button>
+      <img src="../imgages/Studio Session-036_1024px.jpg" alt="Figurină brad">
+      <h3>Figurină brad</h3>
+      <p style="font-size:0.9rem; color:#666; margin:10px 0;">Figurină brad decorativ, ideală pentru a aduce atmosferă de sărbătoare pe birou, raft sau masă.</p>
+      <div class="product-price">29.99 RON</div>
+      <button onclick="addToCart('figurina-brad', 29.99)">Adaugă în Coș</button>
     </div>
     <div class="product-card" data-category="cercei">
       <img src="../imgages/Studio Session-035_1024px.jpg" alt="Statement Earrings">
@@ -564,14 +564,16 @@ function addToCart(productId, price) {
       delete existingProduct.quantity;
     }
   } else {
-    // Get product name from the card
+    // Get product name and image from the card
     const productCard = event.target.closest('.product-card');
     const productName = productCard.querySelector('h3')?.textContent || 'Produs';
+    const productImg = productCard.querySelector('img')?.getAttribute('src') || 'placeholder.jpg';
     
     cart.push({
       id: productId,
       name: productName,
       price: price,
+      img: productImg,
       qty: 1
     });
   }
