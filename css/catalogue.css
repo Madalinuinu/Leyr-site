@@ -18,6 +18,23 @@
 
 * { box-sizing:border-box; margin:0; padding:0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
+/* Text transform - lowercase all text, capitalize first letter of first word */
+h1, h2, h3, h4, h5, h6, p, .product-title, .product-price, .product-description, .category-title, .section-title, nav a, .breadcrumb, .filter-label, .sort-label {
+  text-transform: lowercase;
+}
+
+h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter, h5::first-letter, h6::first-letter, 
+.product-title::first-letter, .product-price::first-letter, .product-description::first-letter, 
+.category-title::first-letter, .section-title::first-letter, nav a::first-letter, 
+.breadcrumb::first-letter, .filter-label::first-letter, .sort-label::first-letter {
+  text-transform: uppercase;
+}
+
+/* Exclude buttons */
+button, .btn, .cta-button {
+  text-transform: uppercase !important;
+}
+
 body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
 /* Header - New Professional Design */

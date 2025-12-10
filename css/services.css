@@ -17,6 +17,21 @@
 }
 
 * { box-sizing:border-box; margin:0; padding:0; }
+/* Text transform - lowercase all text, capitalize first letter of first word */
+h1, h2, h3, h4, h5, h6, p, .service-title, .service-description, .section-title, nav a {
+  text-transform: lowercase;
+}
+
+h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter, h5::first-letter, h6::first-letter, 
+.service-title::first-letter, .service-description::first-letter, .section-title::first-letter, nav a::first-letter {
+  text-transform: uppercase;
+}
+
+/* Exclude buttons */
+button, .btn, .cta-button {
+  text-transform: uppercase !important;
+}
+
 body { font-family:'Poppins', sans-serif; background: var(--bg); color: var(--text); }
 
 /* Header - New Professional Design */
