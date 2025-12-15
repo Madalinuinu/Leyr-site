@@ -288,7 +288,7 @@ nav a:hover {
 .mobile-menu-toggle span {
   width: 25px;
   height: 3px;
-  background: var(--accent);
+  background: #ffffff;
   transition: 0.3s;
 }
 
@@ -296,66 +296,49 @@ nav a:hover {
 @media (max-width: 768px) {
   header {
     padding: 0 20px;
-    height: 80px;
+    height: 70px;
+    overflow: visible;
   }
   
-  header img {
-    max-height: 70px;
-  }
-  
-  .header-controls {
-    gap: 8px;
-  }
-  
-  .toggle-btn {
-    padding: 6px 10px;
-    font-size: 0.75rem;
-    min-width: 40px;
-    height: 36px;
-  }
-  
-  .language-toggle {
-    min-width: 45px;
-  }
-  
-  .cart-toggle {
-    min-width: 40px;
-    padding: 6px;
-  }
-  
-  .cart-badge {
-    width: 18px;
-    height: 18px;
-    font-size: 0.65rem;
-    top: -6px;
-    right: -6px;
-    min-width: 18px;
-  }
-  
-  .toggle-icon {
-    font-size: 0.85rem;
+  .header-logo img {
+    max-height: 78px;
   }
   
   nav {
     display: none;
     position: absolute;
-    top: 80px;
+    top: 70px;
     left: 0;
-    transform: none;
+    right: 0;
     width: 100%;
-    background: var(--header-bg);
+    background: rgba(15, 15, 20, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     flex-direction: column;
-    padding: 20px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    padding: 10px 0 12px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
+    border-radius: 0 0 18px 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 150;
+    overflow: hidden;
   }
   
   nav.active {
     display: flex;
+    animation: mobileMenuSlideDown 0.22s ease-out;
   }
   
   nav a {
-    padding: 15px 30px;
+    padding: 12px 26px;
     width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  
+  nav a:last-child {
+    border-bottom: none;
   }
   
   .mobile-menu-toggle {

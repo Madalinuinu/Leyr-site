@@ -318,7 +318,11 @@ setTimeout(function() {
     </button>
     <a href="contact.html" class="header-cta-btn" data-i18n="requestQuote">Cerere Ofertă</a>
   </div>
-  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Meniu">
+  <button
+    class="mobile-menu-toggle"
+    id="mobileMenuToggle"
+    aria-label="Meniu"
+    onclick="document.getElementById('navMenu').classList.toggle('active')">
     <span></span>
     <span></span>
     <span></span>
@@ -675,12 +679,17 @@ function setTheme(theme) {
 
 // Mobile menu toggle
 function initMobileMenu() {
+  console.log('initMobileMenu() called');
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const navMenu = document.getElementById('navMenu');
 
+  console.log('mobileMenuToggle =', mobileMenuToggle);
+  console.log('navMenu =', navMenu);
+
   if (mobileMenuToggle && navMenu) {
     mobileMenuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+      console.log('mobileMenuToggle clicked (listener)');
+      toggleMobileMenu();
     });
     
     // Close menu when clicking on a link (mobile)
@@ -693,6 +702,18 @@ function initMobileMenu() {
       });
     });
   }
+}
+
+// Fallback global handler for inline onclick (mobile) - MUST be global on window
+window.toggleMobileMenu = function() {
+  console.log('toggleMobileMenu() called');
+  const navMenu = document.getElementById('navMenu');
+  if (!navMenu) {
+    console.log('toggleMobileMenu(): navMenu not found');
+    return;
+  }
+  navMenu.classList.toggle('active');
+  console.log('toggleMobileMenu(): navMenu.classList =', navMenu.className);
 }
 
 
@@ -886,6 +907,7 @@ function updateCartBadge() {
 
 // Initialize everything when DOM is ready
 function initAll() {
+  console.log('initAll() called');
   // Initialize theme
   const savedTheme = localStorage.getItem('theme') || 'light';
   setTheme(savedTheme);
