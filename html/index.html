@@ -940,9 +940,6 @@ function initAll() {
     initCounters();
   }
   
-  // Initialize header scroll effect
-  initHeaderScroll();
-  
   // Scroll animations, counter animation, parallax and smooth scroll are auto-initialized above
   
   // Listen for storage changes to sync language and theme across all open pages
@@ -964,44 +961,6 @@ function initAll() {
     }
   });
 }
-
-// Header stays transparent always - no scroll effect needed
-function initHeaderScroll() {
-  const header = document.querySelector('header');
-  if (!header) return;
-  
-  // Always keep header transparent - remove scrolled class
-  header.classList.remove('scrolled');
-}
-
-// Header stays transparent always - no scroll effect
-(function() {
-  function ensureHeaderTransparent() {
-    const header = document.querySelector('header');
-    if (header) {
-      // Always remove scrolled class to keep header transparent
-      header.classList.remove('scrolled');
-      // Force transparent background
-      header.style.background = 'transparent';
-      header.style.backgroundColor = 'transparent';
-      header.style.boxShadow = 'none';
-    } else {
-      // If header not found yet, try again after a short delay
-      setTimeout(ensureHeaderTransparent, 50);
-    }
-  }
-  
-  // Ensure header is transparent immediately
-  ensureHeaderTransparent();
-  
-  // Also ensure when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ensureHeaderTransparent);
-  }
-  
-  // Also ensure on window load
-  window.addEventListener('load', ensureHeaderTransparent);
-})();
 
 // Initialize on DOM ready
 if (document.readyState === 'loading') {
