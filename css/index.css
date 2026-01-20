@@ -438,10 +438,9 @@ nav a:hover {
     max-height: 78px;
   }
   
-  /* Mobile dropdown menu – full width, integrat cu designul site-ului */
   nav {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 70px;
     left: 0;
     right: 0;
@@ -454,7 +453,7 @@ nav a:hover {
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
     border-radius: 0 0 18px 18px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
-    z-index: 150;
+    z-index: 999;
     overflow: hidden;
   }
   
