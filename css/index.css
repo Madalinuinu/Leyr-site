@@ -402,6 +402,10 @@ nav a:hover {
 }
 
 /* Mobile menu toggle (hidden by default) */
+.mobile-menu-checkbox {
+  display: none;
+}
+
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -456,8 +460,9 @@ nav a:hover {
     z-index: 999;
     overflow: hidden;
   }
-  
-  nav.active {
+
+  /* Deschidem meniul când checkbox-ul este bifat (CSS-only) */
+  .mobile-menu-checkbox:checked + nav {
     display: flex;
     animation: mobileMenuSlideDown 0.22s ease-out;
   }

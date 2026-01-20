@@ -44,6 +44,10 @@ window.toggleTheme = function() {
   <div class="header-logo" onclick="window.location.href='index.html'">
     <img src="../imgages/logo1.png" alt="Leyr.">
   </div>
+
+  <!-- Mobile menu toggle (CSS-only) -->
+  <input type="checkbox" id="mobileMenuToggleCheckbox" class="mobile-menu-checkbox" aria-hidden="true">
+
   <nav id="navMenu">
     <a href="index.html" data-i18n="navHome">Acasă</a>
     <a href="catalogue.html" data-i18n="navProducts">Produse</a>
@@ -63,15 +67,16 @@ window.toggleTheme = function() {
     <!-- păstrăm doar butonul de cerere ofertă, fără lupa în header -->
     <a href="contact.html" class="header-cta-btn" data-i18n="requestQuote">Cerere Ofertă</a>
   </div>
-  <button
+
+  <!-- Hamburger icon works as label for checkbox (no JS needed) -->
+  <label
     class="mobile-menu-toggle"
-    id="mobileMenuToggle"
-    aria-label="Meniu"
-    onclick="document.getElementById('navMenu').classList.toggle('active')">
+    for="mobileMenuToggleCheckbox"
+    aria-label="Meniu">
     <span></span>
     <span></span>
     <span></span>
-  </button>
+  </label>
 </header>
 
 <section class="search-filter-section">
