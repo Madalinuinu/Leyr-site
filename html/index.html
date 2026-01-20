@@ -717,23 +717,26 @@ window.toggleMobileMenu = function() {
 }
 
 
-// Intersection Observer for scroll animations
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+// Intersection Observer for scroll animations (safe fallback for older browsere)
+let observer = null;
+if ('IntersectionObserver' in window) {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
 
-// Observe elements for animation
-const elementsToAnimate = document.querySelectorAll('.hero-slider, .about-us, .stats-section, .features-section');
-elementsToAnimate.forEach(el => observer.observe(el));
+  // Observe elements for animation
+  const elementsToAnimate = document.querySelectorAll('.hero-slider, .about-us, .stats-section, .features-section');
+  elementsToAnimate.forEach(el => observer.observe(el));
+}
 
 // Slow and Visible CountUp Animation - Numbers scroll from 0 to target
 function animateCountUp(element, from, to, duration = 3, delay = 0, onStart, onEnd) {
