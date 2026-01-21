@@ -44,6 +44,10 @@ window.toggleTheme = function() {
   <div class="header-logo" onclick="window.location.href='index.html'">
     <img src="../imgages/logo1.png" alt="Leyr.">
   </div>
+
+  <!-- Mobile menu toggle (CSS-only) -->
+  <input type="checkbox" id="mobileMenuToggleCheckbox" class="mobile-menu-checkbox" aria-hidden="true">
+
   <nav id="navMenu">
     <a href="index.html" data-i18n="navHome">Acasă</a>
     <a href="catalogue.html" data-i18n="navProducts">Produse</a>
@@ -67,15 +71,16 @@ window.toggleTheme = function() {
       </svg>
     </button>
   </div>
-  <button
+
+  <!-- Hamburger icon works as label for checkbox (no JS needed) -->
+  <label
     class="mobile-menu-toggle"
-    id="mobileMenuToggle"
-    aria-label="Meniu"
-    onclick="document.getElementById('navMenu').classList.toggle('active')">
+    for="mobileMenuToggleCheckbox"
+    aria-label="Meniu">
     <span></span>
     <span></span>
     <span></span>
-  </button>
+  </label>
 </header>
 
 <section class="contact-page">
@@ -90,11 +95,6 @@ window.toggleTheme = function() {
           <div class="form-group">
             <label for="name" data-i18n="formName">Numele tău *</label>
             <input type="text" id="name" name="name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="email" data-i18n="formEmail">Email *</label>
-            <input type="email" id="email" name="email" required>
           </div>
           
           <div class="form-group">
@@ -244,7 +244,6 @@ const translations = {
     pageSubtitle: 'Ai o întrebare? Ne-ar plăcea să te ajutăm!',
     formTitle: 'Pune o întrebare',
     formName: 'Numele tău *',
-    formEmail: 'Email *',
     formMessage: 'Mesajul tău *',
     formSubmit: 'Trimite Mesajul',
     contactInfoTitle: 'Informații de Contact',
@@ -260,7 +259,6 @@ const translations = {
     pageSubtitle: 'Have a question? We would love to help you!',
     formTitle: 'Ask a Question',
     formName: 'Your Name *',
-    formEmail: 'Email *',
     formMessage: 'Your Message *',
     formSubmit: 'Send Message',
     contactInfoTitle: 'Contact Information',
@@ -313,24 +311,6 @@ function updatePageContent(lang) {
   }
 }
 
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const navMenu = document.getElementById('navMenu');
-
-if (mobileMenuToggle) {
-  mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-  
-  const navLinks = navMenu.querySelectorAll('a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navMenu.classList.remove('active');
-      }
-    });
-  });
-}
-
 // Form submission
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
@@ -344,18 +324,15 @@ if (contactForm) {
     const lang = localStorage.getItem('language') || 'ro';
     const t = lang === 'en' ? {
       newMessage: 'New message from',
-      email: 'Email',
       message: 'Message',
       sent: 'Your message has been sent! We will contact you soon.'
     } : {
       newMessage: 'Mesaj nou de la',
-      email: 'Email',
       message: 'Mesaj',
       sent: 'Mesajul tău a fost trimis! Te vom contacta în curând.'
     };
     
     let message = `${t.newMessage} ${data.name}%0A%0A`;
-    message += `${t.email}: ${data.email}%0A%0A`;
     message += `${t.message}:%0A${data.message}`;
     
     // Open WhatsApp

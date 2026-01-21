@@ -283,7 +283,11 @@ nav a:hover {
   animation: badgePulse 0.3s ease;
 }
 
-/* Mobile menu toggle */
+/* Mobile menu checkbox (hidden) + toggle button */
+.mobile-menu-checkbox {
+  display: none;
+}
+
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -400,7 +404,7 @@ nav a:hover {
   width: 100%;
   padding: 14px 0;
   background: var(--accent);
-  color: #e9d5ff;
+  color: #ffffff; /* alb, ca butoanele WhatsApp / servicii */
   border: none;
   border-radius: 30px;
   font-weight: 600;
@@ -676,7 +680,7 @@ footer {
   
   nav {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 70px;
     left: 0;
     right: 0;
@@ -689,11 +693,12 @@ footer {
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.65);
     border-radius: 0 0 18px 18px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
-    z-index: 150;
+    z-index: 999;
     overflow: hidden;
   }
   
-  nav.active {
+  /* Deschidem meniul când checkbox-ul este bifat (CSS-only) */
+  .mobile-menu-checkbox:checked + nav {
     display: flex;
     animation: mobileMenuSlideDown 0.22s ease-out;
   }
@@ -731,6 +736,18 @@ footer {
   .contact-link {
     min-width: 100px;
     padding: 15px 20px;
+  }
+
+  /* titlul încape mai bine pe ecran pe mobil */
+  .contact-page-title {
+    font-size: 2rem;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page-title {
+    font-size: 1.8rem;
   }
 }
 

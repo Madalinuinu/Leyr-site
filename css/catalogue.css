@@ -716,7 +716,7 @@ nav a:hover {
   border:none; 
   border-radius:30px;
   background: var(--accent); 
-  color: #e9d5ff;
+  color: #ffffff; /* alb, ca butonul WhatsApp custom */
   font-weight:600; 
   cursor:pointer; 
   transition:0.3s transform,0.3s background;

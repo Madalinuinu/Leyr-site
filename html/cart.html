@@ -45,12 +45,16 @@ window.toggleTheme = function() {
   <div class="header-logo" onclick="window.location.href='index.html'">
     <img src="../imgages/logo1.png" alt="Leyr.">
   </div>
+
+  <!-- Mobile menu toggle (CSS-only) -->
+  <input type="checkbox" id="mobileMenuToggleCheckbox" class="mobile-menu-checkbox" aria-hidden="true">
+
   <nav id="navMenu">
     <a href="index.html" data-i18n="navHome">Acasă</a>
     <a href="catalogue.html" data-i18n="navProducts">Produse</a>
     <a href="services.html" data-i18n="navServices">Servicii</a>
     <a href="index.html#aboutUs" data-i18n="navAbout">Despre Noi</a>
-    <a href="contact.html" data-i18n="navContact">Contactează-ne</a>
+    <a href="contact.html" data-i18n="navContact">Contact</a>
   </nav>
   <div class="header-actions">
     <a href="cart.html" class="header-icon-btn" id="cartToggle" aria-label="Coș">
@@ -68,11 +72,16 @@ window.toggleTheme = function() {
       </svg>
     </button>
   </div>
-  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Meniu" onclick="document.getElementById('navMenu').classList.toggle('active')">
+
+  <!-- Hamburger icon works as label for checkbox (no JS needed) -->
+  <label
+    class="mobile-menu-toggle"
+    for="mobileMenuToggleCheckbox"
+    aria-label="Meniu">
     <span></span>
     <span></span>
     <span></span>
-  </button>
+  </label>
 </header>
 
 <section class="cart-container">
@@ -92,6 +101,7 @@ window.toggleTheme = function() {
       <span id="total">$0.00</span>
     </div>
     <button id="checkoutBtn" class="checkout-btn" data-i18n="checkoutBtn">Finalizează prin WhatsApp</button>
+    <button id="clearCartBtn" class="clear-cart-btn" data-i18n="clearCart">Golește coșul</button>
   </div>
 </section>
 
@@ -102,7 +112,7 @@ const translations = {
     navHome: 'Acasă',
     navProducts: 'Produse',
     navServices: 'Servicii',
-    navContact: 'Contactează-ne',
+    navContact: 'Contact',
     navCart: 'Coș',
     cartTitle: 'Coșul Tău',
     emptyCart: 'Coșul tău este gol.',
@@ -113,7 +123,8 @@ const translations = {
     each: 'fiecare',
     remove: 'Elimină',
     contactTitle: 'Contactează-ne',
-    order: 'Comandă'
+    order: 'Comandă',
+    clearCart: 'Golește coșul'
   },
   en: {
     navHome: 'Home',
@@ -130,7 +141,8 @@ const translations = {
     each: 'each',
     remove: 'Remove',
     contactTitle: 'Contact Us',
-    order: 'Order'
+    order: 'Order',
+    clearCart: 'Clear cart'
   }
 };
 
@@ -182,24 +194,6 @@ function updatePageContent(lang) {
   }
 }
 
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const navMenu = document.getElementById('navMenu');
-
-if (mobileMenuToggle) {
-  mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-  
-  const navLinks = navMenu.querySelectorAll('a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navMenu.classList.remove('active');
-      }
-    });
-  });
-}
-
 // CART LOGIC
 let cart = [];
 
@@ -228,6 +222,7 @@ const cartItemsDiv = document.getElementById('cartItems');
 const emptyMsg = document.getElementById('emptyMsg');
 const cartSummary = document.getElementById('cartSummary');
 const checkoutBtn = document.getElementById('checkoutBtn');
+const clearCartBtn = document.getElementById('clearCartBtn');
 
 function saveCart() {
   try {
@@ -335,6 +330,16 @@ checkoutBtn.addEventListener('click', () => {
   const encodedMsg = encodeURIComponent(msg);
   window.open(`https://wa.me/40771728217?text=${encodedMsg}`, '_blank');
 });
+
+// Clear cart button logic
+if (clearCartBtn) {
+  clearCartBtn.addEventListener('click', () => {
+    if (!cart.length) return;
+    cart = [];
+    saveCart();
+    renderCart();
+  });
+}
 
 // Theme toggle function
 window.toggleTheme = function() {
